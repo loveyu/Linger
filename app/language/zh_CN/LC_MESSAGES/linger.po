@@ -1,0 +1,1474 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pitus 图片分享系统\n"
+"POT-Creation-Date: 2014-04-30 11:51:38\n"
+"PO-Revision-Date: 2014-04-30 11:52+0800\n"
+"Last-Translator: loveyu <admin@loveyu.info>\n"
+"Language-Team: Loveyu <admin@loveyu.info>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: config.php:3
+msgid "PHP Version must be greater than 5.4"
+msgstr "PHP版本必须不低于5.4"
+
+#: core/core.php:91
+msgid "Clone is forbidden."
+msgstr "克隆操作被禁止"
+
+#: core/hook.php:35 core/hook.php:36
+msgid "Error Callback function"
+msgstr "错误的回调函数"
+
+#: core/lib/image/Gd.php:53 core/lib/image/Imagick.php:47
+msgid "The image file does not exist"
+msgstr "图像文件不存在"
+
+#: core/lib/image/Gd.php:61
+msgid "Illegal image file"
+msgstr "非法图像文件"
+
+#: core/lib/image/Gd.php:96 core/lib/image/Imagick.php:74
+msgid "No image resources can be saved"
+msgstr "没有图像资源来保存"
+
+#: core/lib/image/Gd.php:128 core/lib/image/Gd.php:140
+#: core/lib/image/Gd.php:152 core/lib/image/Gd.php:164
+#: core/lib/image/Gd.php:176 core/lib/image/Imagick.php:109
+#: core/lib/image/Imagick.php:121 core/lib/image/Imagick.php:133
+#: core/lib/image/Imagick.php:145 core/lib/image/Imagick.php:157
+msgid "Not specified image resource"
+msgstr "未指定图像资源"
+
+#: core/lib/image/Gd.php:196 core/lib/image/Imagick.php:177
+msgid "No image can be cropped resources"
+msgstr "没有可供裁剪的图像资源"
+
+#: core/lib/image/Gd.php:231 core/lib/image/Imagick.php:232
+msgid "No image can be abbreviated Resources"
+msgstr "没有可以被缩略的图像资源"
+
+#: core/lib/image/Gd.php:330 core/lib/image/Imagick.php:355
+msgid "Does not support the type of crop thumbnails"
+msgstr "不支持的缩略图裁剪类型"
+
+#: core/lib/image/Gd.php:347 core/lib/image/Imagick.php:398
+msgid "No watermark can be added to image resources"
+msgstr "没有水印能够添加到图像资源"
+
+#: core/lib/image/Gd.php:350 core/lib/image/Imagick.php:401
+msgid "Watermark image absence"
+msgstr "水印图像不存"
+
+#: core/lib/image/Gd.php:356
+msgid "Illegal watermark file"
+msgstr "非法水印文件"
+
+#: core/lib/image/Gd.php:426 core/lib/image/Imagick.php:471
+msgid "Does not support the type of watermark location"
+msgstr "不支持的水印位置类型"
+
+#: core/lib/image/Gd.php:463 core/lib/image/Imagick.php:516
+msgid "No image can be written to a text resources"
+msgstr "没有能够写入文字的图片资源"
+
+#: core/lib/image/Gd.php:466 core/lib/image/Imagick.php:519
+msgid "Font file does not exist:"
+msgstr "字体文件没有不存在"
+
+#: core/lib/image/Gd.php:540 core/lib/image/Imagick.php:611
+msgid "Position of the character type is not supported"
+msgstr "不支持的文字位置类型"
+
+#: core/lib/image/Gd.php:561 core/lib/image/Imagick.php:530
+msgid "Wrong color values"
+msgstr "错误的颜色值"
+
+#: core/lib/image/GIF.php:46
+msgid "GIF image decoding error"
+msgstr "GIF图像解码错误"
+
+#: core/lib/image.php:90
+msgid "Unknown type Exception"
+msgstr "未知异常类型"
+
+#: core/lib/image.php:98
+msgid "Image interface class error."
+msgstr "图像接口类错误"
+
+#: core/lib/medoo.php:88
+msgid "Type:"
+msgstr "类型："
+
+#: core/lib/medoo.php:88
+msgid "not defined"
+msgstr "未定义"
+
+#: core/lib/session.php:68
+msgid "Session Drive Not Found"
+msgstr "Session 驱动没有找到"
+
+#: core/lib/upload/Local.php:46
+msgid ""
+"Upload the root directory does not exist! Please try to manually create:"
+msgstr "上传的根目录不存在，请手动指定"
+
+#: core/lib/upload/Local.php:69
+msgid "Upload directory"
+msgstr "上传目录"
+
+#: core/lib/upload/Local.php:69
+msgid " can not writable!"
+msgstr "无法写入！"
+
+#: core/lib/upload/Local.php:91
+msgid "File exists "
+msgstr "文件已存在"
+
+#: core/lib/upload/Local.php:97
+msgid "Save the file upload error!"
+msgstr "保存上传的文件出错"
+
+#: core/lib/upload/Local.php:118
+msgid "Directory "
+msgstr "目录"
+
+#: core/lib/upload/Local.php:118
+msgid " Creation Failed!"
+msgstr "创建失败"
+
+#: core/lib/upload.php:218
+msgid "Illegal image file!"
+msgstr "非法图像文件！"
+
+#: core/lib/upload.php:259
+msgid "File naming mistake!"
+msgstr "文件命名出错"
+
+#: core/lib/upload.php:329
+msgid "Unknown upload error!"
+msgstr "未知上传错误"
+
+#: core/lib/upload.php:334
+msgid "Illegal upload files!"
+msgstr "非法上传的文件"
+
+#: core/lib/upload.php:340
+msgid "Upload file size does not match!"
+msgstr "上传文件大小不匹配"
+
+#: core/lib/upload.php:347
+msgid "Upload file MIME type does not allow!"
+msgstr "上传的文件MIME类型不允许"
+
+#: core/lib/upload.php:353
+msgid "Upload file extension is not allowed"
+msgstr "上传文件的拓展名不允许"
+
+#: core/lib/upload.php:457
+msgid "Lib load error."
+msgstr "LIB类库加载错误"
+
+#: core/lib/upload.php:459
+msgid "Files is empty"
+msgstr "文件列表为空"
+
+#: core/lib/upload.php:461
+msgid "Root path check error."
+msgstr "根目录检测失败"
+
+#: core/lib/upload.php:463
+msgid "Save path check error."
+msgstr "保存目录检测失败"
+
+#: core/lib/upload.php:465 lib/User.php:226 lib/UserControl.php:402
+msgid "Unknown"
+msgstr "未知"
+
+#: core/lib.php:55 core/lib.php:56
+msgid "Can't reload lib:"
+msgstr "无法加载类库"
+
+#: core/page.php:53 core/page.php:60
+msgid "Can't load view file:"
+msgstr "无法加载视图文件："
+
+#: core/uri.php:140
+msgid "URI core class find a exception."
+msgstr "URI核心类发现一个异常。"
+
+#: core/view/404.php:3 core/view/404.php:7
+msgid "404 Not Found"
+msgstr "404 页面未找到"
+
+#: core/view/404.php:9
+msgid "Sorry, this page is not found!"
+msgstr "非常抱歉，这个页面没有找到，"
+
+#: helper/theme.php:247
+msgid "at now"
+msgstr "刚才"
+
+#: helper/theme.php:251
+msgid " ago."
+msgstr "之前"
+
+#: helper/theme.php:268
+msgid "seconds"
+msgstr "秒"
+
+#: helper/theme.php:270
+msgid "minutes"
+msgstr "分钟"
+
+#: helper/theme.php:273
+msgid "hours"
+msgstr "小时"
+
+#: helper/theme.php:276
+msgid "days"
+msgstr "天"
+
+#: helper/theme.php:279
+msgid "months"
+msgstr "个月"
+
+#: helper/theme.php:282
+msgid "years"
+msgstr "年"
+
+#: lib/Comment.php:114
+msgid "Comment class construct error"
+msgstr "评论对象构造出错"
+
+#: lib/CommentData.php:470
+msgid "Comment relation table error."
+msgstr "评论关系表对应错误"
+
+#: lib/CommentData.php:473
+msgid "Comment data is empty."
+msgstr "评论内容为空。"
+
+#: lib/CommentData.php:476
+msgid "Reply id is error."
+msgstr "回复ID有误"
+
+#: lib/CommentData.php:479
+msgid "Reply comment is not exists."
+msgstr "要回复的评论不存在。"
+
+#: lib/CommentData.php:482
+msgid "Comment error on data."
+msgstr "评论数据有误"
+
+#: lib/CommentData.php:485
+msgid "Comment error on table."
+msgstr "评论错误在数据表的操作"
+
+#: lib/CommentData.php:488
+msgid "Comment can't count."
+msgstr "评论无法统计。"
+
+#: lib/CommentData.php:491
+msgid "Comment load error."
+msgstr "评论加载错误"
+
+#: lib/CommentData.php:494
+msgid "Comment page not found."
+msgstr "当前评论页未找到"
+
+#: lib/CommentData.php:497
+msgid "Oh, no comments yet, you can write something at now."
+msgstr "当前还没有评论哦，为什么不写点什么呢？"
+
+#: lib/CommentData.php:500
+msgid "Comment are closed."
+msgstr "评论被关闭"
+
+#: lib/CommentData.php:503 lib/ListPic.php:337
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: lib/CommentList.php:83
+msgid "CommentList class construct error."
+msgstr "评论列表对象构造出错"
+
+#: lib/CommentList.php:85
+msgid "Data get error."
+msgstr "数据获取出错"
+
+#: lib/CommentList.php:87 lib/CommentManagement.php:401 lib/Feed.class.php:450
+#: lib/Feed.class.php:521 lib/Feed.class.php:653 lib/Feed.php:402
+#: lib/FeedManagement.php:151 lib/FollowManagement.php:543 lib/Gallery.php:881
+#: lib/Message.php:590 lib/Notice.php:197 lib/Post.php:429
+msgid "Unknown error."
+msgstr "未知错误"
+
+#: lib/CommentList.php:196
+msgid "Get comment list of user error."
+msgstr "获取评论列表数据出错"
+
+#: lib/CommentList.php:209
+msgid "Data loss on CommentList class."
+msgstr "数据丢失在CommentList类。"
+
+#: lib/CommentManagement.php:92
+msgid "Number of "
+msgstr "序号为"
+
+#: lib/CommentManagement.php:92
+msgid "PICTURE"
+msgstr "图片"
+
+#: lib/CommentManagement.php:108
+msgid "GALLERY"
+msgstr "图集"
+
+#: lib/CommentManagement.php:125
+msgid "POST"
+msgstr "文章"
+
+#: lib/CommentManagement.php:138
+msgid "Comment get type data error."
+msgstr "获取评论类型数据出错。"
+
+#: lib/CommentManagement.php:177
+msgid "Get comment type error."
+msgstr "获取评论类型出错"
+
+#: lib/CommentManagement.php:384 lib/CommentManagement.php:385
+msgid "Delete comment error."
+msgstr "删除评论出错。"
+
+#: lib/CommentManagement.php:387
+msgid "No comment had delete."
+msgstr "没有评论被删除。"
+
+#: lib/CommentManagement.php:389
+msgid "Comment is not exists."
+msgstr "该评论不存在。"
+
+#: lib/CommentManagement.php:391
+msgid "Comment type id not defined."
+msgstr "评论类型未定义。"
+
+#: lib/CommentManagement.php:393
+msgid "Comment top add error."
+msgstr "顶评论失败。"
+
+#: lib/CommentManagement.php:395 lib/CommentManagement.php:396
+msgid "Cancel comment like error."
+msgstr "对评论添加喜欢失败。"
+
+#: lib/CommentManagement.php:398 lib/CommentManagement.php:399
+msgid "Like comment error."
+msgstr "喜欢该评论失败。"
+
+#: lib/CountMessage.php:54
+msgid "Get user count info error."
+msgstr "获取用户统计信息出错"
+
+#: lib/CountMessage.php:101
+msgid "Count info get error."
+msgstr "统计信息获取错误"
+
+#: lib/CountMessage.php:112
+msgid "Count info update error."
+msgstr "统计信息更新出错"
+
+#: lib/CountMessage.php:127
+msgid "Count info insert error."
+msgstr "统计信息插入错误"
+
+#: lib/Feed.class.php:446
+msgid "This picture share are close."
+msgstr "这张图片的分享被关闭。"
+
+#: lib/Feed.class.php:448
+msgid "This picture are not found."
+msgstr "这张图片为找到"
+
+#: lib/Feed.class.php:517
+msgid "Gallery are not found."
+msgstr "图集未找到"
+
+#: lib/Feed.class.php:519
+msgid "Gallery share are close."
+msgstr "图集分享被关闭"
+
+#: lib/Feed.class.php:649 lib/Feed.php:396
+msgid "Share content is empty."
+msgstr "分享内容不能为空"
+
+#: lib/Feed.class.php:651
+msgid "Share content is to long."
+msgstr "分享内容太长"
+
+#: lib/Feed.php:75 lib/FeedManagement.php:97
+msgid "Get feed list error."
+msgstr "获取分享列表出错"
+
+#: lib/Feed.php:169 lib/ListGallery.php:160
+msgid "Select other users error."
+msgstr "选择其他用户出错"
+
+#: lib/Feed.php:358
+msgid "Insert feed error."
+msgstr "插入分享出错"
+
+#: lib/Feed.php:388
+msgid "Init share picture error."
+msgstr "初始化图片分享失败"
+
+#: lib/Feed.php:390
+msgid "Share picture data insert error."
+msgstr "分享图片数据插入失败"
+
+#: lib/Feed.php:392
+msgid "Share gallery data insert error."
+msgstr "分享图集数据插入失败"
+
+#: lib/Feed.php:394
+msgid "Init share gallery error."
+msgstr "初始化图集分享出错"
+
+#: lib/Feed.php:398
+msgid "Share talk data error."
+msgstr "分享交流内容出错"
+
+#: lib/Feed.php:400
+msgid "Create share data error."
+msgstr "创建分享内容出错"
+
+#: lib/FeedManagement.php:122
+msgid "Delete feed error."
+msgstr "删除分享失败"
+
+#: lib/FeedManagement.php:145
+msgid "No found this feed."
+msgstr "未找到这条分享"
+
+#: lib/FeedManagement.php:147
+msgid "Delete error, please try later."
+msgstr "删除出错，稍后重试。"
+
+#: lib/FeedManagement.php:149
+msgid "No delete any data, please try later."
+msgstr "未删除任何数据，稍后重试"
+
+#: lib/FileAction.php:34
+msgid "Image file delete fail:"
+msgstr "图片文件删除失败："
+
+#: lib/FollowManagement.php:70
+msgid "users follow table get error."
+msgstr "用户关注列表获取失败。"
+
+#: lib/FollowManagement.php:84
+msgid "follow message insert error."
+msgstr "关注消息插入错误"
+
+#: lib/FollowManagement.php:121
+msgid "follow message delete error."
+msgstr "关注信息删除失败"
+
+#: lib/FollowManagement.php:125
+msgid "follow message can not be delete."
+msgstr "关注的信息无法删除。"
+
+#: lib/FollowManagement.php:172
+msgid "Count follow message error"
+msgstr "统计关注信息错误"
+
+#: lib/FollowManagement.php:242
+msgid "Get me follow users list error on sql."
+msgstr "获取用户关注列表失败在数据库"
+
+#: lib/FollowManagement.php:287
+msgid "Get follow me users list error on sql."
+msgstr "获取关注我的用户失败"
+
+#: lib/FollowManagement.php:336
+msgid "Get mutual follow users list error on sql."
+msgstr "获取互相关注的用户列表错误"
+
+#: lib/FollowManagement.php:359
+msgid "Follow gallery sql error."
+msgstr "关注图集数据库错误"
+
+#: lib/FollowManagement.php:386
+msgid "insert follow gallery error"
+msgstr "插入图集出现错误"
+
+#: lib/FollowManagement.php:416 lib/FollowManagement.php:537
+msgid "Delete gallery follow data error."
+msgstr "删除图集关注数据错误"
+
+#: lib/FollowManagement.php:466
+msgid "Get user follow gallery error!"
+msgstr "获取用户关注的图集错误"
+
+#: lib/FollowManagement.php:515
+msgid "User id error . "
+msgstr "用户ID错误"
+
+#: lib/FollowManagement.php:517
+msgid "Can't follow yourself."
+msgstr "你不能关注你自己。"
+
+#: lib/FollowManagement.php:519
+msgid "Follow user error."
+msgstr "关注用户错误"
+
+#: lib/FollowManagement.php:521
+msgid "You've already attention to this user . "
+msgstr "你已经关注了该用户。"
+
+#: lib/FollowManagement.php:523
+msgid "Follow user not found!"
+msgstr "关注的用户未找到"
+
+#: lib/FollowManagement.php:525
+msgid "Follow count info flag error . "
+msgstr "关注统计信息错误"
+
+#: lib/FollowManagement.php:527
+msgid "Follow gallery error . "
+msgstr "关注图集错误"
+
+#: lib/FollowManagement.php:529
+msgid "Follow gallery is not exists"
+msgstr "关注的图集不存在"
+
+#: lib/FollowManagement.php:531
+msgid "You can't follow yourself gallery."
+msgstr "你不能关注你自己的图集"
+
+#: lib/FollowManagement.php:533
+msgid "You have already attention to this gallery."
+msgstr "你已经关注了这个图集"
+
+#: lib/FollowManagement.php:535
+msgid "The gallery concern does not exists."
+msgstr "这个图集关注不存在"
+
+#: lib/FollowManagement.php:539
+msgid "Delete gallery error."
+msgstr "删除图集出错"
+
+#: lib/FollowManagement.php:541
+msgid "Cancel follow user error."
+msgstr "取消用户关注出错"
+
+#: lib/Gallery.php:126
+msgid "Set gallery more info error."
+msgstr "设置图集的详细信息错误"
+
+#: lib/Gallery.php:575
+msgid "Gallery not found."
+msgstr "图集没有找到"
+
+#: lib/Gallery.php:670 lib/Gallery.php:867
+msgid "Gallery set public error."
+msgstr "图集发布失败"
+
+#: lib/Gallery.php:702 lib/Gallery.php:869
+msgid "Gallery set draft error."
+msgstr "图集存为草稿失败"
+
+#: lib/Gallery.php:801
+msgid "Get gallery previous and next info error."
+msgstr "获取图集的上一页和下一页的信息错误"
+
+#: lib/Gallery.php:817 lib/Gallery.php:865
+msgid "Gallery get previous and next page id error."
+msgstr "获取图集上下页信息失败。"
+
+#: lib/Gallery.php:837
+msgid "Insert gallery error sql."
+msgstr "插入图集出现数据库错误"
+
+#: lib/Gallery.php:839
+msgid "Insert failed."
+msgstr "插入失败"
+
+#: lib/Gallery.php:841
+msgid "title not be empty"
+msgstr "标题不能为空"
+
+#: lib/Gallery.php:843
+msgid "delete create a error."
+msgstr "删除产生了一个错误"
+
+#: lib/Gallery.php:845
+msgid "No delete any gallery"
+msgstr "没有删除任何图集"
+
+#: lib/Gallery.php:847
+msgid "No permission on this gallery"
+msgstr "没有权限操作在这个图集上"
+
+#: lib/Gallery.php:849
+msgid "comment status error."
+msgstr "评论状态有误"
+
+#: lib/Gallery.php:851
+msgid "Gallery info update error."
+msgstr "图集信息更新错误"
+
+#: lib/Gallery.php:853
+msgid "Pic list is empty"
+msgstr "图片列表为空"
+
+#: lib/Gallery.php:855
+msgid "User own pic list is empty"
+msgstr "用户拥有的图片列表为空"
+
+#: lib/Gallery.php:857
+msgid "No new pictures add"
+msgstr "没有图片被添加"
+
+#: lib/Gallery.php:859
+msgid "Delete gallery pictures make a sql error."
+msgstr "删除图集产生了一个数据库错误"
+
+#: lib/Gallery.php:861
+msgid "Cancel like gallery error."
+msgstr "取消对图集的喜欢失败。"
+
+#: lib/Gallery.php:863
+msgid "Like gallery error."
+msgstr "喜欢图集出错。"
+
+#: lib/Gallery.php:871
+msgid "Gallery must be have a title."
+msgstr "图集必须有一个标题"
+
+#: lib/Gallery.php:873
+msgid "Gallery must be have a description"
+msgstr "图集必须有描述"
+
+#: lib/Gallery.php:875
+msgid "Gallery must be have a front cover."
+msgstr "图集必须有封面\v"
+
+#: lib/Gallery.php:877
+msgid "Gallery must be have a tag."
+msgstr "图集必须存在一个标签"
+
+#: lib/Gallery.php:879
+msgid "Gallery must be have a picture."
+msgstr "图集必须有一张以上的图片"
+
+#: lib/ListPic.php:332
+msgid "User is error."
+msgstr "用户参数错误"
+
+#: lib/ListPic.php:335
+msgid "Data select error on sql."
+msgstr "数据选择失败"
+
+#: lib/MailTemplate.php:63
+msgid "Template is not exists."
+msgstr "模板文件未定义"
+
+#: lib/MailTemplate.php:186
+msgid "Mail send is cancel."
+msgstr "邮件发送被取消"
+
+#: lib/MailTemplate.php:218
+msgid "Mail Send Error."
+msgstr "邮件发送错误"
+
+#: lib/Message.php:133
+msgid "Get system message error on sql."
+msgstr "获取系统消息出错在数据异常"
+
+#: lib/Message.php:174
+msgid "Get outbox message error on sql."
+msgstr "获取发信箱的消息错误"
+
+#: lib/Message.php:225
+msgid "Message set del error."
+msgstr "消息设置为删除失败"
+
+#: lib/Message.php:294
+msgid "select user id list error on message."
+msgstr "消息选择用户ID列表错误"
+
+#: lib/Message.php:324
+msgid "Insert message error."
+msgstr "插入消息错误"
+
+#: lib/Message.php:366 lib/Message.php:584
+msgid "Add message notice error."
+msgstr "添加消息提示出错。"
+
+#: lib/Message.php:406
+msgid "Get inbox message error on sql."
+msgstr "获取收信箱的消息错误"
+
+#: lib/Message.php:449
+msgid "Set "
+msgstr "设置"
+
+#: lib/Message.php:503
+msgid "Get sql message users error."
+msgstr "获取数据库中的用户信息错误。"
+
+#: lib/Message.php:550
+msgid "The sender id error!"
+msgstr "发送者ID错误"
+
+#: lib/Message.php:552
+msgid "You have no permission to send system message."
+msgstr "你没有权限发送系统消息。"
+
+#: lib/Message.php:554
+msgid "Your must activation you account."
+msgstr "你必须先激活你的账户。"
+
+#: lib/Message.php:556
+msgid "The message content is empty."
+msgstr "消息内容为空"
+
+#: lib/Message.php:558
+msgid "You post users list is too big."
+msgstr "你请求的用户列表太大。"
+
+#: lib/Message.php:560
+msgid "Does not have a valid user."
+msgstr "没有一个合法的用户。"
+
+#: lib/Message.php:562
+msgid "Too large number of users."
+msgstr "用户数量太大."
+
+#: lib/Message.php:564
+msgid "Send error on users parse."
+msgstr "发送错误在用户列表解析时"
+
+#: lib/Message.php:566
+msgid "Your message is sent too fast."
+msgstr "你消息发送的太快了。"
+
+#: lib/Message.php:568
+msgid "You do not have permission to perform this operation."
+msgstr "你没有权限来进行这项操作。"
+
+#: lib/Message.php:570
+msgid "Get pager count error."
+msgstr "获取分页统计出错"
+
+#: lib/Message.php:572
+msgid "This message was not found."
+msgstr "这条消息没有找到"
+
+#: lib/Message.php:574
+msgid "You can't send message to yourself."
+msgstr "你不能发送信息给你自己。"
+
+#: lib/Message.php:576
+msgid "Message does not belong to you."
+msgstr "这条消息不属于你。"
+
+#: lib/Message.php:578
+msgid "Delete message error, please try later."
+msgstr "删除消息错误，请稍后再试。"
+
+#: lib/Message.php:580
+msgid "Flag message to read is error, maybe is already read or not found."
+msgstr "标记信息为已读失败，或许该信息已经为已读或者未找到。"
+
+#: lib/Message.php:582
+msgid "Add notice error, data is verify error."
+msgstr "添加消息错误，数据验证错误"
+
+#: lib/Message.php:586
+msgid "System message title can not be empty."
+msgstr "系统消息标题不能为空"
+
+#: lib/Message.php:588
+msgid "System does not delete any message data."
+msgstr "系统未删除任何信息数据。"
+
+#: lib/Meta.php:116
+msgid "Meta insert no found data"
+msgstr "标签插入未找到数据"
+
+#: lib/Meta.php:120
+msgid "Meta insert Sql error."
+msgstr "标签插入数据库错误"
+
+#: lib/Meta.php:149
+msgid "Meta set Error on Update."
+msgstr "标签设置出错在更新操作"
+
+#: lib/Meta.php:156
+msgid "Meta set Error on EXISTS."
+msgstr "标签设置时已存在"
+
+#: lib/Meta.php:162
+msgid "Meta set Error on Insert."
+msgstr "标签插入失败"
+
+#: lib/Meta.php:186
+msgid "Meta key delete error on SQL."
+msgstr "标签删除出错在数据库操作时"
+
+#: lib/Meta.php:214
+msgid "Get meta on "
+msgstr "获取标签在"
+
+#: lib/Notice.php:120 lib/Notice.php:144
+msgid "When someone follow about me"
+msgstr "当有人关注我时"
+
+#: lib/Notice.php:121 lib/Notice.php:145
+msgid "When someone follow about my gallery"
+msgstr "当有人关注我的图集"
+
+#: lib/Notice.php:122 lib/Notice.php:146
+msgid "When someone commented on my picture"
+msgstr "当有人评论我的图片"
+
+#: lib/Notice.php:123 lib/Notice.php:147
+msgid "When someone commented on my gallery"
+msgstr "当有人评论我的图集"
+
+#: lib/Notice.php:124 lib/Notice.php:148
+msgid "When someone replies to my comment"
+msgstr "当有人回复了我的评论"
+
+#: lib/Notice.php:125 lib/Notice.php:149
+msgid "When someone like my pictures"
+msgstr "当有人喜欢我的图片"
+
+#: lib/Notice.php:126 lib/Notice.php:150
+msgid "When someone like my gallery"
+msgstr "当有人喜欢我的图集"
+
+#: lib/Notice.php:127 lib/Notice.php:151
+msgid "When someone like my comment"
+msgstr "当有人喜欢我的评论"
+
+#: lib/Notice.php:128
+msgid "When someone sends a message to me"
+msgstr "当有人发送信息给我"
+
+#: lib/Notice.php:129
+msgid "When the system sends a message to me"
+msgstr "当有系统信息发送给我"
+
+#: lib/Notice.php:130 lib/Notice.php:152
+msgid "When an exception is generated login information"
+msgstr "当产生了一个异常登录信息"
+
+#: lib/Notice.php:131 lib/Notice.php:153
+msgid "Error login too many times"
+msgstr "错误登录次数过多！"
+
+#: lib/Notice.php:132 lib/Notice.php:154
+msgid "When the site has information on activities"
+msgstr "当网站有活动信息"
+
+#: lib/Notice.php:193
+msgid "Update param is miss."
+msgstr "更新参数丢失。"
+
+#: lib/Notice.php:195
+msgid "Notice class initialization error."
+msgstr "消息类初始化错误。"
+
+#: lib/NoticeApply.php:144
+msgid "NoticeApply notice create ex."
+msgstr "NoticeApply 提示产生异常。"
+
+#: lib/NoticeApply.php:183
+msgid "NoticeApply comment_picture create a Exception."
+msgstr "NoticeApply comment_picture 出现一个异常。"
+
+#: lib/NoticeApply.php:213
+msgid "NoticeApply message_comment_picture create a Exception."
+msgstr "NoticeApply message_comment_picture 出现一个异常。"
+
+#: lib/NoticeApply.php:242
+msgid "NoticeApply mail_comment_gallery create a Exception."
+msgstr "NoticeApply mail_comment_gallery 出现一个异常。"
+
+#: lib/NoticeApply.php:271
+msgid "NoticeApply message_comment_gallery create a Exception."
+msgstr "NoticeApply message_comment_gallery 出现一个异常。"
+
+#: lib/NoticeApply.php:318
+msgid "NoticeApply mail_comment_reply create a Exception."
+msgstr "NoticeApply mail_comment_reply 出现一个异常。"
+
+#: lib/NoticeApply.php:365
+msgid "NoticeApply message_comment_reply create a Exception."
+msgstr "NoticeApply message_comment_reply 出现一个异常。"
+
+#: lib/NoticeApply.php:394
+msgid "NoticeApply mail_like_pic create a Exception."
+msgstr "NoticeApply mail_like_pic 出现一个异常。"
+
+#: lib/NoticeApply.php:423
+msgid "NoticeApply message_like_pic create a Exception."
+msgstr "NoticeApply message_like_pic 出现一个异常。"
+
+#: lib/NoticeApply.php:450
+msgid "NoticeApply mail_like_gallery create a Exception."
+msgstr "NoticeApply mail_like_gallery出现一个异常。"
+
+#: lib/NoticeApply.php:477
+msgid "NoticeApply message_like_gallery create a Exception."
+msgstr "NoticeApply message_like_gallery 出现一个异常。"
+
+#: lib/NoticeApply.php:521
+msgid "NoticeApply mail_like_comment create a Exception."
+msgstr "NoticeApply mail_like_comment 出现一个异常。"
+
+#: lib/NoticeApply.php:565
+msgid "NoticeApply message_like_comment create a Exception."
+msgstr "NoticeApply message_like_comment 出现一个异常。"
+
+#: lib/NoticeApply.php:595
+msgid "NoticeApply mail_send_message create a Exception."
+msgstr "NoticeApply mail_send_message 出现一个异常。"
+
+#: lib/NoticeApply.php:620
+msgid "NoticeApply mail_send_system_message create a Exception."
+msgstr "NoticeApply mail_send_system_message 出现一个异常。"
+
+#: lib/NoticeApply.php:636
+msgid "NoticeApply mail_exception_login create a Exception."
+msgstr "NoticeApply mail_exception_login 出现一个异常。"
+
+#: lib/NoticeApply.php:652
+msgid "NoticeApply message_exception_login create a Exception."
+msgstr "NoticeApply message_exception_login 出现一个异常。"
+
+#: lib/NoticeApply.php:679
+msgid "NoticeApply mail_login_restrictions create a Exception."
+msgstr "NoticeApply mail_login_restrictions 出现一个异常。"
+
+#: lib/NoticeApply.php:706
+msgid "NoticeApply message_login_restrictions create a Exception."
+msgstr "NoticeApply message_login_restrictions 出现一个异常。"
+
+#: lib/NoticeApply.php:716
+msgid "NoticeApply mail_site_activity_information create a Exception."
+msgstr "NoticeApply mail_site_activity_information 出现一个异常。"
+
+#: lib/NoticeApply.php:726
+msgid "NoticeApply message_site_activity_information create a Exception."
+msgstr "NoticeApply message_site_activity_information 出现一个异常。"
+
+#: lib/NoticeApply.php:760
+msgid "NoticeApply mail_follow_gallery create a Exception."
+msgstr "NoticeApply mail_follow_gallery 出现一个异常。"
+
+#: lib/NoticeApply.php:793
+msgid "NoticeApply message_follow_gallery create a Exception."
+msgstr "NoticeApply message_follow_gallery 出现一个异常。"
+
+#: lib/NoticeApply.php:821
+msgid "NoticeApply mail_follow_me create a Exception."
+msgstr "NoticeApply mail_follow_me 出现一个异常。"
+
+#: lib/NoticeApply.php:849
+msgid "Message to message_follow_me create a Exception."
+msgstr "Message to message_follow_me 产生一个异常。"
+
+#: lib/Option.php:53
+msgid "User register already closed."
+msgstr "用户注册被关闭"
+
+#: lib/Option.php:91
+msgid "Update option error"
+msgstr "更新选项出错"
+
+#: lib/Option.php:101
+msgid "Insert unknown option error."
+msgstr "插入未知选项出错"
+
+#: lib/Picture.php:518
+msgid "get simple picture info error."
+msgstr "获取简单图集信息出错"
+
+#: lib/Picture.php:622
+msgid "Like picture error."
+msgstr "喜欢图片出错"
+
+#: lib/Picture.php:750
+msgid "Picture tag can not set on insert."
+msgstr "图片的标签在插入的时候无法设置。"
+
+#: lib/Picture.php:843
+msgid "Path create error."
+msgstr "路径创建出错"
+
+#: lib/Picture.php:888
+msgid "Server info check Error."
+msgstr "服务器信息检查错误"
+
+#: lib/Picture.php:890
+msgid "Upload param error."
+msgstr "上传参数有误"
+
+#: lib/Picture.php:892
+msgid "A maximum of 20 allowed to upload pictures."
+msgstr "一次最多允许上传20张图片"
+
+#: lib/Picture.php:894
+msgid "Delete picture error."
+msgstr "删除图片出错"
+
+#: lib/Picture.php:896
+msgid "Picture not found."
+msgstr "图片未找到"
+
+#: lib/Picture.php:898
+msgid "Picture not found on the user"
+msgstr "在当前用户上未找到图片"
+
+#: lib/Picture.php:900
+msgid "status code error"
+msgstr "状态码有误"
+
+#: lib/Picture.php:902
+msgid "Update picture info error."
+msgstr "更新图片信息出错"
+
+#: lib/Picture.php:904
+msgid "User id error on select pictures."
+msgstr "用户ID有误，在选择图片的过程中。"
+
+#: lib/Picture.php:906
+msgid "Select pictures error on sql."
+msgstr "选择图片数据库出错。"
+
+#: lib/Picture.php:908
+msgid "Cancel like fail."
+msgstr "取消喜欢失败。"
+
+#: lib/Picture.php:910
+msgid "Like fail."
+msgstr "喜欢失败。"
+
+#: lib/Picture.php:912
+msgid "First change gallery front cover, than delete it!"
+msgstr "首先需要修改图集的封面图片，然后才能删除它！"
+
+#: lib/Picture.php:914
+msgid "Unknown Error."
+msgstr "未知错误"
+
+#: lib/Post.php:94
+msgid "delete post error."
+msgstr "删除文章出错"
+
+#: lib/Post.php:234
+msgid "Select post list error."
+msgstr "选择文章列表出错"
+
+#: lib/Post.php:263
+msgid "Select public post list error."
+msgstr "选择公共文章列表出错。"
+
+#: lib/Post.php:296
+msgid "Insert post content error."
+msgstr "插入文章内容出错"
+
+#: lib/Post.php:356 lib/Post.php:427
+msgid "Update post error."
+msgstr "更新文章出错。"
+
+#: lib/Post.php:405
+msgid "Post title can no be empty."
+msgstr "文章标题不能为空"
+
+#: lib/Post.php:407
+msgid "Post name check error."
+msgstr "文章名称检查出错"
+
+#: lib/Post.php:409
+msgid "Post create error."
+msgstr "文章创建出错。"
+
+#: lib/Post.php:411
+msgid "You do not have permission."
+msgstr "你没有这个权限"
+
+#: lib/Post.php:413
+msgid "The post is not exists."
+msgstr "这篇文章不存在。"
+
+#: lib/Post.php:415
+msgid "Delete post error."
+msgstr "删除文章失败。"
+
+#: lib/Post.php:417
+msgid "This name is exists."
+msgstr "这个名称已存在。"
+
+#: lib/Post.php:419
+msgid "Post content can not be empty!"
+msgstr "文章内容不能为空。"
+
+#: lib/Post.php:421
+msgid "This post name is exists, please try for another."
+msgstr "这个文章名称已存储，请尝试另一个。"
+
+#: lib/Post.php:423
+msgid "This post category is not exists."
+msgstr "该文章分类不存在。"
+
+#: lib/Post.php:425
+msgid "This post status code is error."
+msgstr "文章状态标示错误。"
+
+#: lib/POTCreator.php:126
+msgid "file not exists"
+msgstr "文件不存在"
+
+#: lib/Queue.php:54
+msgid "Queue Error:"
+msgstr "队列错误："
+
+#: lib/Queue.php:117
+msgid "Add queue error on sql."
+msgstr "添加队列出错在数据库"
+
+#: lib/Queue.php:159
+msgid "unserialize error"
+msgstr "反序列化出错"
+
+#: lib/Queue.php:164
+msgid "callback class error."
+msgstr "回调类出错"
+
+#: lib/Server.php:126
+msgid "Url format error."
+msgstr "URL地址格式有误"
+
+#: lib/Server.php:128
+msgid "Database write error."
+msgstr "数据库写入错误"
+
+#: lib/Server.php:130
+msgid "Name is error, only allow a-z."
+msgstr "名称错误，只允许a-z的小写字符"
+
+#: lib/Server.php:132 lib/Tag.php:214
+msgid "Unknown Error"
+msgstr "未知错误"
+
+#: lib/Tag.php:75
+msgid "Call tag add error."
+msgstr "执行标签添加操作错误"
+
+#: lib/Tag.php:96
+msgid "Call tag del error."
+msgstr "执行标签删除操作错误"
+
+#: lib/Tag.php:200
+msgid "Pic is not found."
+msgstr "图片未找到"
+
+#: lib/Tag.php:202
+msgid "Add pic tag error on tag is exists."
+msgstr "标签已存在添加出错"
+
+#: lib/Tag.php:204
+msgid "Pic not found this tag."
+msgstr "图片不存在这个标签"
+
+#: lib/Tag.php:206
+msgid "Tag is not found."
+msgstr "标签未找到"
+
+#: lib/Tag.php:208
+msgid "Delete tags error on sql."
+msgstr "数据库删除标签出错"
+
+#: lib/Tag.php:210
+msgid "Insert tags error on sql."
+msgstr "数据库插入标签出错"
+
+#: lib/Tag.php:212
+msgid "table not defined"
+msgstr "改表未定义"
+
+#: lib/Theme.php:531
+msgid "Previous"
+msgstr "上一页"
+
+#: lib/Theme.php:543
+msgid "The first page"
+msgstr "第一页"
+
+#: lib/Theme.php:543
+msgid "Index"
+msgstr "首页"
+
+#: lib/Theme.php:550 lib/Theme.php:553
+msgid "The "
+msgstr "第 "
+
+#: lib/Theme.php:550 lib/Theme.php:553
+msgid " page"
+msgstr " 页"
+
+#: lib/Theme.php:553
+msgid "End"
+msgstr "尾部"
+
+#: lib/Theme.php:558
+msgid "Next"
+msgstr "下一页"
+
+#: lib/User.php:169
+msgid "User add stack error."
+msgstr "用户堆栈添加失败"
+
+#: lib/User.php:227
+msgid "Unverified"
+msgstr "未验证"
+
+#: lib/User.php:229
+msgid "Normal"
+msgstr "正常"
+
+#: lib/User.php:231
+msgid "Restrict Login"
+msgstr "限制登录"
+
+#: lib/User.php:233
+msgid "Lockout Login"
+msgstr "登录被锁"
+
+#: lib/User.php:246
+msgid "User ID param error."
+msgstr "用户ID参数错误"
+
+#: lib/User.php:248
+msgid "User ID array param col error."
+msgstr "用户ID数组参数列错误"
+
+#: lib/User.php:272
+msgid "Unknown User"
+msgstr "未知用户"
+
+#: lib/User.php:589
+msgid "Aliases can't set empty."
+msgstr "别名不能为空"
+
+#: lib/User.php:592
+msgid "Email verify check Error"
+msgstr "邮箱地址检测错误"
+
+#: lib/User.php:595
+msgid "Username verify check Error"
+msgstr "用户名检测错误"
+
+#: lib/User.php:598
+msgid "Password verify check Error"
+msgstr "密码检测错误"
+
+#: lib/User.php:601
+msgid "Url check error"
+msgstr "网址检测错"
+
+#: lib/User.php:605
+msgid "Can't update User info."
+msgstr "无法更新用户信息"
+
+#: lib/UserCheck.php:56
+msgid "Email does not comply with the rules"
+msgstr "邮箱不符合规则"
+
+#: lib/UserCheck.php:59
+msgid "Email already exists"
+msgstr "邮件已经存在"
+
+#: lib/UserCheck.php:71
+msgid "Password hash is incorrect"
+msgstr "密码字符验证出错"
+
+#: lib/UserCheck.php:83
+msgid "User name does not comply with the rules"
+msgstr "用户名不符合规则"
+
+#: lib/UserCheck.php:87
+msgid "User name already exists"
+msgstr "用户名已存在"
+
+#: lib/UserControl.php:198
+msgid "reset param error."
+msgstr "重置参数有误"
+
+#: lib/UserControl.php:201
+msgid "Code time out."
+msgstr "验证码超时"
+
+#: lib/UserControl.php:204 lib/UserControl.php:392
+msgid "Code error."
+msgstr "验证码有误"
+
+#: lib/UserControl.php:370
+msgid "Permission is exists"
+msgstr "该权限已存在"
+
+#: lib/UserControl.php:372
+msgid "Permission is not change."
+msgstr "权限未改变"
+
+#: lib/UserControl.php:374
+msgid "Captcha code error."
+msgstr "验证码错误"
+
+#: lib/UserControl.php:376
+msgid "User is locked, can't reset password."
+msgstr "用户被锁，无法重置密码"
+
+#: lib/UserControl.php:378
+msgid "Reset user ex."
+msgstr "重置用户出现异常"
+
+#: lib/UserControl.php:380
+msgid "Reset Password check error."
+msgstr "重置密码检测错误"
+
+#: lib/UserControl.php:382
+msgid "The password param is error format."
+msgstr "密码参数格式不正确"
+
+#: lib/UserControl.php:384
+msgid "Old password is not match."
+msgstr "原始密码不匹配"
+
+#: lib/UserControl.php:386
+msgid "Cookie reset type is not in match list"
+msgstr "COOKIE重置类型不匹配"
+
+#: lib/UserControl.php:388
+msgid "User password error."
+msgstr "用户密码错误"
+
+#: lib/UserControl.php:390
+msgid "Time out, please send mail again."
+msgstr "超时，请重新发送邮件。"
+
+#: lib/UserControl.php:394
+msgid "email address is change, please send mail again."
+msgstr "邮箱地址已经改变，请重发邮件"
+
+#: lib/UserControl.php:396
+msgid "avatar type is not defined."
+msgstr "头像类型未知"
+
+#: lib/UserControl.php:398
+msgid "user upload avatar error or not found."
+msgstr "用户上传的头像错误或者没找到"
+
+#: lib/UserControl.php:400
+msgid "upload form data is not defined"
+msgstr "上传表单数据未定义"
+
+#: lib/UserLogin.php:84
+msgid "Account check name error"
+msgstr "账户名称检测出错"
+
+#: lib/UserLogin.php:86
+msgid "Account not found"
+msgstr "账户未找到"
+
+#: lib/UserLogin.php:88
+msgid "Hash Password does not match rule"
+msgstr "提交的密码不符合规则"
+
+#: lib/UserLogin.php:90
+msgid "Account password does not match"
+msgstr "账户密码不匹配"
+
+#: lib/UserLogin.php:92
+msgid "Captcha Error"
+msgstr "验证码错误"
+
+#: lib/UserLogin.php:94
+msgid "Cookie Set Error"
+msgstr "COOKIE设置失败"
+
+#: lib/UserLogin.php:96
+msgid "Can't set last login info"
+msgstr "无法设置最后登录信息"
+
+#: lib/UserLogin.php:98
+msgid "Error login count to much"
+msgstr "错误登录次数过多"
+
+#: lib/UserLogin.php:102
+msgid "Post login param error"
+msgstr "登录提交的参数错误"
+
+#: lib/UserLogin.php:104
+msgid "unknown error"
+msgstr "未知错误"
+
+#: lib/UserLogin.php:259
+msgid "User last login info set error.ID: "
+msgstr "用户最后登录信息设置出错，ID："
+
+#: lib/UserLogin.php:259
+msgid ".Exception:"
+msgstr ".异常："
+
+#: lib/UserRegister.php:97
+msgid "User register insert sql error."
+msgstr "用户注册数据插入数据库错误"
+
+#: lib/UserRegister.php:108
+msgid "User register success exception notice"
+msgstr "用户注册异常提醒"
+
+#: lib/UserRegister.php:154
+msgid "User is already activation"
+msgstr "用户已经被激活过"
+
+#: lib/UserRegister.php:161
+msgid "Activation code is invalid"
+msgstr "激活码无效"
+
+#: lib/UserRegister.php:164
+msgid "Activation code is time out"
+msgstr "激活码超时"
+
+#: lib/UserRegister.php:167
+msgid "Activation code is error"
+msgstr "激活码出错"
+
+#: lib/UserRegister.php:190
+msgid "Captcha code Error"
+msgstr "验证码出错"
+
+#: lib/UserRegister.php:192
+msgid "Password char error"
+msgstr "密码字符验证错误"
+
+#: lib/UserRegister.php:194
+msgid "Name already exists or does not comply with the rules"
+msgstr "名称已经存在或者不匹配规则。"
+
+#: lib/UserRegister.php:196
+msgid "Email is exists"
+msgstr "该邮箱已经存在"
+
+#: lib/UserRegister.php:198
+msgid "Sql Insert Error"
+msgstr "数据库插入错误"

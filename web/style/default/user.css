@@ -1,0 +1,364 @@
+/*用户菜单*/
+.user_menu {
+	margin: 0 0 30px 0;
+	list-style: none;
+	text-align: left;
+	padding: 0;
+}
+
+.user_menu > li {
+	margin-top: 4px;
+}
+
+.user_menu div.title {
+	height: 32px;
+	padding-right: 20px;
+	background-color: #d9d9d9;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.user_menu div.title > span {
+	position: relative;
+	top: -25px;
+	left: 100%;
+}
+
+.user_menu div.title:hover {
+	background-color: #3779a2;
+}
+
+.user_menu div.title:hover > a {
+	color: #fff;
+}
+
+.user_menu div.title > a {
+	line-height: 32px;
+	display: block;
+	padding-left: 5px;
+	text-decoration: none;
+}
+
+.user_menu div.title > a:hover {
+	color: #fff;
+}
+
+.user_menu ul {
+	list-style: none;
+	margin: 0 0 0 5px;
+	background-color: #f5f5f5;
+	padding: 0;
+	display: none;
+}
+
+.user_menu li.active ul {
+	display: block;
+}
+
+.user_menu ul > li {
+	margin: 2px 0;
+}
+
+.user_menu ul > li.active {
+	background-color: #ececec;
+}
+
+.user_menu ul > li > a {
+	display: block;
+	line-height: 25px;
+	padding-left: 5px;
+	text-decoration: none;
+}
+
+.user_menu ul > li:hover {
+	background-color: #e1e1e1;
+}
+
+.user_menu .active > div.title {
+	background-color: #398439;
+}
+
+.user_menu .active > div.title > a {
+	color: #fff;
+}
+
+/*用户信息表*/
+.user_info_table img {
+	max-height: 100px;
+	max-width: 100px;
+}
+
+/*头像修改*/
+img.user_edit_avatar {
+	max-width: 150px;
+	max-height: 150px;
+}
+
+/*底部信息*/
+.user_footer {
+	padding-top: 40px;
+	padding-bottom: 30px;
+	margin-top: 50px;
+	color: #777;
+	text-align: center;
+	border-top: 1px solid #e5e5e5;
+}
+
+/* 图片文件上传 */
+div.image_upload {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+div.image_upload > button {
+	margin-right: 5px;
+}
+
+button.image_upload > input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.image_preview {
+	border-top: 1px solid #cacfc7;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.preview_img_pic {
+	max-height: 220px;
+	overflow-y: hidden;
+}
+
+.preview_img_pic:hover {
+	max-height: inherit;
+}
+
+.image_preview img {
+	border: 1px solid #e3e3e3;
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.image_preview .preview_desc, .image_preview .preview_remove, .image_preview .preview_upload, .image_preview .preview_tag {
+	margin-top: 5px;
+}
+
+.image_preview .preview_img {
+	display: table;
+}
+
+#ImagePre #Uploaded img {
+	height: 120px;
+	cursor: pointer;
+}
+
+#ImagePre #Uploaded img.selected {
+	background-color: #3276b1;
+}
+
+/* 用户中心上传等待 */
+#Pic_Upload_Loading {
+	background: #262626;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	opacity: 0.6;
+	position: absolute;
+}
+
+#Pic_Upload_Loading_Content {
+	background: no-repeat url("img/loading.gif") center;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	display: table;
+}
+
+#Pic_Upload_Loading_Content > p {
+	display: table-cell;
+	vertical-align: middle;
+	padding-top: 70px;
+	color: #fff;
+}
+
+/* 编辑图片信息 */
+#Edit_pic {
+
+}
+
+#Edit_pic .thumbnail_img img {
+	max-width: 100%;
+}
+
+/*图片列表*/
+#Photo_list > a > img {
+	max-width: 24%;
+}
+
+.pic_edit_list {
+	margin-top: 10px;
+	padding-top: 15px;
+	background-color: #f5f5f5;
+	border-top: dotted 1px #a5a5a5;
+}
+
+/*图集列表*/
+#Gallery_list input[type=checkbox] {
+	width: 1.2em;
+	height: 1.2em;
+}
+
+#Gallery_list .glyphicon {
+	margin-right: 5px;
+}
+
+/* 图集编辑器图片列表 */
+.Gallery_pic_list .img_list > img {
+	width: 19%;
+	max-width: 400px;
+	min-width: 150px;
+	cursor: pointer;
+}
+
+.Gallery_pic_list .img_list > img.select {
+	background-color: #c93126;
+}
+
+/* 图片选择器 */
+#Select_user_pic .Image_list > img {
+	width: 12%;
+	max-width: 400px;
+	min-width: 120px;
+	margin: 1px;
+	cursor: pointer;
+}
+
+#Select_user_pic .Image_list > img.select {
+	background-color: #2d9915;
+}
+
+#Select_user_pic .well .pagination {
+	margin: 0;
+}
+
+#Edit_gallery_add_pic_frame {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	background-color: #fff;
+}
+
+/* 标签图片列表 */
+#Pictures_list .glyphicon {
+	margin-right: 5px;
+}
+
+#Pictures_list td > a.image_link {
+	width: 100%;
+}
+
+#Pictures_list td > a.image_link > img {
+	max-width: 200px;
+	min-width: 80px;
+	max-height: 150px;
+	min-height: 60px;
+}
+
+#Pictures_list td > p > span.label {
+	margin: 0 2px;
+}
+
+#Pictures_list input[type=checkbox] {
+	width: 1em;
+	height: 1em;
+}
+
+/* 弹出对话框 */
+#commonModal img {
+	max-width: 100%;
+}
+
+/* 评论选择 */
+#Comment_Chose ul li a {
+	border-radius: 5px;
+}
+
+#Comment_Chose ul li {
+	text-decoration: none;
+	border: solid 2px #a2a2a2;
+	font-size: 1.5em;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+/* 评论展示中的内容边框 */
+.comment_show_content {
+	border-left: solid 4px #c1c9c1;
+	padding: 5px 0 1px 2px;
+	box-sizing: border-box;
+}
+
+/*我的分享*/
+#MyFeed .share_box {
+	border-top: 1px dashed #8f8f47;
+	background: #f8f8f8;
+	margin-bottom: 10px;
+	padding: 0 5px;
+	box-sizing: border-box;
+}
+
+#MyFeed .share_box > h4 {
+	color: #b44481;
+	border-left: 3px solid #727272;
+	padding-left: 2px;
+}
+
+#MyFeed .share_box > div.time {
+	color: #463972;
+}
+
+#MyFeed .share_box > div.time > span {
+	margin-right: 3px;
+}
+
+#MyFeed .talk > .content {
+	border: 1px dashed #bbb;
+	padding: 2px;
+	box-sizing: border-box;
+	margin-bottom: 4px;
+}
+
+#MyFeed .share_box > div.img {
+	margin: 2px 0 5px 0;
+}
+
+#MyFeed .share_box > div.img img {
+	max-height: 200px;
+	max-width: 100%;
+}
+
+#MyFeed .share_box > button.close {
+	position: relative;
+	right: 10px;
+	top: 10px;
+}
+
+#MyFeed .share_box > h4 > span:first-child {
+	color: #9a9032;
+	margin-right: 5px;
+	font-size: 0.8em;
+}

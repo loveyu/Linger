@@ -1,0 +1,80 @@
+#warp .menu_left {
+	width: 200px;
+	height: 100%;
+	overflow: auto;
+	float: left;
+}
+
+#warp .content_right {
+	width: 600px;
+	height: 100%;
+	overflow: auto;
+	float: right;
+	border-left: #269abc 2px solid;
+}
+
+#NAV_MENU_TOP {
+	margin-top: 5px;
+}
+
+#NAV_MENU_TOP li {
+
+}
+
+#NAV_MENU_TOP li > a {
+	padding: 7px 5px;
+}
+
+#NAV_MENU_TOP li {
+	/*border-left: solid 4px #3d7ed1;*/
+}
+
+#page_content_load {
+	width: 98%;
+	margin: 5px auto;
+}
+
+#NAV_MENU_TOP .control_sub {
+	margin: 4px 0 3px 2px;
+}
+
+#NAV_MENU_TOP .control_sub > li > a {
+	padding: 3px 0px 3px 8px;
+}
+
+#NAV_MENU_TOP .control_sub > li {
+	border-left: solid 4px #6699FF;
+	margin-left: 4px;
+}
+
+#windowAlertModal .modal-footer {
+	text-align: center;
+}
+
+table#Control_user td {
+	vertical-align: middle;
+}
+
+table#Control_user th.avatar {
+	width: 50px;
+}
+
+table#Control_user td.avatar {
+	padding: 0;
+	text-align: center;
+}
+
+table#Control_user .avatar img {
+	width: 42px;
+	height: 42px;
+}
+
+/* 图片服务器 */
+table.pic_server > tbody > tr > td {
+	vertical-align: middle;
+}
+
+/* 弹出对话框 */
+#commonModal img {
+	max-width: 100%;
+}
