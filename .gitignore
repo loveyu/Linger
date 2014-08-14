@@ -44,7 +44,7 @@ app/log/*.log
 *.rar
 web/avatar/[0-9]*.jpg
 web/avatar/[0-9]*/*
-#web/images/*
+web/images/*/
 config/all.php
 config/install.lock
 config/queue.lock
