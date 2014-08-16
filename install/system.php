@@ -15,14 +15,14 @@ if(isset($_POST['COOKIE_KEY']) && strlen($_POST['COOKIE_KEY']) > 5){
 
 file_put_contents(_SysPath_ . "/config.php", $config);
 
-if(!rename(_BasePath_ . "/install.php", dirname(_BasePath_) . "/install/install.php")){
+if(!rename(_BasePath_ . "/install.php", _RootPath_ . "/install/install.php")){
 	die("文件移动失败");
 }
 
 if(isset($_POST['INSTALL_REMOVE']) && $_POST['INSTALL_REMOVE'] == "1"){
 	c_lib()->load('file');
 	$f = new \CLib\File();
-	$f->path_remove(dirname(_BasePath_) . "/install", true);
+	$f->path_remove(_RootPath_ . "/install", true);
 }
-file_put_contents(dirname(_BasePath_) . "/config/install.lock", "");
+file_put_contents(_RootPath_ . "/config/install.lock", "");
 echo "true";

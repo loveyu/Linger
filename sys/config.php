@@ -9,7 +9,7 @@ date_default_timezone_set("PRC");
 /**
  * 程序版本
  */
-define("_VERSION_","1.0.0");
+define("_VERSION_", "1.0.0");
 
 /**
  * 定义唯一名称
@@ -43,20 +43,24 @@ define('COOKIE_KEY', 'xS/087N*+O:JTd%3z8+YTrkjrz<\'$K<^No@@L`wh');
 define('COOKIE_PREFIX', 'LC_');
 
 /**
- * 基本路径
+ * 系统根目录，对应着包含sys,app,install的目录，需要修改时可以调整该目录参数，一般调整整个系统文件结构，无需改变任何内容
  */
-define("_BasePath_", dirname(__DIR__)."/web");
-
-/**
- * App应用文件路径
- */
-define("_AppPath_", dirname(__DIR__)."/app");
+define("_RootPath_", dirname(__DIR__));
 
 /**
  * 系统路径
  */
 define("_SysPath_", __DIR__);
 
+/**
+ * 基本路径
+ */
+define("_BasePath_", _RootPath_ . "/web");
+
+/**
+ * App应用文件路径
+ */
+define("_AppPath_", _RootPath_ . "/app");
 /**
  * 核心路径
  */
@@ -80,7 +84,7 @@ define("_PagePath_", _AppPath_ . "/page");
 /**
  * 功能函数路径
  */
-define("_HelperPath_",_AppPath_ . "/helper");
+define("_HelperPath_", _AppPath_ . "/helper");
 
 /**
  * 视图路径
@@ -94,10 +98,10 @@ define("_LibPath_", _AppPath_ . "/lib");
 
 //设置运行错误信息
 if(_Debug_){
-	ini_set('display_errors','on');
+	ini_set('display_errors', 'on');
 	error_reporting(E_ALL | E_STRICT);
 } else{
-	ini_set('display_errors','off');
+	ini_set('display_errors', 'off');
 	error_reporting(0);
 }
 
