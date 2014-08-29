@@ -66,7 +66,7 @@ function modal_show(title, content, callback) {
 		'<h4 class= "modal-title" id="commonModalMyModalLabel" >' + title + '</h4 >' +
 		'</div>	' +
 		"<div class='modal-body'>" + content + "</div>" +
-		' <div class="modal-footer">' +
+		'<div class="modal-footer">' +
 		'<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>' +
 		"</div></div></div></div>"
 	);
@@ -82,6 +82,13 @@ function modal_show(title, content, callback) {
 		}
 	}
 	$('#commonModal').modal('show');
+}
+function prompt_box(msg, call) {
+//	modal_show(msg,msg);
+	var x = prompt(msg);
+	if (typeof x ==="string" && x != '') {
+		call(x);
+	}
 }
 function views_add(type, id, time, callback, error_callback) {
 	$(function () {

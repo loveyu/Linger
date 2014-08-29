@@ -21,7 +21,8 @@
 		<button type="button" class="btn btn-warning col-sm-1 upload_clear pull-right" onclick="image_clear()">清除</button>
 	</div>
 	<div class="well well-sm">
-		<p class="help-block">已上传的图片：<a href="#" onclick="return uploaded_img_edit();">编辑</a></p>
+		<p class="help-block">已上传的图片：<a href="#" onclick="return uploaded_img_edit();">编辑</a>,
+			<a href="#" onclick="return create_gallery();">创建图集</a></p>
 
 		<div id="Uploaded"></div>
 	</div>
@@ -148,6 +149,26 @@ function uploaded_img_edit() {
 		alert_error("没有要编辑的图片");
 	} else {
 		location.href = "<?php echo get_url("Photo","edit_pic")?>?id=" + list.join(",");
+	}
+	return false;
+}
+function create_gallery() {
+	var list = [];
+	$("#Uploaded img.selected").each(function (i, e) {
+		list.push(+this.alt);
+	});
+	if (list.length < 1) {
+		alert_error("没有图片可供创建图集");
+	} else {
+		prompt_box("输入新图集标题", function (value) {
+			$.post("<?php echo get_url("UserApi", "gallery_add_by_pics");?>", {'gallery_title': value, 'pic_list': list.join(',')}, function (data) {
+				if (!data.status) {
+					alert_error(data.msg);
+				} else {
+					modal_show("添加图集成功", "前往编辑：<a href='<?php echo get_url("Photo/edit_gallery?id=")?>" + data.content + "'>" + value + "</a>");
+				}
+			});
+		});
 	}
 	return false;
 }

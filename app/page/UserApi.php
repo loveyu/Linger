@@ -518,6 +518,22 @@ class UserApi extends Page{
 		}
 	}
 
+	public function gallery_add_by_pics(){
+		try{
+			$this->throwMsgCheck('is_post', 'is_login', 'is_active');
+			lib()->load('Gallery');
+			$g = new Gallery();
+			$rt = $g->add(req()->_plain()->post('gallery_title'), login_user()->getId());
+			$g = new Gallery($rt, login_user()->getId());
+			$g->add_pic(req()->_plain()->post('pic_list'));
+			$this->rt_msg['content'] = intval($rt);
+			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
 	public function gallery_add_tag(){
 		try{
 			$this->throwMsgCheck('is_post', 'is_login', 'is_active');

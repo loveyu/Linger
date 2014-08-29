@@ -82,6 +82,10 @@
 	color: #fff;
 }
 
+#commonModal code{
+	word-break: break-all;
+}
+
 /*用户信息表*/
 .user_info_table img {
 	max-height: 100px;
