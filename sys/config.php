@@ -12,6 +12,11 @@ date_default_timezone_set("PRC");
 define("_VERSION_", "1.1.0");
 
 /**
+ * 资源文件版本
+ */
+define("_SRC_VERSION_", "20140901");
+
+/**
  * 定义唯一名称
  * 当修改语言标示后需要修改才名称
  */

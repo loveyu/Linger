@@ -292,7 +292,7 @@ function get_bootstrap_url(){
 	if($url === NULL){
 		$url = hook()->apply("get_bootstrap_url", get_file_url() . path_of_bootstrap());
 	}
-	return $url . "/" . implode("/", func_get_args());
+	return $url . "/" . implode("/", func_get_args()) . add_src_version(func_get_args());
 }
 
 /**
@@ -304,7 +304,7 @@ function get_bootstrap_plugin_url(){
 	if($url === NULL){
 		$url = hook()->apply("get_bootstrap_plugin_url", get_file_url() . path_of_bootstrap_plugin());
 	}
-	return $url . "/" . implode("/", func_get_args());
+	return $url . "/" . implode("/", func_get_args()) . add_src_version(func_get_args());
 }
 
 /**
@@ -316,7 +316,7 @@ function get_js_url(){
 	if($url === NULL){
 		$url = hook()->apply("get_js_url", get_file_url() . path_of_js());
 	}
-	return $url . "/" . implode("/", func_get_args());
+	return $url . "/" . implode("/", func_get_args()) . add_src_version(func_get_args());
 }
 
 /**
@@ -328,7 +328,7 @@ function get_style_url(){
 	if($url === NULL){
 		$url = hook()->apply("get_style_url", get_file_url() . path_of_style());
 	}
-	return $url . "/" . implode("/", func_get_args());
+	return $url . "/" . implode("/", func_get_args()) . add_src_version(func_get_args());
 }
 
 /**
@@ -341,7 +341,21 @@ function get_static_style_url(){
 	if($url === NULL){
 		$url = hook()->apply("get_static_style_url", get_style_url() . get_style());
 	}
-	return $url . "/" . implode("/", func_get_args());
+	return $url . "/" . implode("/", func_get_args()) . add_src_version(func_get_args());
+}
+
+/**
+ * 依据传入的参数判断是否需要添加版本号
+ * @param array $param
+ * @return string
+ */
+function add_src_version($param = NULL){
+	$v = end($param);
+	if($v && is_string($v) && strpos($v, ".")){
+		//必须有后缀
+		return "?_v=" . _SRC_VERSION_;
+	}
+	return "";
 }
 
 /**
