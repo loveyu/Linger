@@ -90,6 +90,9 @@ body {
 #H-Gallery h4 {
 	border-bottom: 1px dashed #2a6496;
 	padding-bottom: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #H-Gallery .thumbnail p {

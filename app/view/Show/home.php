@@ -68,9 +68,7 @@ $user = login_user();
 	<div class="row">
 		<?php $i = 0;
 		foreach($__gallery_list as $v): ++$i; ?>
-			<div class="col-sm-3<?php if($i === 4){
-				echo " hidden-sm";
-			} ?>">
+			<div class="col-sm-3">
 				<div class="thumbnail">
 					<a href="<?php echo $link = gallery_link($v['gallery_id']) ?>">
 						<img src="<?php echo $v['pic_thumbnails_url'] ?>"
@@ -80,7 +78,7 @@ $user = login_user();
 					<p><?php echo mb_substr($v['gallery_description'], 0, 50, "UTF-8") ?></p>
 				</div>
 			</div>
-		<?php endforeach; ?>
+		<?php if($i%4==0){echo "<div class='clearfix'></div>";} endforeach; ?>
 	</div>
 </div>
 <div id="H-Pic" class="main_box hidden-print">
@@ -89,10 +87,10 @@ $user = login_user();
 	<div class="picture  clearfix">
 		<?php $i = 0;
 		foreach($__pic_list as $v):++$i; ?>
-			<a class="<?php if($i > 3){
+			<a class="<?php if($i > 6){
 				echo "hidden-xs ";
 			}
-			if($i > 4){
+			if($i > 8){
 				echo "hidden-sm";
 			} ?>" href="<?php echo picture_link($v['pic_id']) ?>"
 			   title="<?php echo mb_substr($v['pic_description'], 0, 20, "UTF-8") ?>">
