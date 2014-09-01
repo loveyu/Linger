@@ -92,6 +92,13 @@ body {
 	padding-bottom: 4px;
 }
 
+#H-Gallery .thumbnail p {
+	/*字符自动隐藏*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 #H-User .avatar img {
 	height: 80px;
 	width: 80px;
