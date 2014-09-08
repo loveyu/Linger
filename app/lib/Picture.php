@@ -807,24 +807,35 @@ class Picture{
 
 					//创建缩略图
 					$img_w = $img->width();
+					$c_w = image_thumbnail_width();
+					$c_h = image_thumbnail_height();
 					$img_h = $img->height();
-					$x = $img_w / $img_h;
-					$x_t = image_thumbnail_width() / image_thumbnail_height();
-					if($x < $x_t){
+					if($img_w < $c_w){ //目标图片宽度小于缩略图
+						$img_w = $c_w;
+						$img_h = $img_h * $c_w / $img_w;
+					}
+					if($img_h < $c_h){ //目标图片高度小于缩略图
+						$img_h = $c_h;
+						$img_w = $img_w * $c_h / $img_h;
+					}
+					//if($img_w / $img_h < $c_w / $c_h){
+					if($img_w * $c_h < $c_w * $img_h){ //化简表达
 						$x_w = $img_w;
-						$x_h = $x_w / $x_t;
+						$x_h = ceil($x_w * $c_h / $c_w);
 					} else{
 						$x_h = $img_h;
-						$x_w = $x_h * $x_t;
+						$x_w = ceil($x_h * $c_w / $c_h);
 					}
+					Log::write(print_r(get_defined_vars(), true));
 					$img->thumb($x_w, $x_h, Image::IMAGE_THUMB_CENTER);
-					$img->thumb(image_thumbnail_width(), image_thumbnail_height(), Image::IMAGE_THUMB_SCALE);
+					Log::write(print_r(get_defined_vars(), true));
+					//$img->thumb($c_w, $c_h, Image::IMAGE_THUMB_SCALE);
 					$t_path = "thumbnail/" . dirname($path);
 					$this->createPath($root . "/" . $t_path);
 					$img->save($root . "/thumbnail/" . $path);
 					$rt['pic_thumbnails_path'] = "thumbnail/" . $path;
-					$rt['pic_thumbnails_width'] = image_thumbnail_width();
-					$rt['pic_thumbnails_height'] = image_thumbnail_height();
+					$rt['pic_thumbnails_width'] = $c_w;
+					$rt['pic_thumbnails_height'] = $c_h;
 				} catch(\Exception $ex){
 					return [];
 				}
