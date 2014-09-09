@@ -3,6 +3,8 @@ namespace CLib;
 
 /**
  * Cookie操作类
+ * Class Cookie
+ * @package CLib
  */
 class Cookie
 {

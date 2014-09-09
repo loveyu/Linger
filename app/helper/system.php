@@ -58,6 +58,20 @@ function session(){
 }
 
 /**
+ * 取得缓存对象的实例
+ * @return \CLib\Cache
+ */
+function cache(){
+	$lib = c_lib();
+	$cache = $lib->using('cache');
+	if($cache === false){
+		$lib->load('cache')->add("cache", new \CLib\Cache(cfg()->get('cache','drive')));
+		$cache = $lib->using('cache');
+	}
+	return $cache;
+}
+
+/**
  * 生成随机字符
  * @param int $len
  * @return string

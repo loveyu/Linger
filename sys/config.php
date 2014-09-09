@@ -82,6 +82,11 @@ define("_LogPath_", _AppPath_ . "/log");
 define("_Language_", _AppPath_ . "/language");
 
 /**
+ * 缓存目录
+ */
+define("_Cache_", _AppPath_ . "/cache");
+
+/**
  * 页面路径
  */
 define("_PagePath_", _AppPath_ . "/page");

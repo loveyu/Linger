@@ -75,10 +75,10 @@ class Uri{
 	 * @param ...
 	 */
 	public function require_page_class(){
-		$path = _PagePath_."/".implode("/",func_get_args());
+		$path = _PagePath_ . "/" . implode("/", func_get_args());
 		if(is_file($path)){
 			require_once($path);
-		}else{
+		} else{
 			Log::write("Load a page class error.");
 		}
 	}
@@ -90,6 +90,12 @@ class Uri{
 	 */
 	public function load(){
 		$list = func_get_args();
+		if(!$this->_flag_404){
+			if(hook()->apply("Uri_load_start", false, $list) === true){
+				//如果加载请求被处理则不再继续调用，直接返回
+				return true;
+			}
+		}
 		$path = _PagePath_;
 		try{
 			foreach($list as $id => $v){
@@ -133,7 +139,11 @@ class Uri{
 								}
 								hook()->apply('Uri_load_begin', NULL);
 								$page = new $class_name;
-								$page->main();
+								if(_Debug_){
+									$page->main();
+								} else{
+									@$page->main();
+								}
 								hook()->apply('Uri_load_end', NULL);
 								return true;
 							}

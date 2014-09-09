@@ -69,13 +69,10 @@ class Page{
 	 */
 	private function __view_f($file, $param){
 		if(is_array($param)){
-			foreach(array_keys($param) as $key){
-				$tmp = "__" . $key;
-				$$tmp = & $param[$key];
-			}
-			unset($key);
-			unset($tmp);
+			//自动将解析并添加前缀
+			extract($param, EXTR_PREFIX_ALL, "_");//短下划线不是合法的变量名，会自动添加一个下划线
 		}
+		unset($param);
 		include(_ViewPath_ . "/$file");
 	}
 

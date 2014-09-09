@@ -3,8 +3,9 @@ namespace ULib;
 if(!defined('_CorePath_')){
 	exit;
 }
-use \CLib\Sql;
-use \CLib\Cookie;
+use CLib\Cache;
+use CLib\Sql;
+use CLib\Cookie;
 
 /**
  * 自定义Hook类
@@ -82,6 +83,15 @@ class Hook{
 				echo "<script>var SITE_URL='" . get_url() . "';var IS_LOGIN=" . (is_login() ? "true" : "false") . ";</script>\n";
 			});
 			$this->publish_cdn();
+			if(!cfg()->get('cache','status')){
+				//启用页面缓存设置
+				hook()->add("Cache_set",function(){
+					//关闭缓存输出
+					return false;
+				});
+			}else{
+				cache();//允许缓存时初始化信息，并加载钩子机制
+			}
 		}
 	}
 

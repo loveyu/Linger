@@ -39,6 +39,7 @@ Icon
 # 移除部分系统目录
 .git/*
 .idea/*
+app/cache/out/*/
 app/log/*.log
 *.zip
 *.rar

@@ -66,8 +66,20 @@ return array(
 			//'headers'=>''
 		]
 	],
-	'mail_template' => _ViewPath_ . "/MailTemplate",//邮件模板路径
-	'comment_view_path' => "Comment",//评论视图路径
-	'option' => []//该处选项由数据库添加，请勿随意改动
+	'mail_template' => _ViewPath_ . "/MailTemplate",
+	//邮件模板路径
+	'comment_view_path' => "Comment",
+	//评论视图路径
+
+	//页面缓存设置
+	'cache' => [
+		'status' => false,
+		//当为false时忽略缓存设置
+		'drive' => 'File'
+		//缓存驱动
+	],
+
+	'option' => []
+	//该处选项由数据库添加，请勿随意改动
 	//数据库调用的选项
 );

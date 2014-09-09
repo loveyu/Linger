@@ -34,7 +34,6 @@ class Local implements SessionInterface
 	 * @return mixed
 	 */
 	public function get($name) {
-		// TODO: Implement get() method.
 		if(isset($_SESSION[$name])) {
 			return $_SESSION[$name];
 		} else {
@@ -52,7 +51,6 @@ class Local implements SessionInterface
 	 * @return bool
 	 */
 	public function set($name, $value) {
-		// TODO: Implement set() method.
 		$_SESSION[$name] = $value;
 		return true;
 	}
@@ -63,7 +61,6 @@ class Local implements SessionInterface
 	 * @return bool
 	 */
 	public function delete($name) {
-		// TODO: Implement delete() method.
 		if(isset($_SESSION[$name])) {
 			unset($_SESSION[$name]);
 		}
@@ -75,7 +72,6 @@ class Local implements SessionInterface
 	 * @return void
 	 */
 	public function destroy() {
-		// TODO: Implement destroy() method.
 		session_destroy();
 	}
 

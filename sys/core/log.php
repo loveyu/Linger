@@ -81,7 +81,7 @@ class Log{
 		}
 		$now = date(self::$config['time_format']);
 		$message = Core::getInstance()->getHook()->apply("Log_write", $message, $level);
-		error_log("[{$now}] " . URL_NOW . "\r\n{$level}: {$message}\r\n", self::$config['type'], self::$config['destination'], self::$config['headers']);
+		error_log("[{$now}] " . URL_NOW . "; {$level}: {$message}\r\n", self::$config['type'], self::$config['destination'], self::$config['headers']);
 	}
 
 	/**
@@ -97,12 +97,22 @@ class Log{
 		}
 	}
 
+	/**
+	 * 程序结束错误信息输出
+	 */
 	public static function phpShowdownLog(){
 		if(($e = error_get_last()) && $e['type']==E_ERROR || $e['type']==E_COMPILE_ERROR){
 			call_user_func_array('\Core\Log::phpErrorLog', $e);
 		}
 	}
 
+	/**
+	 * 记录系统错误提示信息
+	 * @param $error
+	 * @param $message
+	 * @param $file
+	 * @param $line
+	 */
 	public static function phpErrorLog($error, $message, $file, $line){
 		$type = NULL;
 		switch($error){
@@ -118,9 +128,14 @@ class Log{
 			case E_NOTICE:
 				$type = "E_NOTICE";
 				break;
+			default:
+				$type = "UNKNOWN";
 		}
 		if($type !== NULL){
-			Log::write("Create a $type error.\nMsg:$message\nFile:$file:$line", Log::ERR);
+			Log::write("[$type]:$message;$file:$line", Log::ERR);
+		}
+		if(_Debug_){
+			echo "<br />\n<b>{$type}</b>:  {$message} in <b>{$file}</b> on line <b>{$line}</b><br />\n";
 		}
 	}
 } 

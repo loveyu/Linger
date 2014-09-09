@@ -71,7 +71,6 @@ class Session implements SessionInterface
 	}
 
 	public function get($name) {
-		// TODO: Implement get() method.
 		return call_user_func_array([
 			$this->drive,
 			'get'
@@ -79,7 +78,6 @@ class Session implements SessionInterface
 	}
 
 	public function set($name, $value) {
-		// TODO: Implement set() method.
 		return call_user_func_array([
 			$this->drive,
 			'set'
@@ -87,7 +85,6 @@ class Session implements SessionInterface
 	}
 
 	public function delete($name) {
-		// TODO: Implement delete() method.
 		return call_user_func_array([
 			$this->drive,
 			'delete'
@@ -99,7 +96,6 @@ class Session implements SessionInterface
 	 * @return void
 	 */
 	public function destroy() {
-		// TODO: Implement destroy() method.
 		$this->drive->destroy();
 	}
 }
