@@ -12,6 +12,8 @@
 // +----------------------------------------------------------------------
 namespace CLib\Image;
 
+c_lib()->load('image');
+
 use CLib\Image;
 use CLib\ImageInterface;
 

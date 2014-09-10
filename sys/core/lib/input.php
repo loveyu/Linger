@@ -9,9 +9,7 @@
 
 namespace CLib;
 
-if(!class_exists('Ip')){
-	c_lib()->load('ip');
-}
+c_lib()->load('ip');
 
 /**
  * Class Input

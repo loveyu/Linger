@@ -29,8 +29,8 @@
 					<th>标题</th>
 					<th>时间</th>
 					<th>分类</th>
-					<th>评论</th>
 					<th>状态</th>
+					<th>评论</th>
 					<th>操作</th>
 				</tr>
 				</thead>

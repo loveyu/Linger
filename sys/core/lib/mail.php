@@ -7,20 +7,18 @@
  */
 
 namespace CLib;
-if(!class_exists("PHPMailer")) {
-	c_lib()->load("phpmailer/PHPMailerAutoload");
-}
+c_lib()->load("phpmailer/PHPMailerAutoload");
 
-class Mail extends \PHPMailer
-{
+class Mail extends \PHPMailer{
 
-	public function __construct() {
+	public function __construct(){
 		parent::__construct(true);
-		$this->setLanguage("zh_cn",_CorePath_."/lib/phpmailer/language/");
+		$this->setLanguage("zh_cn", _CorePath_ . "/lib/phpmailer/language/");
 		$this->setConfig();
 	}
+
 	private function setConfig(){
-		$cfg = hook()->apply("Mail_setConfig",cfg()->get('mail'));
+		$cfg = hook()->apply("Mail_setConfig", cfg()->get('mail'));
 		foreach($cfg as $name => $value){
 			if(isset($this->$name)){
 				$this->$name = $value;

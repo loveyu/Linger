@@ -1,15 +1,16 @@
 <?php
-namespace CLib\Cache;
+namespace CLib\PCache;
 
-use CLib\CacheInterface;
-use Core\Log;
+c_lib()->load('pcache');
+
+use CLib\PCacheInterface;
 
 /**
  * 文件缓存驱动
  * Class File
  * @package CLib\Cache
  */
-class File implements CacheInterface{
+class File implements PCacheInterface{
 	function __construct($config){
 		if(!is_dir(_Cache_ . "/out/00")){
 			$this->mk_cache_dir();
@@ -22,7 +23,7 @@ class File implements CacheInterface{
 	 */
 	private function mk_cache_dir(){
 		if(!is_writable(_Cache_ . "/out/")){
-			throw new \Exception(_("Cache path can't write!"));
+			throw new \Exception(_("Page cache path can't write!"));
 		}
 		for($i = 0; $i < 0xff; $i++){
 			$x = dechex($i);

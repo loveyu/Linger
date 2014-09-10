@@ -442,7 +442,6 @@ function mime_get(){
 		'ts' => 'video/MP2T',
 		'tsp' => 'application/dsptype',
 		'tsv' => 'text/tab-separated-values',
-		'tsv' => 'text/tab-separated-values',
 		'ttf' => 'application/octet-stream',
 		'ttz' => 'application/t-time',
 		'txt' => 'text/plain',

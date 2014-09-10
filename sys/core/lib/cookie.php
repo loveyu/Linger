@@ -6,11 +6,9 @@ namespace CLib;
  * Class Cookie
  * @package CLib
  */
-class Cookie
-{
+class Cookie{
 	/**
 	 * 设置是否加密COOKIE
-	 *
 	 * @var bool
 	 */
 	private $encode;
@@ -21,16 +19,20 @@ class Cookie
 	private $key;
 
 	/**
+	 * @var Safe
+	 */
+	private $safe;
+
+	/**
 	 * 构造
-	 * @param bool $encode
+	 * @param bool   $encode
 	 * @param string $key
 	 */
 	public function __construct($encode = false, $key = ''){
 		$this->encode = $encode;
 		if($encode){
-			if(!class_exists('Safe')){
-				c_lib()->load('safe');
-			}
+			c_lib()->load('safe');
+			$this->safe = new Safe();
 			hook()->add('Request_cookie', array(
 				$this,
 				'de'
@@ -53,46 +55,43 @@ class Cookie
 
 	/**
 	 * 通过Cookie_Key加密数据或数组
-	 *
 	 * @param $data
 	 * @return array|string
 	 */
 	public function en($data){
-		if($data === null){
+		if($data === NULL){
 			return $data;
 		}
 		return is_array($data) ? array_map(array(
 			$this,
 			'de'
-		), $data) : Safe::encrypt($data, $this->key);
+		), $data) : $this->safe->encrypt($data, $this->key);
 	}
 
 	/**
 	 * 通过Cookie_Key解密数据或数组
-	 *
 	 * @param $data
 	 * @return array|string
 	 */
 	public function de($data){
-		if($data === null){
+		if($data === NULL){
 			return $data;
 		}
 		return is_array($data) ? array_map(array(
 			$this,
 			'de'
-		), $data) : Safe::decrypt($data, $this->key);
+		), $data) : $this->safe->decrypt($data, $this->key);
 	}
 
 	/**
 	 * 设置COOKIE的值
-	 *
 	 * @param        $name
 	 * @param        $value
-	 * @param int $expire
+	 * @param int    $expire
 	 * @param string $path
 	 * @param string $domain
-	 * @param bool $secure
-	 * @param bool $httponly
+	 * @param bool   $secure
+	 * @param bool   $httponly
 	 */
 	public function set($name, $value, $expire = 0, $path = '', $domain = '', $secure = false, $httponly = true){
 		setcookie(COOKIE_PREFIX . $name, hook()->apply('Cookie_set', $value), $expire, $this->path($path), $this->domain($domain), $secure, $httponly);
@@ -100,7 +99,6 @@ class Cookie
 
 	/**
 	 * 删除COOKIE的值
-	 *
 	 * @param        $name
 	 * @param string $path
 	 * @param string $domain
@@ -111,7 +109,6 @@ class Cookie
 
 	/**
 	 * 修正COOKIE设置的路径
-	 *
 	 * @param $path
 	 * @return mixed
 	 */

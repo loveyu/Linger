@@ -16,6 +16,10 @@ function db(){
  * @return \ULib\Notice
  */
 function notice(){
+	static $notice = NULL;
+	if($notice !== NULL){
+		return $notice;
+	}
 	$lib = lib();
 	$notice = $lib->using('notice');
 	if(!is_object($notice)){
@@ -48,6 +52,10 @@ function option(){
  * @return \CLib\Session
  */
 function session(){
+	static $session = NULL;
+	if($session !== NULL){
+		return $session;
+	}
 	$lib = c_lib();
 	$session = $lib->using('session');
 	if($session === false){
@@ -59,14 +67,18 @@ function session(){
 
 /**
  * 取得缓存对象的实例
- * @return \CLib\Cache
+ * @return \CLib\PCache
  */
-function cache(){
+function pcache(){
+	static $cache = NULL;
+	if($cache !== NULL){
+		return $cache;
+	}
 	$lib = c_lib();
 	$cache = $lib->using('cache');
 	if($cache === false){
-		$lib->load('cache')->add("cache", new \CLib\Cache(cfg()->get('cache','drive')));
-		$cache = $lib->using('cache');
+		$lib->load('pcache')->add("pcache", new \CLib\PCache(cfg()->get('cache', 'drive')));
+		$cache = $lib->using('pcache');
 	}
 	return $cache;
 }

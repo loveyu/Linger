@@ -43,7 +43,7 @@ return array(
 		'encode' => true
 	],
 	'mail' => [
-		//邮件配置设置
+		//邮件配置设置，参考PHPailer的邮件配置
 		'Mailer' => 'smtp',
 		'Host' => 'smtp.exmail.qq.com',
 		'SMTPAuth' => true,
@@ -72,8 +72,8 @@ return array(
 	//评论视图路径
 
 	//页面缓存设置
-	'cache' => [
-		'status' => false,
+	'pcache' => [
+		'status' => true,
 		//当为false时忽略缓存设置
 		'drive' => 'File'
 		//缓存驱动

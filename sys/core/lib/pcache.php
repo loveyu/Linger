@@ -1,39 +1,17 @@
 <?php
 namespace CLib;
 
-/**
- * 缓存驱动接口
- * Interface CacheInterface
- * @package CLib
- */
-interface CacheInterface{
-	/**
-	 * 读取缓存内容
-	 * @param string $name 名称
-	 * @param int    $exp  超时，秒
-	 * @return string|false 返回缓存内容
-	 */
-	public function read($name, $exp);
-
-	/**
-	 * 写入缓存内容
-	 * @param string $name
-	 * @param string $content
-	 * @param int    $exp 超时
-	 * @return void
-	 */
-	public function write($name, $content, $exp);
-}
+c_lib()->load('interface/PCacheInterface');
 
 /**
  * 缓存类
  * Class Cache
  * @package CLib
  */
-class Cache{
+class PCache{
 
 	/**
-	 * @var CacheInterface
+	 * @var PCacheInterface
 	 */
 	private $drive;
 	/**
@@ -52,16 +30,16 @@ class Cache{
 	 * @throws \Exception 抛出驱动未找到的异常
 	 */
 	function __construct($drive_name = 'File', $drive_config = []){
-		if(hook()->apply("Cache_set", true)){
+		if(hook()->apply("PCache_set", true)){
 			//只有当缓存启用时才调用页面缓存
 			$this->status = true;
 			if(empty($drive_name)){
 				$drive_name = "File";
 			}
-			c_lib()->load('cache/' . $drive_name);
-			$drive_name = "CLib\\Cache\\" . $drive_name;
+			c_lib()->load('pcache/' . $drive_name);
+			$drive_name = "CLib\\PCache\\" . $drive_name;
 			if(!class_exists($drive_name)){
-				throw new \Exception(_("Cache Drive Not Found"));
+				throw new \Exception(_("Page Cache Drive Not Found"));
 			}
 			$this->drive = new $drive_name($drive_config);
 			hook()->add("Uri_load_begin", [
@@ -95,7 +73,7 @@ class Cache{
 				@flush();
 				@ob_end_flush();
 			}
-			hook()->apply("Cache_set_success", NULL);//缓存设置结束前钩子
+			hook()->apply("PCache_set_success", NULL);//缓存设置结束前钩子
 			exit;
 		}
 	}

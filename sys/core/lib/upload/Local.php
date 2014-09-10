@@ -4,11 +4,9 @@
  */
 namespace CLib\Upload;
 
-if(!interface_exists("CLib\\UploadInterface")){
-	c_lib()->load('upload');
-}
-
 use CLib\UploadInterface;
+
+c_lib()->load('upload');
 
 class Local implements UploadInterface{
 	/**

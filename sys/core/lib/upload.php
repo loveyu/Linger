@@ -11,21 +11,7 @@
 
 namespace CLib;
 
-use ULib\User;
-
-interface UploadInterface{
-	public function checkRootPath($path);
-
-	public function checkPath($path);
-
-	public function checkSavePath($path);
-
-	public function save(&$file, $replace = true);
-
-	public function mkdir($path);
-
-	public function getError();
-}
+c_lib()->load('interface/UploadInterface');
 
 /**
  * 文件上传操作类

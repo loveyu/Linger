@@ -8,9 +8,8 @@
 
 namespace CLib\Session;
 
-if(!interface_exists("CLib\\SessionInterface")) {
-	c_lib()->load('session');
-}
+c_lib()->load('session');
+
 use CLib\SessionInterface;
 
 /**

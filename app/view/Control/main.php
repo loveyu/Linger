@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo get_bootstrap_url('css/bootstrap.min.css'); ?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_style('control.css'); ?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_js_url('pnotify/jquery.pnotify.default.css'); ?>"/>
-	<script src="<?php echo get_js_url('jquery-1.11.0.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo get_js_url('jquery-1.11.1.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo get_bootstrap_url('js/bootstrap.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo get_style('home.js'); ?>"></script>
 	<script src="<?php echo get_style('control.js'); ?>"></script>
