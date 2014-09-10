@@ -77,7 +77,7 @@ function pcache(){
 	$lib = c_lib();
 	$cache = $lib->using('cache');
 	if($cache === false){
-		$lib->load('pcache')->add("pcache", new \CLib\PCache(cfg()->get('cache', 'drive')));
+		$lib->load('pcache')->add("pcache", new \CLib\PCache(cfg()->get('pcache', 'drive')));
 		$cache = $lib->using('pcache');
 	}
 	return $cache;
