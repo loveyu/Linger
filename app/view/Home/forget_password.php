@@ -37,7 +37,7 @@
 	};
 	$("#Forget_password_captcha").click(captcha_refresh);
 	$("form").submit(function(){
-		$("form .well").fadeOut("slow");
+		$("form .well").html("<span class='text-warning'>邮件发送中....</span>");
 	});
 	$("form").ajaxForm(function (data) {
 		var s = $("form .well");
@@ -49,6 +49,8 @@
 		if(data['code']!==-3){
 			captcha_refresh();
 		}
-		s.fadeIn('slow');
+		s.fadeOut('fast',function(){
+			s.fadeIn("slow");
+		});
 	});
 </script>
