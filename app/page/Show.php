@@ -31,7 +31,7 @@ class Show extends Page{
 		$g = new Gallery();
 		$um = new UserManagement();
 		$this->__view("Home/header.php");
-		$p_list = $pic->select_new_pic(12);
+		$p_list = $pic->select_new_pic(18);
 		$g_list = $g->select_new_gallery(4, true);
 		$u_list = $um->get_new_users(5);
 		$this->__view("Show/home.php", [
