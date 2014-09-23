@@ -90,7 +90,7 @@ class Hook{
 					return false;
 				});
 			}else{
-				cache();//允许缓存时初始化信息，并加载钩子机制
+				pcache();//允许缓存时初始化信息，并加载钩子机制
 			}
 		}
 	}
@@ -105,7 +105,7 @@ class Hook{
 			}
 			if(cdn_info('filed', 'get_bootstrap_url')){
 				$hook->add('get_bootstrap_url', function (){
-					return cdn_info('filed', 'get_bootstrap_url') . path_of_bootstrap();
+					return cdn_info('filed', 'get_bootstrap_url');
 				});
 			}
 			if(cdn_info('filed', 'get_bootstrap_plugin_url')){
