@@ -43,6 +43,8 @@ class Page{
 
 	/**
 	 * 加载视图
+	 * @param string $file 文件名
+	 * @param array $param 参数列表
 	 */
 	protected function __view($file, $param = NULL){
 		if(is_array($file)){

@@ -25,7 +25,7 @@
 		var API_URL = '<?php echo get_url("UserControlApi")?>';
 		var SITE_URL = '<?php echo site_url();?>';
 	</script>
-
+	<?php hook()->apply("view_control_main", NULL); ?>
 </head>
 <body>
 <div class="container-fluid clearfix" id="warp">

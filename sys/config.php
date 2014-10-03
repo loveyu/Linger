@@ -12,6 +12,11 @@ date_default_timezone_set("PRC");
 define("_VERSION_", "1.1.2");
 
 /**
+ * 检测更新地址
+ */
+define("_UPDATE_URL_", "http://www.loveyu.net/Update/Linger.php");
+
+/**
  * 资源文件版本
  */
 define("_SRC_VERSION_", "20140901");

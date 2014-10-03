@@ -18,6 +18,7 @@ use ULib\UserCheck;
 use ULib\UserControl;
 use ULib\UserManagement;
 use ULib\UserRegister;
+use ULib\VersionUpdate;
 
 /**
  * 用于用户后台控制的API
@@ -519,6 +520,20 @@ class UserControlApi extends Page{
 			];
 			option()->update(['cdn' => serialize($data)]);
 			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
+	public function checkUpdate(){
+		try{
+			$this->__lib("VersionUpdate");
+			$msg = (new VersionUpdate())->check();
+			if(!empty($msg)){
+				$this->rt_msg['content'] = $msg;
+				$this->rt_msg['status'] = true;
+			}
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
 			$this->rt_msg['code'] = $ex->getCode();
