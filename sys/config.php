@@ -9,7 +9,7 @@ date_default_timezone_set("PRC");
 /**
  * 程序版本
  */
-define("_VERSION_", "1.1.2");
+define("_VERSION_", "1.1.3");
 
 /**
  * 检测更新地址
