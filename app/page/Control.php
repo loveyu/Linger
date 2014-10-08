@@ -57,7 +57,7 @@ class Control extends Page{
 	public function check_update(){
 		$this->__lib("VersionUpdate");
 		$info = (new VersionUpdate())->get_update_info();
-		var_dump($info);
+		$this->__view("Control/check_update.php", ['info' => $info]);
 	}
 
 	public function user_add(){

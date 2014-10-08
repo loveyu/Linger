@@ -98,10 +98,11 @@ class VersionUpdate{
 
 	/**
 	 * 远程调用
+	 * @param bool $force 是否强制检测
 	 * @return string 新版本的版本号，如果没有新版本，返回空
 	 */
-	public function check(){
-		$data = $this->cu->exec([
+	public function check($force = false){
+		$data = $this->cu->exec($force ? function (){ return true; } : [
 			$this,
 			'need_update'
 		], function (){ }, [

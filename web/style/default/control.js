@@ -114,3 +114,7 @@ function update_show(version) {
 	$("#page_content_load").before("<div style='display: none' class='well well-sm' id='Update_check_well'><a href=\"#check_update\" class='text-danger'>发现新版本 : " + version + "</a></div>");
 	$("#Update_check_well").slideDown("fast");
 }
+
+function update_hide(){
+	$("#Update_check_well").remove();
+}

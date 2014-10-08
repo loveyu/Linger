@@ -529,7 +529,7 @@ class UserControlApi extends Page{
 	public function checkUpdate(){
 		try{
 			$this->__lib("VersionUpdate");
-			$msg = (new VersionUpdate())->check();
+			$msg = (new VersionUpdate())->check(req()->req('force')=="1");
 			if(!empty($msg)){
 				$this->rt_msg['content'] = $msg;
 				$this->rt_msg['status'] = true;
