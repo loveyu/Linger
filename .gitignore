@@ -49,3 +49,4 @@ web/images/*/
 config/all.php
 config/install.lock
 config/queue.lock
+sys/update.lock

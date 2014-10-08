@@ -97,3 +97,24 @@ function load_menu(select, api_url) {
 		page_analysis('______');
 	});
 }
+
+function update_check() {
+	$.get(API_URL + "/checkUpdate", function (data) {
+		if (data.status && data.content != "") {
+			update_show(data.content);
+		}
+	});
+}
+
+function update_show(version) {
+	var obj = $("#Update_check_well");
+	if (obj.length > 0) {
+		obj.remove();
+	}
+	$("#page_content_load").before("<div style='display: none' class='well well-sm' id='Update_check_well'><a href=\"#check_update\" class='text-danger'>发现新版本 : " + version + "</a></div>");
+	$("#Update_check_well").slideDown("fast");
+}
+
+function update_hide(){
+	$("#Update_check_well").remove();
+}

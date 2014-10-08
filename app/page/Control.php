@@ -11,6 +11,7 @@ namespace UView;
 use \Core\Page;
 use ULib\Server;
 use ULib\User;
+use ULib\VersionUpdate;
 
 class Control extends Page{
 	public function __construct(){
@@ -30,6 +31,8 @@ class Control extends Page{
 
 	public function main(){
 		if(count(u()->getUriInfo()->getUrlList()) == 1){
+			$this->__lib('VersionUpdate');
+			(new VersionUpdate())->update_script();
 			$this->__view("Control/main.php");
 		} else{
 			$this->__view("Control/main_show.php");
@@ -49,6 +52,12 @@ class Control extends Page{
 		} catch(\Exception $ex){
 			echo "<h3 class='text-danger'>用户信息加载失败:</h3><p>" . $ex->getMessage() . "</p>";
 		}
+	}
+
+	public function check_update(){
+		$this->__lib("VersionUpdate");
+		$info = (new VersionUpdate())->get_update_info();
+		$this->__view("Control/check_update.php", ['info' => $info]);
 	}
 
 	public function user_add(){
@@ -102,6 +111,7 @@ class Control extends Page{
 	public function message_send(){
 		$this->__view("Control/message_send.php");
 	}
+
 	public function cdn(){
 		l_h('html_tag.php');
 		$this->__view("Control/cdn.php");
