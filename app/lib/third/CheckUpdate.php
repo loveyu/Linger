@@ -90,7 +90,7 @@ class CheckUpdate{
 		foreach($this->_get as $key => $value){
 			$get[] = $key . "=" . urlencode($value);
 		}
-		if(count($get)){
+		if(!count($get)){
 			$url = $this->_uri;
 		} else{
 			$url = $this->_uri . "?" . implode("&", $get);
