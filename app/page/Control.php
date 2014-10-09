@@ -111,6 +111,9 @@ class Control extends Page{
 	public function message_send(){
 		$this->__view("Control/message_send.php");
 	}
+	public function footer(){
+		$this->__view("Control/footer.php");
+	}
 
 	public function cdn(){
 		l_h('html_tag.php');

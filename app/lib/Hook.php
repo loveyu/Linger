@@ -92,6 +92,10 @@ class Hook{
 			}else{
 				pcache();//允许缓存时初始化信息，并加载钩子机制
 			}
+			$hook->add('footer_hook',function(){
+				//输出数据库中的设置
+				echo cfg()->get('option','footer');
+			});
 		}
 	}
 

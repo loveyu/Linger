@@ -131,6 +131,12 @@ class UserControlApi extends Page{
 						'id' => 'CDN',
 						'url' => '#cdn',
 						'sub' => []
+					],
+					[
+						'name' => '底部内容',
+						'id' => 'Footer',
+						'url' => '#footer',
+						'sub' => []
 					]
 				]
 			]
@@ -526,10 +532,21 @@ class UserControlApi extends Page{
 		}
 	}
 
+	public function footer(){
+		try{
+			$this->throwMsgCheck('is_post');
+			option()->update(['footer' => req()->post('footer')]);
+			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
 	public function checkUpdate(){
 		try{
 			$this->__lib("VersionUpdate");
-			$msg = (new VersionUpdate())->check(req()->req('force')=="1");
+			$msg = (new VersionUpdate())->check(req()->req('force') == "1");
 			if(!empty($msg)){
 				$this->rt_msg['content'] = $msg;
 				$this->rt_msg['status'] = true;

@@ -81,7 +81,13 @@ class Option{
 		}
 	}
 
-	public function update($list){
+	/**
+	 * 更新一个选项
+	 * @param array $list 更新的数据列表
+	 * @param int   $auto 不存在的数据是否添加为自动加载
+	 * @throws \Exception
+	 */
+	public function update($list, $auto = 1){
 		$db = db()->getWriter();
 		$db->pdo->beginTransaction();
 		foreach($list as $name => $v){
@@ -96,7 +102,7 @@ class Option{
 				if($db->insert("options", [
 						'option_value' => $v,
 						'option_name' => $name,
-						'option_autoload' => 0
+						'option_autoload' => (int)$auto
 					]) < 0
 				){
 					$db->pdo->rollBack();
