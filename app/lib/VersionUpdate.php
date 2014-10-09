@@ -7,7 +7,7 @@
 
 namespace ULib;
 
-lib()->load('third\CheckUpdate');
+lib()->load('third/CheckUpdate');
 
 use ULib\third\CheckUpdate;
 
