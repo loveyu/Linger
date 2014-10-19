@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="<?php echo get_bootstrap_url('css/bootstrap.min.css'); ?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_style('style.css') ?>"/>
-	<script src="<?php echo get_js_url('jquery-1.11.1.min.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo get_js_url('jquery.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo get_bootstrap_url('js/bootstrap.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo get_style('home.js') ?>" type="text/javascript"></script>
 

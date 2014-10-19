@@ -35,7 +35,7 @@ if ($setup == "import_sql" && $info['number'] == '2'){
 	<title>程序安装</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="<?php echo get_bootstrap_url('css/bootstrap.min.css'); ?>"/>
-	<script src="<?php echo get_js_url('jquery-1.11.0.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo get_js_url('jquery.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo get_bootstrap_url('js/bootstrap.min.js') ?>" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
