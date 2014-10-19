@@ -1,4 +1,13 @@
 <?php
+/**
+ * 清除URL的多余内容
+ * @param string $url
+ * @return string
+ */
+function clean_url($url){
+	$url = preg_replace('/([^:])[\/\\\\]{2,}/', '$1/', $url);
+	return hook()->apply('clean_url', $url);
+}
 
 /**
  * 获取网站地址，依据路由表
@@ -19,7 +28,7 @@ function get_url($param = ''){
 	} else{
 		$rt .= implode(ROUTER_SPLIT_CHAR, func_get_args());
 	}
-	return $rt;
+	return clean_url($rt);
 }
 
 /**
@@ -41,7 +50,7 @@ function get_file_url($param = ''){
 	} else{
 		$rt .= implode('/', func_get_args());
 	}
-	return $rt;
+	return clean_url($rt);
 }
 
 /**
