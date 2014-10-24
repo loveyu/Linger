@@ -26,7 +26,7 @@
 			<span
 				class="glyphicon glyphicon-tags"><span>标签：<?php echo count($__info['pic_tags']) > 0 ? "<span class='label label-info'>" . implode("</span><span class='label label-info'>", $__info['pic_tags']) . "</span>" : "无" ?></span></span>
 			<?php if(empty($__info['pic_like_time'])): ?>
-				<a href="#" class="like_picture glyphicon glyphicon-heart text-danger"><span>喜欢[<?php echo $__info['pic_like_count'] ?>]</span></a>
+				<a href="#" class="like_picture"><span class="glyphicon glyphicon-heart text-danger"><span>喜欢[<?php echo $__info['pic_like_count'] ?>]</span></span></a>
 			<?php else: ?>
 				<a href="#" class="like_picture"><span
 						class="glyphicon glyphicon-heart-empty text-danger"><span>取消喜欢[<?php echo $__info['pic_like_count'] ?>]</span></span></a>
@@ -64,7 +64,7 @@
 			var s_o = this;
 			$.post('<?php echo get_url('UserApi','picture_like')?>', {id:<?php echo $__info['pic_id']?>}, function (data) {
 				if (data['status']) {
-					var now_number = $(s_o).find("span").text();
+					var now_number = $(s_o).find("span span").text();
 					now_number = now_number.match(/\[([\d]+)\]/);
 					if (now_number.hasOwnProperty('1')) {
 						now_number = now_number[1];
