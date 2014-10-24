@@ -64,7 +64,7 @@
 			var s_o = this;
 			$.post('<?php echo get_url('UserApi','picture_like')?>', {id:<?php echo $__info['pic_id']?>}, function (data) {
 				if (data['status']) {
-					var now_number = $(s_o).find("span span").text();
+					var now_number = $(s_o).find("span").text();
 					now_number = now_number.match(/\[([\d]+)\]/);
 					if (now_number.hasOwnProperty('1')) {
 						now_number = now_number[1];
