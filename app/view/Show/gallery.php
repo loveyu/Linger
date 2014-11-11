@@ -58,7 +58,7 @@
 			<?php endif; ?>
 			<p class="tags">
 				<span
-					class="glyphicon glyphicon-tags"><span>标签：<?php echo count($__info['gallery_tags']) > 0 ? "<span class='label label-info'>" . implode("</span><span class='label label-info'>", $__info['gallery_tags']) . "</span>" : "无" ?></span></span>
+					class="glyphicon glyphicon-tags"><span><?php echo tag($__info['gallery_tags'])?></span></span>
 				<?php if(empty($__info['gallery_like_time'])): ?>
 					<a href="#" class="like_gallery"><span
 							class="glyphicon glyphicon-heart text-danger"><span>喜欢[<?php echo $__info['gallery_like_count'] ?>]</span></span></a>

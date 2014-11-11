@@ -50,7 +50,7 @@ class POTCreator{
 	 * @var        string
 	 */
 	public function __construct(){
-		$this->root = _SysPath_;
+		$this->root = _RootPath_;
 		$this->exts = 'php';
 		$this->base_path = '../../../';
 		$this->read_subdir = true;
@@ -149,7 +149,7 @@ class POTCreator{
 	private function msg2pot($msgs){
 		$pot = 'msgid ""
 msgstr ""
-"Project-Id-Version: Pitus 图片分享系统\n"
+"Project-Id-Version: Linger 图片分享系统\n"
 "POT-Creation-Date: ' . date('Y-m-d H:i:s') . '\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"

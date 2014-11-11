@@ -24,7 +24,7 @@
 		<?php endif; ?>
 		<p class="tags">
 			<span
-				class="glyphicon glyphicon-tags"><span>标签：<?php echo count($__info['pic_tags']) > 0 ? "<span class='label label-info'>" . implode("</span><span class='label label-info'>", $__info['pic_tags']) . "</span>" : "无" ?></span></span>
+				class="glyphicon glyphicon-tags"><span><?php echo tag($__info['pic_tags'])?></span></span>
 			<?php if(empty($__info['pic_like_time'])): ?>
 				<a href="#" class="like_picture"><span class="glyphicon glyphicon-heart text-danger"><span>喜欢[<?php echo $__info['pic_like_count'] ?>]</span></span></a>
 			<?php else: ?>

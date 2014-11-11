@@ -30,7 +30,7 @@ define("_AppName_", "linger");
 /**
  * 调试模式，基本未使用
  */
-define('_Debug_', false);
+define('_Debug_', true);
 
 /**
  * 转义是否开启标志

@@ -456,5 +456,43 @@ function get_unread_message_count(){
 		$obj = new \ULib\CountMessage();
 	}
 	$n = $obj->getUnreadMessage(login_user()->getId());
-	return $n ? : "";
+	return $n ?: "";
+}
+
+/**
+ * 对于标签的输出
+ * @param array|string $list     标签的列表
+ * @param string       $class    标签的样式
+ * @param string       $html_tag 用于包裹标签的html标签
+ * @param string       $exp      两个标签中的中间分割符
+ * @param bool         $none_out 如果标签不存在是否输出
+ * @param string       $before   标签的前置字符串
+ * @param string       $end      标签的后置字符串
+ * @param string       $w_before 包含整个输出内容的前置
+ * @param string       $w_end    包含整个输出内容之后
+ * @return string|false 出错时返回false
+ */
+function tag($list, $class = 'label label-info', $html_tag = 'span', $exp = '', $none_out = true, $before = '', $end = '', $w_before = '', $w_end = ''){
+	$rt = '';
+	if(is_string($list)){
+		$list = [$list];
+	}
+	if(is_array($list)){
+		$list = array_map('trim', $list);
+	} else{
+		return false;
+	}
+	if(!count($list) && $none_out == false){
+		return $rt;
+	}
+	$rt .= $w_before . _("tags:");
+	if(count($list)){
+		$class = trim($class);
+		$html_tag = trim($html_tag);
+		$exp = trim($exp);
+		$rt .= $before . "<{$html_tag} class=\"{$class}\">" . implode("</{$html_tag}>{$exp}<{$html_tag} class=\"{$class}\">", $list) . "</{$html_tag}>" . $end;
+	} else{
+		$rt .= _("none") . $w_end;
+	}
+	return $rt;
 }

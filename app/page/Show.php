@@ -154,6 +154,10 @@ class Show extends Page{
 		$this->__view("Home/footer.php");
 	}
 
+	public function tag_list($tag_name = '', $page = 0){
+		var_dump(func_get_args());
+	}
+
 	public function time_line(){
 		if(!is_login()){
 			redirect_to_login();
@@ -170,7 +174,7 @@ class Show extends Page{
 		$page = (int)$page;
 		$this->__lib('ListGallery');
 		$lg = new ListGallery();
-		$lg->setPager($page, 12);
+		$lg->setPager($page, 6);
 		$pager = [
 			'previous' => NULL,
 			'next' => NULL
@@ -216,7 +220,7 @@ class Show extends Page{
 		$page = (int)$page;
 		$this->__lib('ListGallery');
 		$lg = new ListGallery();
-		$lg->setPager($page, 12);
+		$lg->setPager($page, 6);
 		$pager = [
 			'previous' => NULL,
 			'next' => NULL
