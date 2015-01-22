@@ -75,6 +75,24 @@ function redirect($uri = '', $method = 'refresh', $http_response_code = 302){
 }
 
 /**
+ * 判断当前是否为HTTPS访问
+ * @return bool
+ */
+function is_ssl(){
+	if(isset($_SERVER['HTTPS'])){
+		if('on' == strtolower($_SERVER['HTTPS'])){
+			return true;
+		}
+		if('1' == $_SERVER['HTTPS']){
+			return true;
+		}
+	} elseif(isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'])){
+		return true;
+	}
+	return false;
+}
+
+/**
  * 发送HTTP状态
  * @param integer $code 状态码
  * @return void

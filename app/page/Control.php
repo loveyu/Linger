@@ -66,6 +66,7 @@ class Control extends Page{
 
 
 	public function option(){
+		l_h("html_tag.php");
 		$this->__view("Control/option.php");
 	}
 

@@ -16,7 +16,7 @@
 				<label for="inputUrl" class="col-sm-2 control-label">网址</label>
 
 				<div class="col-sm-10">
-					<input type="url" class="form-control" id="inputUrl" placeholder="网址" value="<?php echo $__list['url'] ?>" name="url">
+					<input type="text" class="form-control" id="inputUrl" placeholder="网址" value="<?php echo $__list['url'] ?>" name="url">
 				</div>
 			</div>
 

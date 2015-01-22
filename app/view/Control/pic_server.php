@@ -32,7 +32,7 @@
 		</div>
 		<div class="form-group">
 			<label class="sr-only" for="InputUrl">名称:</label>
-			<input class="form-control" id="InputUrl" name="url" placeholder="根网址">
+			<input class="form-control" id="InputUrl" name="text" placeholder="根网址">
 		</div>
 		<button type="submit" class="btn btn-default">创建</button>
 	</fieldset>

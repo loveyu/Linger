@@ -206,8 +206,11 @@ class UserControlApi extends Page{
 		$list = [
 			'site_title' => $req->post('site_title'),
 			'site_desc' => $req->post('site_desc'),
+			'site_mode' => strtolower($req->post('site_mode')),
 			'site_url' => $req->post('site_url'),
 			'site_static_url' => $req->post('site_static_url'),
+			'site_url_ssl' => $req->post('site_url_ssl'),
+			'site_static_url_ssl' => $req->post('site_static_url_ssl'),
 			'comment_one_page' => intval($req->post('comment_one_page')),
 			'admin_email' => $req->post('admin_email'),
 			'comment_deep' => $req->post('comment_deep'),
@@ -218,19 +221,43 @@ class UserControlApi extends Page{
 			'comment_order_desc' => $req->post('comment_order_desc') ? "yes" : "no",
 			'login_captcha' => $req->post('login_captcha') ? "yes" : "no",
 		];
-		if(substr($list['site_url'], -1) != '/'){
-			$list['site_url'] .= "/";
-			if(!filter_var($list['site_url'], FILTER_VALIDATE_URL)){
-				$this->rt_msg['msg'] = "网站地址不合法";
-				return;
+		if(!in_array($list['site_mode'], [
+			'all',
+			'http',
+			'https'
+		])
+		){
+			$this->rt_msg['msg'] = "网站模式不合法";
+			return;
+		}
+		foreach([
+			'site_url',
+			'site_static_url',
+			'site_static_url_ssl',
+			'site_url_ssl'
+		] as $v){
+			if(!empty($list['site_url_ssl']) && substr($list[$v], -1) != '/'){
+				$list[$v] .= "/";
 			}
 		}
-		if(substr($list['site_static_url'], -1) != '/'){
-			$list['site_static_url'] .= "/";
-			if(!filter_var($list['site_static_url'], FILTER_VALIDATE_URL)){
-				$this->rt_msg['msg'] = "网站静态地址不合法";
-				return;
-			}
+
+		if(!empty($list['site_url_ssl']) && !filter_var($list['site_url'], FILTER_VALIDATE_URL)){
+			$this->rt_msg['msg'] = "网站地址不合法";
+			return;
+		}
+
+		if(!empty($list['site_url_ssl']) && !filter_var($list['site_static_url'], FILTER_VALIDATE_URL)){
+			$this->rt_msg['msg'] = "网站静态地址不合法";
+			return;
+		}
+
+		if(!empty($list['site_url_ssl']) && !filter_var($list['site_url_ssl'], FILTER_VALIDATE_URL)){
+			$this->rt_msg['msg'] = "网站HTTPS地址不合法";
+			return;
+		}
+		if(!empty($list['site_url_ssl']) && !filter_var($list['site_static_url_ssl'], FILTER_VALIDATE_URL)){
+			$this->rt_msg['msg'] = "网站静态HTTPS地址不合法";
+			return;
 		}
 		try{
 			option()->update($list);

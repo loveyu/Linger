@@ -35,12 +35,12 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo site_url(); ?>" title="返回 <?php echo site_title() ?> 首页"><?php echo site_title() ?></a>
+			<a class="navbar-brand" href="<?php echo get_url(); ?>" title="返回 <?php echo site_title() ?> 首页"><?php echo site_title() ?></a>
 		</div>
 		<div class="collapse navbar-collapse" id="home_navbar">
 			<ul class="nav navbar-nav">
 				<?php
-				echo create_menu_link(site_url(), "首页", NULL, []);
+				echo create_menu_link(get_url(), "首页", NULL, []);
 				echo create_menu_link(time_line_link(), "时间线", NULL, [
 					'Show',
 					'time_line'

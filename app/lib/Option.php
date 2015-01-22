@@ -44,12 +44,50 @@ class Option{
 			}
 			return $code;
 		});
-		$hook->add('get_url', function (){
-			return site_url();
-		});
-		$hook->add("get_file_url", function (){
-			return site_static_url();
-		});
+		switch(site_mode()){
+			case "https":
+				if(!is_ssl()){
+					header("Cache-Control: no-cache, must-revalidate");
+					header("Pragma: no-cache");
+					redirect("https://" . substr(URL_NOW, 6), "header", 301);
+				}
+				$hook->add('get_url', function (){
+					return site_url_ssl();
+				});
+				$hook->add("get_file_url", function (){
+					return site_static_url_ssl();
+				});
+				break;
+			case "all":
+				if(is_ssl()){
+					$hook->add('get_url', function (){
+						return site_url_ssl();
+					});
+					$hook->add("get_file_url", function (){
+						return site_static_url_ssl();
+					});
+				} else{
+					$hook->add('get_url', function (){
+						return site_url();
+					});
+					$hook->add("get_file_url", function (){
+						return site_static_url();
+					});
+				}
+				break;
+			default:
+				if(is_ssl()){
+					header("Cache-Control: no-cache, must-revalidate");
+					header("Pragma: no-cache");
+					redirect("http://" . substr(URL_NOW, 7), "header", 301);
+				}
+				$hook->add('get_url', function (){
+					return site_url();
+				});
+				$hook->add("get_file_url", function (){
+					return site_static_url();
+				});
+		}
 		$hook->add("UserRegister_CodeMsg", function ($msg, $code){
 			if($code == -11){
 				return _("User register already closed.");

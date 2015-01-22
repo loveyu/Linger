@@ -1,4 +1,5 @@
-<form id="Option_Form" class="form-horizontal" role="form" method="post" action="<?php echo get_url("UserControlApi", "option_update") ?>" style="max-width: 800px;margin: 10px 0;">
+<form id="Option_Form" class="form-horizontal" role="form" method="post" action="<?php echo get_url("UserControlApi", "option_update") ?>"
+	  style="max-width: 800px;margin: 10px 0;">
 	<fieldset>
 		<div id="legend">
 			<legend class="">网站系统选项</legend>
@@ -25,9 +26,25 @@
 			<label for="inputAdminEmail" class="col-sm-2 control-label">管理员邮箱</label>
 
 			<div class="col-sm-10">
-				<input type="email" name="admin_email" class="form-control" value="<?php echo admin_email(); ?>" id="inputAdminEmail" placeholder="邮箱地址">
+				<input type="email" name="admin_email" class="form-control" value="<?php echo admin_email(); ?>" id="inputAdminEmail"
+					   placeholder="邮箱地址">
 
 				<p class="help-block">用于网站的系统提示等通知</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputSiteMode" class="col-sm-2 control-label">网站模式</label>
+
+			<div class="col-sm-10">
+				<select name="site_mode" class="form-control" id="inputSiteMode">
+					<?php echo html_option([
+						'http' => 'http',
+						'https' => 'https',
+						'all' => '兼容两者'
+					], site_mode()) ?>
+				</select>
+
+				<p class="help-block">网站的自定义网址前缀，必须以斜杠结尾</p>
 			</div>
 		</div>
 		<div class="form-group">
@@ -43,7 +60,29 @@
 			<label for="inputSiteStaticUrl" class="col-sm-2 control-label">静态地址</label>
 
 			<div class="col-sm-10">
-				<input type="url" name="site_static_url" class="form-control" value="<?php echo site_url(); ?>" id="inputSiteStaticUrl" placeholder="url">
+				<input type="url" name="site_static_url" class="form-control" value="<?php echo site_static_url(); ?>" id="inputSiteStaticUrl"
+					   placeholder="url">
+
+				<p class="help-block">用于网站资源设置的静态访问地址，必须以斜杠结尾</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputSiteUrl_ssl" class="col-sm-2 control-label">HTTPS网站地址</label>
+
+			<div class="col-sm-10">
+				<input type="url" name="site_url_ssl" class="form-control" value="<?php echo site_url_ssl(); ?>" id="inputSiteUrl_ssl"
+					   placeholder="url">
+
+				<p class="help-block">网站的自定义网址前缀，必须以斜杠结尾</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputSiteStaticUrl_ssl" class="col-sm-2 control-label">HTTPS静态地址</label>
+
+			<div class="col-sm-10">
+				<input type="url" name="site_static_url_ssl" class="form-control" value="<?php echo site_static_url_ssl(); ?>"
+					   id="inputSiteStaticUrl_ssl"
+					   placeholder="url">
 
 				<p class="help-block">用于网站资源设置的静态访问地址，必须以斜杠结尾</p>
 			</div>
@@ -52,7 +91,8 @@
 			<label for="CommentOnePage" class="col-sm-2 control-label">每页评论数</label>
 
 			<div class="col-sm-10">
-				<input type="number" name="comment_one_page" class="form-control" value="<?php echo comment_one_page(); ?>" id="CommentOnePage" placeholder="数量">
+				<input type="number" name="comment_one_page" class="form-control" value="<?php echo comment_one_page(); ?>" id="CommentOnePage"
+					   placeholder="数量">
 
 				<p class="help-block">评论每页显示的顶级评论数量</p>
 			</div>
@@ -62,7 +102,8 @@
 			<label for="CommentOnePage" class="col-sm-2 control-label">评论嵌套数</label>
 
 			<div class="col-sm-10">
-				<input type="number" name="comment_deep" class="form-control" value="<?php echo comment_deep(); ?>" id="CommentDeep" placeholder="最大层数">
+				<input type="number" name="comment_deep" class="form-control" value="<?php echo comment_deep(); ?>" id="CommentDeep"
+					   placeholder="最大层数">
 
 				<p class="help-block">评论CSS最大的嵌套层数</p>
 			</div>

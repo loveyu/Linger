@@ -678,6 +678,9 @@ class Picture{
 	 * @return string
 	 */
 	private function makePictureUrl($sever_url, $server_path, $pic_path){
+		if(substr($sever_url, 0, 4) != "http"){
+			$sever_url = (is_ssl()?"https:":"http:").$sever_url;
+		}
 		switch($server_path){
 			case "thumbnail":
 			case "hd":

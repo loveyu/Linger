@@ -211,6 +211,40 @@ function site_static_url(){
 		return $c;
 	}
 }
+/**
+ * 网站HTTPS URL
+ * @return string
+ */
+function site_url_ssl(){
+	$c = cfg()->get("option", "site_url_ssl");
+	if(empty($c)){
+		return URL_WEB;
+	} else{
+		return $c;
+	}
+}
+
+function site_mode(){
+	$c = cfg()->get("option", "site_mode");
+	if(empty($c)){
+		return "http";
+	} else{
+		return $c;
+	}
+}
+
+/**
+ * 获取静态HTTPS资源地址
+ * @return string
+ */
+function site_static_url_ssl(){
+	$c = cfg()->get("option", "site_static_url_ssl");
+	if(empty($c)){
+		return URL_FILE;
+	} else{
+		return $c;
+	}
+}
 
 /**
  * 管理员邮箱

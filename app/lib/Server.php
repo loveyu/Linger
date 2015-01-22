@@ -85,6 +85,9 @@ class Server{
 
 	private function urlCheck($url){
 		if(!filter_var($url, FILTER_VALIDATE_URL) || substr($url, -1) != "/"){
+			if(substr($url,0,2)=="//"){
+				return $this->urlCheck("http:".$url);
+			}
 			$this->throwMsg(-2);
 		}
 	}
