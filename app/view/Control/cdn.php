@@ -2,6 +2,9 @@
 	<fieldset>
 		<legend>CDN设置</legend>
 		<div class="form-group">
+			<p class="col-sm-offset-3 help-block">如果要添加对HTTPS或HTTP的支持，请添加两个地址，并使用竖杠分割,HTTP为第0个，HTTPS为第一个，http://x.c/<b>|</b>https://xx.c</p>
+		</div>
+		<div class="form-group">
 			<label class="control-label col-sm-3" for="Status">是否开启CDN</label>
 
 			<div class="col-sm-9">
@@ -9,28 +12,32 @@
 					<?php echo html_option([
 						'0' => '关闭CDN',
 						'1' => '启用CDN',
-					], cdn_info('status')?'1':'0') ?></select>
+					], cdn_info('status') ? '1' : '0') ?></select>
 			</div>
 		</div>
+
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="get_static_style_url">get_static_style_url</label>
 
 			<div class="col-sm-9">
-				<input type="text" name="list[get_static_style_url]" placeholder="静态样式地址" id="get_static_style_url" value="<?php echo cdn_info('filed','get_static_style_url')?>" class="form-control">
+				<input type="text" name="list[get_static_style_url]" placeholder="静态样式地址" id="get_static_style_url"
+					   value="<?php echo cdn_info('filed', 'get_static_style_url') ?>" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="get_bootstrap_url">get_bootstrap_url</label>
 
 			<div class="col-sm-9">
-				<input type="text" name="list[get_bootstrap_url]" placeholder="Bootstrap地址" id="get_bootstrap_url" value="<?php echo cdn_info('filed','get_bootstrap_url')?>" class="form-control">
+				<input type="text" name="list[get_bootstrap_url]" placeholder="Bootstrap地址" id="get_bootstrap_url"
+					   value="<?php echo cdn_info('filed', 'get_bootstrap_url') ?>" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="get_bootstrap_plugin_url">get_bootstrap_plugin_url</label>
 
 			<div class="col-sm-9">
-				<input type="text" name="list[get_bootstrap_plugin_url]" placeholder="Bootstrap插件地址" id="get_bootstrap_plugin_url" value="<?php echo cdn_info('filed','get_bootstrap_plugin_url')?>"
+				<input type="text" name="list[get_bootstrap_plugin_url]" placeholder="Bootstrap插件地址" id="get_bootstrap_plugin_url"
+					   value="<?php echo cdn_info('filed', 'get_bootstrap_plugin_url') ?>"
 					   class="form-control">
 			</div>
 		</div>
@@ -38,7 +45,8 @@
 			<label class="control-label col-sm-3" for="get_js_url">get_js_url</label>
 
 			<div class="col-sm-9">
-				<input type="text" name="list[get_js_url]" placeholder="JS地址" id="get_js_url" value="<?php echo cdn_info('filed','get_js_url')?>" class="form-control">
+				<input type="text" name="list[get_js_url]" placeholder="JS地址" id="get_js_url" value="<?php echo cdn_info('filed', 'get_js_url') ?>"
+					   class="form-control">
 			</div>
 		</div>
 		<div class="form-group">

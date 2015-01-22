@@ -451,7 +451,16 @@ function cdn_info($type = 'all', $name = ''){
 			return $cdn_info['status'] === true;
 		case 'filed':
 			if(isset($cdn_info['list'][$name])){
-				return $cdn_info['list'][$name];
+				$x = explode("|",$cdn_info['list'][$name]);
+				if(isset($x[1])){
+					if(is_ssl()){
+						return $x[1];
+					}else{
+						return $x[0];
+					}
+				}else{
+					return trim($x[0]);
+				}
 			}
 			return false;
 	}
