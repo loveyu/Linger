@@ -44,7 +44,7 @@
 
 						<p class="well well-sm text-danger">此方式必须正确设置你的邮箱，并且你上传了头像。</p>
 						<blockquote>
-							<p><img class="img-rounded" src="http://1.gravatar.com/avatar/<?php echo md5("") ?>" width="100" height="100" alt=""></p>
+							<p><img class="img-rounded" src="<?php echo \ULib\Avatar::getGravatar(md5("")) ?>" width="100" height="100" alt=""></p>
 							<small>这是该服务提供的默认头像。</small>
 						</blockquote>
 						<button class="btn btn-success user_change_set">使用Gravatar的头像</button>

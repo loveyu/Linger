@@ -47,15 +47,24 @@ class Avatar{
 		$avatar = hook()->apply("Avatar_convert", $avatar);
 		switch(strtolower($avatar)){
 			case "{gravatar}":
-				if(is_ssl()){
-					return "https://secure.gravatar.com/avatar/" . md5($user->getEmail());
-				} else{
-					return "http://1.gravatar.com/avatar/" . md5($user->getEmail());
-				}
+				return self::getGravatar(md5($user->getEmail()));
 			case "{user_upload}":
 				return self::local_avatar($user->getId());
 		}
 		return self::default_avatar();
+	}
+
+	/**
+	 * 依据MD5值获取头像
+	 * @param string $sid
+	 * @return string
+	 */
+	public static function getGravatar($sid){
+		if(is_ssl()){
+			return "https://secure.gravatar.com/avatar/" . $sid;
+		} else{
+			return "http://1.gravatar.com/avatar/" . $sid;
+		}
 	}
 
 	public static function getSizeOfAvatar($avatar_url, $avatar_sql, $size){
