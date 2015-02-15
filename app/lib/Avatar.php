@@ -47,7 +47,11 @@ class Avatar{
 		$avatar = hook()->apply("Avatar_convert", $avatar);
 		switch(strtolower($avatar)){
 			case "{gravatar}":
-				return "http://1.gravatar.com/avatar/" . md5($user->getEmail());
+				if(is_ssl()){
+					return "https://secure.gravatar.com/avatar/" . md5($user->getEmail());
+				} else{
+					return "http://1.gravatar.com/avatar/" . md5($user->getEmail());
+				}
 			case "{user_upload}":
 				return self::local_avatar($user->getId());
 		}
