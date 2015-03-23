@@ -1,6 +1,7 @@
 <?php
-if(PHP_VERSION < 5.4){
-	die(_("PHP Version must be greater than 5.4"));
+if(version_compare(PHP_VERSION, '5.4', '<')){
+	header("Content-Type: text/plain; charset=utf-8");
+	die("PHP版本必须大于等于5.4");
 }
 
 //设置时区

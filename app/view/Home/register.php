@@ -20,7 +20,7 @@
 				<div class="col-sm-10">
 					<input type="email" class="form-control" name="email" data-toggle="tooltip" title="邮箱已存在或格式错误" value="" id="inputEmail">
 
-					<p class="help-block">你唯一的邮箱,同一邮箱不允许注册多个账号，推荐使用QQ邮箱。</p>
+					<p class="help-block text-danger">请填写可验证邮箱，否者无法上传图片。</p>
 				</div>
 			</div>
 			<div class="form-group">

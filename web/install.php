@@ -72,7 +72,7 @@ if ($setup == "import_sql" && $info['number'] == '2'){
 				include("../install/setup1.php");
 			}
 			break;
-	}?>
+	} ?>
 </div>
 </body>
 </html>
