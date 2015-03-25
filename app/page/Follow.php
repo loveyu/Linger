@@ -22,6 +22,7 @@ class Follow extends Page{
 	private $theme;
 
 	function __construct(){
+		parent::__construct();
 		if(!is_login()){
 			redirect_to_login();
 		} else if(!login_user()->is_active()){

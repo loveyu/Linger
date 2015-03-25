@@ -17,6 +17,7 @@ class Show extends Page{
 	private $theme;
 
 	function __construct(){
+		parent::__construct();
 		if(strpos(u()->getUriInfo()->getPath(), "/Show") === 0){
 			$this->__load_404();
 			exit;

@@ -24,6 +24,7 @@ use ULib\UserRegister;
 class DataCreate extends Page{
 
 	function __construct(){
+		parent::__construct();
 		if(!_Debug_ || $_SERVER['REMOTE_ADDR']!=='127.0.0.1'){
 			$this->__load_404();
 			exit;

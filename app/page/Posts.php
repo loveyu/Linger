@@ -22,6 +22,7 @@ class Posts extends Page{
 	private $theme;
 
 	public function __construct(){
+		parent::__construct();
 		if(!is_login()){
 			redirect(array(
 				"Home",

@@ -40,6 +40,7 @@ class UserControlApi extends Page{
 	 * 发送状态头
 	 */
 	public function __construct(){
+		parent::__construct();
 		header('Content-type: application/json; Charset=utf-8');
 		header("Cache-Control: no-cache, must-revalidate");
 		header("Pragma: no-cache");

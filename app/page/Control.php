@@ -15,6 +15,7 @@ use ULib\VersionUpdate;
 
 class Control extends Page{
 	public function __construct(){
+		parent::__construct();
 		if(!is_login()){
 			redirect(array(
 				"Home",

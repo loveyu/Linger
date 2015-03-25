@@ -14,6 +14,10 @@ use ULib\Avatar;
 use ULib\Captcha;
 
 class Tool extends Page{
+	function __construct(){
+		parent::__construct();
+	}
+
 	public function captcha(){
 		$this->__lib('Captcha');
 		$c = new Captcha();

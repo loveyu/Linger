@@ -18,6 +18,7 @@ class Message extends Page{
 	private $theme;
 
 	function __construct(){
+		parent::__construct();
 		if(!is_login()){
 			redirect_to_login();
 		}

@@ -13,6 +13,7 @@ class Home extends Page{
 	private $theme;
 
 	function __construct(){
+		parent::__construct();
 		$this->theme = theme();
 	}
 
