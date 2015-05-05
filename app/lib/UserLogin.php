@@ -152,7 +152,7 @@ class UserLogin{
 			//登录被限制
 			$this->throwMsg(-8);
 		} else{
-			if(UserCheck::CreatePassword($password, $this->user->getSalt()) != $this->user->getPassword()){
+			if(UserCheck::CreatePassword($password, $this->user->getSalt()) !== $this->user->getPassword()){
 				//错误登录记录
 				$this->user->set(array(
 					"error_login_count" => 1 + $this->user->getErrorLoginCount(),
