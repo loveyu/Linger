@@ -12,4 +12,6 @@ config/install.lock
 config/queue.lock
 sys/update.lock
 node_modules
-vue/dist.min.js
+bower_components
+web_resource/vue/dist.min.js
+components

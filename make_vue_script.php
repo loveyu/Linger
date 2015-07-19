@@ -6,7 +6,7 @@
  */
 header("Content-Type: application/javascript; charset=utf-8");
 $page = [];
-define("VUE_PATH", __DIR__ . "/vue/");
+define("VUE_PATH", __DIR__ . "/web_resource/vue/");
 
 //加载工具库
 foreach(glob(VUE_PATH . "script/utils/*.js") as $v){
@@ -35,7 +35,7 @@ foreach($page as $v){
 	$out_data .= parse($content) . "\n\n\n";
 }
 
-file_put_contents("vue/dist.js", $out_data);
+file_put_contents(VUE_PATH . "dist.js", $out_data);
 
 //解析模板信息
 function parse($content){
