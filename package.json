@@ -1,0 +1,34 @@
+{
+  "name": "Linger",
+  "version": "1.2.2",
+  "description": "这是一个图片存储的网站系统，具有简单的时间线功能，同时有完善的通知中心。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loveyu/Linger.git"
+  },
+  "keywords": [
+    "图片分享",
+    "图集",
+    "loveyu"
+  ],
+  "author": "loveyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loveyu/Linger/issues"
+  },
+  "homepage": "https://github.com/loveyu/Linger",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-htmlmin": "^1.1.2",
+    "gulp-jshint": "^1.11.0",
+    "gulp-minify-css": "^1.1.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}

@@ -40,6 +40,10 @@ class Control extends Page{
 		}
 	}
 
+	public function v2(){
+		$this->__view("Control/main_v2.php");
+	}
+
 	public function user(){
 		$this->__view("Control/user.php");
 	}
