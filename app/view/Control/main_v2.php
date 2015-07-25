@@ -295,35 +295,14 @@ $info = login_user();
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
 				<li class="header">导航菜单</li>
-				<?php //foreach($__control_menu as $menu): ?>
-				<!--<li class="--><?php //echo count($menu['sub']) === 0 ?: "treeview" ?><!--">-->
-				<!--<a href="--><?php //echo $menu['url'] === "" ? "javascript:void()" : ("#" . $menu['url']) ?><!--">-->
-				<!--<i class="fa fa---><?php //echo $menu['class'] ?><!--"></i><span>-->
-				<?php //echo $menu['name'] ?><!--</span>-->
-				<?php //if(count($menu['sub']) > 0): ?>
-				<!--<i class="fa fa-angle-left pull-right"></i>-->
-				<?php //endif; ?>
-				<!--</a>-->
-				<?php //if(count($menu['sub']) > 0): ?>
-				<!--<ul class="treeview-menu">-->
-				<?php //foreach($menu['sub'] as $sub_menu): ?>
-				<!--<li><a href="#--><?php //echo $sub_menu['url']?><!--">-->
-				<!--<i class="fa fa---><?php //echo $sub_menu['class']?><!--">-->
-				<?php //echo $sub_menu['name']?><!--</a></i>-->
-				<!--</li>-->
-				<?php //endforeach; ?>
-				<!--</ul>-->
-				<?php //endif; ?>
-				<!--</li>-->
-				<?php //endforeach; ?>
 				<li v-if="menus!=null && menus.length>0" v-repeat="item:menus" class="{{item.active?'active':''}}"
-					v-class="item.sub.length>0?'treeview':''">
+					v-class="item.sub.length>0?'treeview':'tree-root'">
 					<a href="#{{item.url}}" v-on="click:menu_click" class="{{item.active?'active':''}}">
 						<i class="fa fa-{{item.class}}"></i> <span>{{item.name}}</span>
 						<i v-if="item.sub.length>0" class="fa fa-angle-left pull-right"></i>
 					</a>
 					<ul v-if="item.sub.length>0" class="treeview-menu">
-						<li v-repeat="sub_item:item.sub" class="{{sub_item.active?'active':''}}">
+						<li v-repeat="sub_item:item.sub" class="final-menu {{sub_item.active?'active':''}}">
 							<a href="#{{sub_item.url}}" v-on="click:menu_click"><i class="fa fa-{{sub_item.class}}"></i>{{sub_item.name}}</a>
 						</li>
 					</ul>

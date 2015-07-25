@@ -386,6 +386,7 @@ function _init() {
 			//Get the clicked link and the next element
 			var $this = $(this);
 			var checkElement = $this.next();
+			var parentElement = $this.parent();
 
 			//Check if the next element is a menu and is visible
 			if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
@@ -417,6 +418,16 @@ function _init() {
 					//Fix the layout in case the sidebar stretches over the height of the window
 					_this.layout.fix();
 				});
+			} else if (parentElement.is('.tree-root')) {
+				//在跟节点为打开的情况下，关闭其他节点
+				var open_ul = parentElement.parent().find('ul:visible').slideUp(animationSpeed);
+				open_ul.removeClass('menu-open');
+				open_ul.parents().removeClass('active');
+				parentElement.addClass("active");
+			} else if (parentElement.is('.final-menu')) {
+				//移除父元素的中最终菜单的激活样式
+				parentElement.parent().parent().find('.final-menu').removeClass('active');
+				parentElement.addClass('active');
 			}
 			//if this isn't a link, prevent the page from being redirected
 			if (checkElement.is('.treeview-menu')) {
