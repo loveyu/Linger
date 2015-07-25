@@ -20,7 +20,7 @@ define("_UPDATE_URL_", "http://www.loveyu.net/Update/Linger.php");
 /**
  * 资源文件版本
  */
-define("_SRC_VERSION_", '');
+define("_SRC_VERSION_", '20150724');
 
 /**
  * 定义唯一名称

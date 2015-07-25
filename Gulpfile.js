@@ -4,24 +4,35 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	clean = require('gulp-clean'),
-	htmlMin = require('gulp-htmlmin');
+	htmlMin = require('gulp-htmlmin'),
+	fs = require('fs'),
+	child_process = require('child_process');
 
 /**
  * Vue 的数据压缩
  */
 gulp.task("vue_mini_js", function () {
-	return gulp.src('web_resource/vue/dist.js')
+	child_process.execSync("php make_vue_script.php");
+
+	var path = 'web_resource/vue/';
+	if (fs.existsSync(path + "dist.min.js")) {
+		fs.unlinkSync(path + 'dist.min.js');
+	}
+	return gulp.src(path + 'dist.js')
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('vue'));
+		.pipe(gulp.dest(path));
 });
 
 /**
  * Vue JS 输出
  */
 gulp.task("vue_js", ['vue_mini_js'], function () {
-	return gulp.src(['web_resource/vue/vue.min.js', 'web_resource/vue/dist.min.js'])
-		.pipe(concat('vue.js'))
+	return gulp.src([
+		'web_resource/director/director.min.js',
+		'web_resource/vue/vue.min.js',
+		'web_resource/vue/dist.min.js'
+	]).pipe(concat('vue.js'))
 		.pipe(gulp.dest('web/style/default/'));
 });
 

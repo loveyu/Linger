@@ -41,7 +41,12 @@ class Control extends Page{
 	}
 
 	public function v2(){
-		$this->__view("Control/main_v2.php");
+		$menu = cfg()->load(_RootPath_ . "/config/control_menu.php");
+		$this->__view("Control/main_v2.php", ['control_menu' => $menu['control_menu']]);
+	}
+
+	public function v3(){
+		$this->__view("Control/main_v3.php");
 	}
 
 	public function user(){
@@ -117,6 +122,7 @@ class Control extends Page{
 	public function message_send(){
 		$this->__view("Control/message_send.php");
 	}
+
 	public function footer(){
 		$this->__view("Control/footer.php");
 	}
