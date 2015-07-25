@@ -500,12 +500,13 @@ function tag($list, $class = 'label label-info', $html_tag = 'span', $exp = '', 
 /**
  * 创建控制台菜单
  * @param string $name
+ * @param string $id 唯一标记ID
  * @param string $class
  * @param string $url
  * @param bool   $active
  * @param array  $sub
  * @return array
  */
-function createMenu($name, $class, $url, $active = false, $sub = []){
-	return compact('name', 'class', 'url', 'active', is_array($sub) ? 'sub' : [$sub]);
+function createMenu($name, $id, $class, $url, $active = false, $sub = []){
+	return compact('name', 'id', 'class', 'url', 'active', is_array($sub) ? 'sub' : [$sub]);
 }

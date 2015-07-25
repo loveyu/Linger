@@ -28,10 +28,17 @@ gulp.task("vue_mini_js", function () {
  * Vue JS 输出
  */
 gulp.task("vue_js", ['vue_mini_js'], function () {
-	return gulp.src([
+	gulp.src([
 		'web_resource/director/director.min.js',
 		'web_resource/vue/vue.min.js',
 		'web_resource/vue/dist.min.js'
+	]).pipe(concat('vue.min.js'))
+		.pipe(gulp.dest('web/style/default/'));
+
+	gulp.src([
+		'web_resource/director/director.js',
+		'web_resource/vue/vue.js',
+		'web_resource/vue/dist.js'
 	]).pipe(concat('vue.js'))
 		.pipe(gulp.dest('web/style/default/'));
 });

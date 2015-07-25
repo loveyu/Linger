@@ -295,15 +295,15 @@ $info = login_user();
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
 				<li class="header">导航菜单</li>
-				<li v-if="menus!=null && menus.length>0" v-repeat="item:menus" class="{{item.active?'active':''}}"
+				<li id="VME-{{item.id}}" v-show="menus!=null && menus.length>0" v-repeat="item:menus" class="{{item.active?'active':''}}"
 					v-class="item.sub.length>0?'treeview':'tree-root'">
-					<a href="#{{item.url}}" v-on="click:menu_click" class="{{item.active?'active':''}}">
+					<a href="#{{item.url}}" class="{{item.active?'active':''}}">
 						<i class="fa fa-{{item.class}}"></i> <span>{{item.name}}</span>
 						<i v-if="item.sub.length>0" class="fa fa-angle-left pull-right"></i>
 					</a>
 					<ul v-if="item.sub.length>0" class="treeview-menu">
-						<li v-repeat="sub_item:item.sub" class="final-menu {{sub_item.active?'active':''}}">
-							<a href="#{{sub_item.url}}" v-on="click:menu_click"><i class="fa fa-{{sub_item.class}}"></i>{{sub_item.name}}</a>
+						<li id="VME-{{sub_item.id}}" v-repeat="sub_item:item.sub" class="final-menu {{sub_item.active?'active':''}}">
+							<a href="#{{sub_item.url}}"><i class="fa fa-{{sub_item.class}}"></i>{{sub_item.name}}</a>
 						</li>
 					</ul>
 				</li>
@@ -317,12 +317,12 @@ $info = login_user();
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				控制台
-				<small>版本 <?php echo _VERSION_ ?></small>
+				{{title}}
+				<small v-if="showVersion">版本 <?php echo _VERSION_ ?></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a target="_blank" href="<?php echo site_url() ?>"><i class="fa fa-dashboard"></i> 主页</a></li>
-				<li class="active">控制面板</li>
+				<li class="active">{{title}}</li>
 			</ol>
 		</section>
 
