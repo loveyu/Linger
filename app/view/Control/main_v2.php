@@ -328,7 +328,7 @@ $info = login_user();
 
 		<!-- Main content -->
 		<section class="content">
-
+			<component callback="{{callback}}" is="{{currentView}}"></component>
 		</section>
 		<!-- /.content -->
 	</div>

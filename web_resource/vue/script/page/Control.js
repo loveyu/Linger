@@ -6,16 +6,30 @@ V_PAGE.Control = function () {
 			menus: null,
 			error: null,
 			title: "Loading",
-			showVersion: false
+			showVersion: false,
+			currentView: null,
+			callback: null
+		},
+		components: {
+			picture_list: {__require: 'control/picture_list.html'},
+			dashboard: {__require: 'control/dashboard.html'}
 		},
 		methods: {
 			rDashboard: function () {
 				this.setMenu('dashboard');
 				this.setTitle('控制面板', true);
+				this.callback = function ($child) {
+
+				};
+				this.currentView = "dashboard";
 			},
 			rPictureList: function () {
 				this.setMenu('picture', 'picture-list');
 				this.setTitle('图片列表');
+				this.callback = function ($child) {
+					$child.load();
+				};
+				this.currentView = "picture_list";
 			},
 			init_menus: function (callback) {
 				var obj = this;
@@ -34,12 +48,11 @@ V_PAGE.Control = function () {
 				});
 			},
 			setMenu: function (group, group_item) {
+				//return;
 				if (typeof group === "string" && group != "") {
-					$("#VME-" + group + " > a").trigger('click');
+					$("#VME-" + group).addClass("active");
 					if (typeof group_item === "string" && group_item != "") {
-						setTimeout(function () {
-							$("#VME-" + group_item + " > a").trigger('click');
-						}, 1000);
+						$("#VME-" + group_item).addClass("active");
 					}
 				}
 			},
