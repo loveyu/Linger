@@ -79,7 +79,9 @@ return array(
 		//缓存驱动
 	],
 
-	'option' => []
+	'option' => [
+		'register_captcha'=>'no'//yes显示验证码，no不显示
+	]
 	//该处选项由数据库添加，请勿随意改动
 	//数据库调用的选项
 );

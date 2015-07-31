@@ -41,6 +41,7 @@
 					<p class="help-block">重复输入一遍密码</p>
 				</div>
 			</div>
+			<?php if(cfg()->get('option','register_captcha')==='yes'):?>
 			<div class="form-group">
 				<label for="inputCaptcha" class="col-sm-2 control-label">验证码</label>
 
@@ -51,6 +52,7 @@
 					<img id="Register_captcha" src="<?php echo get_url("Tool", "captcha") ?>" title="点击刷新" height="32" alt="captcha"/>
 				</div>
 			</div>
+			<?php endif;?>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-primary">注册</button>
@@ -62,13 +64,16 @@
 <script src="<?php echo get_file_url("js/md5_sha1.js"); ?>"></script>
 <script>
 	$(function () {
+		var show_captcha = <?php echo json_encode(cfg()->get('option','register_captcha')==='yes')?>;
 		var i = 1;
 		var captcha_refresh = function () {
 			var s = $("#Register_captcha");
 			s[0].src = "<?php echo get_url("Tool","captcha")?>?refresh=" + (i++);
 			$("#Register_form form input[name=captcha]").val("");
 		};
-		$("#Register_captcha").click(captcha_refresh);
+		if(show_captcha) {
+			$("#Register_captcha").click(captcha_refresh);
+		}
 		var user_api_url = "<?php echo get_url("UserApi")?>";
 		$("form input[name=name]").on("change", function () {
 			this.value = this.value.replace(/[^A-Z0-9a-z_.]/g, '');
@@ -118,10 +123,10 @@
 				name: $("#Register_form form input[name=name]").val(),
 				password: password($("#Register_form form input[name=password]").val()),
 				email: $("#Register_form form input[name=email]").val(),
-				captcha: $("#Register_form form input[name=captcha]").val()
+				captcha: show_captcha?$("#Register_form form input[name=captcha]").val():''
 			};
 			var pwd2 = $("#Register_form form input[name=password2]").val();
-			if (param.captcha.length < 4) {
+			if (show_captcha && param.captcha.length < 4) {
 				error("验证码格式不正确");
 				return false;
 			}
@@ -156,7 +161,7 @@
 				} else {
 					error("服务器返回错误: " + data['msg']);
 				}
-				if (data['code'] != -1) {
+				if (data['code'] != -1 && show_captcha) {
 					captcha_refresh();
 				}
 			});

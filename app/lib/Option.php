@@ -33,7 +33,7 @@ class Option{
 	}
 
 	private function set_option(){
-		cfg()->set('option', $this->option);
+		cfg()->merge('option', $this->option);
 	}
 
 	public function register_hook(){

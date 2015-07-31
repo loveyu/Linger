@@ -96,6 +96,13 @@ class Hook{
 				//输出数据库中的设置
 				echo cfg()->get('option','footer');
 			});
+
+			//移除验证码
+			if(cfg()->get('option','register_captcha')==='no'){
+				$hook->add('UserRegister_Captcha', function (){
+					return true;
+				});
+			}
 		}
 	}
 

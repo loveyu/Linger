@@ -32,16 +32,16 @@ class UserRegister{
 	private $activation_msg = "Unknown";
 
 	/**
-	 * 验证码检测
+	 * 验证码检测，首先判断钩子函数
 	 * @param $captcha
 	 * @return bool
 	 */
 	private function Captcha($captcha){
-		if(empty($captcha)){
-			return false;
-		}
 		if(hook()->apply('UserRegister_Captcha', false, $captcha)){
 			return true;
+		}
+		if(empty($captcha)){
+			return false;
 		}
 		lib()->load('Captcha');
 		$c = new Captcha();
