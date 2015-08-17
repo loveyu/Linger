@@ -7,48 +7,16 @@
 
 namespace UView;
 
-use Core\Page;
+if(!class_exists('UView\ControlBase')){
+	include_once(__DIR__ . "/ControlBase.php");
+}
 
 /**
  * 控制API
  * Class ControlApi
  * @package UView
  */
-class ControlApi extends Page{
-	/**
-	 * @var array 最终用户返回消息
-	 */
-	private $rt_msg = [
-		'status' => false,
-		'code' => NULL,
-		'msg' => '',
-		'content' => NULL
-	];
-
-	/**
-	 * 发送状态头
-	 */
-	public function __construct(){
-		parent::__construct();
-		header('Content-type: application/json; Charset=utf-8');
-		header("Cache-Control: no-cache, must-revalidate");
-		header("Pragma: no-cache");
-		if(!is_login()){
-			$this->rt_msg['msg'] = '用户未登陆';
-			exit;
-		} else if(!login_user()->Permission("Control")){
-			$this->rt_msg['msg'] = '权限不足';
-			exit;
-		}
-	}
-
-	/**
-	 * 析构方法，输出JSON数据
-	 */
-	function __destruct(){
-		echo json_encode($this->rt_msg);
-	}
-
+class ControlApi extends ControlBase{
 	/**
 	 * 菜单
 	 */
