@@ -36,7 +36,7 @@ function check_status(){
 		'pdo_mysql' => extension_loaded('pdo_mysql'),
 		'gd' => extension_loaded('gd'),
 		'mbstring' => extension_loaded('mbstring'),
-		'gettext' => extension_loaded('gettext'),
+		'gettext' => extension_loaded('gettext') && function_exists('_'),
 		'curl' => extension_loaded('curl'),
 	);
 }
