@@ -159,6 +159,10 @@ class Show extends Page{
 		var_dump(func_get_args());
 	}
 
+	public function tag(){
+		var_dump(time());
+	}
+
 	public function time_line(){
 		if(!is_login()){
 			redirect_to_login();

@@ -48,6 +48,9 @@ class Router{
 			'user_gallery_list' => 'user/%user_name%/gallery',
 			'user_gallery_list_pager' => 'user/%user_name%/gallery/page-%number%',
 			'time_line' => 'TimeLine',
+			'tag_all' => 'tag',
+			'tag_list' => 'tag/%word%',
+			'tag_list_pager' => 'tag/%word%/page-%number%',
 		];
 	}
 
@@ -90,6 +93,7 @@ class Router{
 			'%number%',
 			'%user_name%',
 			'%post_name%',
+			'%word%',//单词或中文之类的
 		];
 		$replace = [
 			'\.',
@@ -97,6 +101,7 @@ class Router{
 			'([1-9]{1}[0-9]*)',
 			'([_a-z]{1}[a-z0-9_.]{5,19})',
 			'([a-zA-Z0-9]+[a-zA-Z0-9_-]*)',
+			'([\x{4e00}-\x{9fa5}A-Za-z0-9_]+)',
 		];
 		$control_list = [
 			'picture' => 'Show/picture/[1]',
@@ -113,9 +118,12 @@ class Router{
 			'user_gallery_list' => 'Show/user_gallery_list/[1]',
 			'user_gallery_list_pager' => 'Show/user_gallery_list/[1]/[2]',
 			'time_line' => 'Show/time_line',
+			'tag_all' => 'Show/tag',
+			'tag_list' => 'Show/tag_list/[1]',
+			'tag_list_pager' => 'Show/tag_list/[1]/[2]',
 		];
 		foreach($this->router_list as $name => $v){
-			$p = "/^" . str_replace($search, $replace, $v) . "$/";
+			$p = "/^" . str_replace($search, $replace, $v) . "$/u";
 			if(isset($control_list[$name]) && !isset($rt[$p])){
 				$rt[$p] = $control_list[$name];
 			}
