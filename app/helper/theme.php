@@ -166,6 +166,33 @@ function user_gallery_list_link($user_name){
 	return get_url($router->getLink('user_gallery_list', $user_name));
 }
 
+/**
+ * 获取标签页面链接
+ * @param string $name
+ * @param string $type
+ * @param string $page
+ * @return string
+ */
+function tag_list_link($name = NULL, $type = NULL, $page = NULL){
+	/**
+	 * @var \ULib\Router $router
+	 */
+	static $router = NULL;
+	if($router === NULL){
+		$router = lib()->using('router');
+	}
+	if(empty($name)){
+		return $router->getLink('tag_all');
+	}
+	if(empty($type)){
+		return $router->getLink('tag_list', $name);
+	}
+	if(empty($page)){
+		return $router->getLink('tag_type_list', $name, $type);
+	}
+	return $router->getLink('tag_type_list_pager', $name, $type, $page);
+}
+
 
 function create_menu_link($link, $name, $title = NULL, $uri = NULL, $class_name = "active", $external = false){
 	static $s_uri = NULL;

@@ -50,7 +50,8 @@ class Router{
 			'time_line' => 'TimeLine',
 			'tag_all' => 'tag',
 			'tag_list' => 'tag/%word%',
-			'tag_list_pager' => 'tag/%word%/page-%number%',
+			'tag_type_list' => 'tag/%word%/%tag_type%',
+			'tag_type_list_pager' => 'tag/%word%/%tag_type%/page-%number%',
 		];
 	}
 
@@ -94,6 +95,7 @@ class Router{
 			'%user_name%',
 			'%post_name%',
 			'%word%',//单词或中文之类的
+			'%tag_type%',//标签类型，{picture|gallery}
 		];
 		$replace = [
 			'\.',
@@ -102,6 +104,7 @@ class Router{
 			'([_a-z]{1}[a-z0-9_.]{5,19})',
 			'([a-zA-Z0-9]+[a-zA-Z0-9_-]*)',
 			'([\x{4e00}-\x{9fa5}A-Za-z0-9_]+)',
+			'(picture|gallery)',
 		];
 		$control_list = [
 			'picture' => 'Show/picture/[1]',
@@ -120,7 +123,8 @@ class Router{
 			'time_line' => 'Show/time_line',
 			'tag_all' => 'Show/tag',
 			'tag_list' => 'Show/tag_list/[1]',
-			'tag_list_pager' => 'Show/tag_list/[1]/[2]',
+			'tag_type_list' => 'Show/tag_list/[1]/[2]',
+			'tag_type_list_pager' => 'Show/tag_list/[1]/[2]/[3]',
 		];
 		foreach($this->router_list as $name => $v){
 			$p = "/^" . str_replace($search, $replace, $v) . "$/u";
