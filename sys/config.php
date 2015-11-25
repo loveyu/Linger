@@ -78,6 +78,11 @@ define("_AppPath_", _RootPath_ . "/app");
 define("_CorePath_", _SysPath_ . "/core");
 
 /**
+ * 配置文件路径
+ */
+define("_ConfigPath_", _RootPath_ . "/config");
+
+/**
  * 日志文件路径
  */
 define("_LogPath_", _AppPath_ . "/log");

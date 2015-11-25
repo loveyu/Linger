@@ -41,7 +41,7 @@ class Control extends Page{
 	}
 
 	public function v2(){
-		$menu = cfg()->load(_RootPath_ . "/config/control_menu.php");
+		$menu = cfg()->load(_ConfigPath_ . "/control_menu.php");
 		$this->__view("Control/main_v2.php", ['control_menu' => $menu['control_menu']]);
 	}
 
