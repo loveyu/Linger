@@ -185,6 +185,9 @@ function tag_list_link($name = NULL, $type = NULL, $page = NULL){
 		return $router->getLink('tag_all');
 	}
 	if(empty($type)){
+		if($page > 1){
+			return $router->getLink("tag_list_pager", $name, $page);
+		}
 		return $router->getLink('tag_list', $name);
 	}
 	if(empty($page)){

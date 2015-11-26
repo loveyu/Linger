@@ -156,10 +156,22 @@ class Show extends Page{
 	}
 
 	public function tag_list($tag_name = '', $page = 0){
+		var_dump(__METHOD__);
+		var_dump(func_get_args());
+	}
+
+	public function tag_gallery_list($tag_name = '', $page = 0){
+		var_dump(__METHOD__);
+		var_dump(func_get_args());
+	}
+
+	public function tag_picture_list($tag_name = '', $page = 0){
+		var_dump(__METHOD__);
 		var_dump(func_get_args());
 	}
 
 	public function tag(){
+		var_dump(__METHOD__);
 		var_dump(time());
 	}
 

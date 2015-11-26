@@ -50,6 +50,7 @@ class Router{
 			'time_line' => 'TimeLine',
 			'tag_all' => 'tag/',
 			'tag_list' => 'tag/%word%/',
+			'tag_list_pager' => 'tag/%word%/page-%number%',
 			'tag_type_list' => 'tag/%word%/%tag_type%/',
 			'tag_type_list_pager' => 'tag/%word%/%tag_type%/page-%number%',
 		];
@@ -123,8 +124,9 @@ class Router{
 			'time_line' => 'Show/time_line',
 			'tag_all' => 'Show/tag',
 			'tag_list' => 'Show/tag_list/[1]',
-			'tag_type_list' => 'Show/tag_list/[1]/[2]',
-			'tag_type_list_pager' => 'Show/tag_list/[1]/[2]/[3]',
+			'tag_list_pager' => 'Show/tag_list/[1]/[2]',
+			'tag_type_list' => 'Show/tag_[2]_list/[1]',
+			'tag_type_list_pager' => 'Show/tag_[2]_list/[1]/[3]',
 		];
 		foreach($this->router_list as $name => $v){
 			$p = "/^" . str_replace($search, $replace, $v) . "$/u";
