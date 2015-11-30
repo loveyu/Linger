@@ -21,9 +21,11 @@ class Router{
 		$this->c_router = c_lib()->load('router')->add('router', new \CLib\Router());
 		//对路由信息反序列化
 		$router = @unserialize(cfg()->get('option', 'router_list'));
-		foreach(array_keys($router) as $c){
-			if(empty($router[$c])){
-				unset($router[$c]);
+		if(is_array($router)){
+			foreach(array_keys($router) as $c){
+				if(empty($router[$c])){
+					unset($router[$c]);
+				}
 			}
 		}
 		$this->router_list = $this->defaultRouter();
