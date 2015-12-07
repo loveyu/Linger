@@ -515,6 +515,10 @@ function tag($list, $class = 'label label-info', $html_tag = 'span', $exp = '', 
 	if(!count($list) && $none_out == false){
 		return $rt;
 	}
+	foreach($list as $k=> $v){
+		$url = tag_list_link($v);
+		$list[$k] = "<a href=\"{$url}\" title=\"{$v}\">{$v}</a>";
+	}
 	$rt .= $w_before . _("tags:");
 	if(count($list)){
 		$class = trim($class);
