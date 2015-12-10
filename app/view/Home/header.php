@@ -87,6 +87,9 @@
 								'user',
 								login_user()->getName()
 							]) ?>
+							<?php if(login_user()->Permission("Control")): ?>
+								<li><a href="<?php echo get_url("Control") ?>">网站控制中心</a></li>
+							<?php endif; ?>
 							<li><a href="<?php echo get_url("Home", "logout") ?>"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
 						</ul>
 					</li>

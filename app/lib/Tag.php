@@ -113,6 +113,18 @@ class Tag{
 	}
 
 	/**
+	 * 获取热门标签列表
+	 * @param array $limit
+	 * @return array
+	 */
+	public function get_hot_tags($limit = array()){
+		return $this->db->select("tags", "*", [
+			'ORDER' => 'count DESC',
+			'LIMIT' => $limit
+		]);
+	}
+
+	/**
 	 * 图集删除标签
 	 * @param int    $id
 	 * @param string $tag

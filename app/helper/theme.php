@@ -182,18 +182,18 @@ function tag_list_link($name = NULL, $type = NULL, $page = NULL){
 		$router = lib()->using('router');
 	}
 	if(empty($name)){
-		return $router->getLink('tag_all');
+		return get_url($router->getLink('tag_all'));
 	}
 	if(empty($type)){
 		if($page > 1){
-			return $router->getLink("tag_list_pager", $name, $page);
+			return get_url($router->getLink("tag_list_pager", $name, $page));
 		}
-		return $router->getLink('tag_list', $name);
+		return get_url($router->getLink('tag_list', $name));
 	}
 	if(empty($page)){
-		return $router->getLink('tag_type_list', $name, $type);
+		return get_url($router->getLink('tag_type_list', $name, $type));
 	}
-	return $router->getLink('tag_type_list_pager', $name, $type, $page);
+	return get_url($router->getLink('tag_type_list_pager', $name, $type, $page));
 }
 
 

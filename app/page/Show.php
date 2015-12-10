@@ -10,6 +10,7 @@ use ULib\PictureComment;
 use ULib\Picture;
 use ULib\Post;
 use ULib\PostComment;
+use ULib\Tag;
 use ULib\User;
 use ULib\UserManagement;
 
@@ -171,8 +172,24 @@ class Show extends Page{
 	}
 
 	public function tag(){
-		var_dump(__METHOD__);
-		var_dump(time());
+		$this->__lib("Tag");
+		$tag = new Tag();
+		$tags = $tag->get_hot_tags([
+			0,
+			50
+		]);
+		$font_size = function ($count){
+			$m = $count / 5;
+			if($m > 10){
+				$m = 10;
+			}
+			$s = $m * 2 + 16;
+			return $s;
+		};
+		$this->theme->setTitle("热门标签");
+		$this->__view("Home/header.php");
+		$this->__view("Show/hot_tags.php", compact('tags', 'font_size'));
+		$this->__view("Home/footer.php");
 	}
 
 	public function time_line(){
