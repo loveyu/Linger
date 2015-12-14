@@ -63,7 +63,7 @@ class Avatar{
 		if(is_ssl()){
 			return "https://secure.gravatar.com/avatar/" . $sid;
 		} else{
-			return "http://1.gravatar.com/avatar/" . $sid;
+			return "https://secure.gravatar.com/avatar/" . $sid;
 		}
 	}
 
