@@ -157,8 +157,7 @@ class Show extends Page{
 	}
 
 	public function tag_list($tag_name = '', $page = 0){
-		var_dump(__METHOD__);
-		var_dump(func_get_args());
+		return $this->tag_gallery_list($tag_name, $page);
 	}
 
 	public function tag_gallery_list($tag_name = '', $page = 0){
