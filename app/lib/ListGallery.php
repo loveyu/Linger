@@ -157,7 +157,7 @@ class ListGallery{
 				'user_avatar' => 'avatar',
 			], ['id' => $ids]);
 			if($list === false){
-				Log::write(_("Select other users error."), Log::SQL);
+				Log::write(___("Select other users error."), Log::SQL);
 			} else{
 				foreach($list as &$v){
 					//保存数据到堆栈

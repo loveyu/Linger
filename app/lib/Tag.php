@@ -209,21 +209,21 @@ class Tag{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Pic is not found.");
+				return ___("Pic is not found.");
 			case -2:
-				return _("Add pic tag error on tag is exists.");
+				return ___("Add pic tag error on tag is exists.");
 			case -3:
-				return _("Pic not found this tag.");
+				return ___("Pic not found this tag.");
 			case -4:
-				return _("Tag is not found.");
+				return ___("Tag is not found.");
 			case -5:
-				return _("Delete tags error on sql.") . debug(implode(",", $this->db->error()['write']));
+				return ___("Delete tags error on sql.") . debug(implode(",", $this->db->error()['write']));
 			case -6:
-				return _("Insert tags error on sql.") . debug(implode(",", $this->db->error()['write']));
+				return ___("Insert tags error on sql.") . debug(implode(",", $this->db->error()['write']));
 			case -7:
-				return _("table not defined");
+				return ___("table not defined");
 			default:
-				return _("Unknown Error");
+				return ___("Unknown Error");
 		}
 	}
 

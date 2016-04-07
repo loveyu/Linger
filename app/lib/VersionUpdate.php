@@ -23,7 +23,7 @@ class VersionUpdate{
 	function __construct(){
 		$lib = lib();
 		if(is_object($lib->using('version_update'))){
-			throw new \Exception(_("Only allow run a update."));
+			throw new \Exception(___("Only allow run a update."));
 		}
 		$this->cu = new CheckUpdate(_UPDATE_URL_, ['version' => _VERSION_]);
 		$lib->add("version_update", $this);

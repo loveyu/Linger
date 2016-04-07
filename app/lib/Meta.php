@@ -113,11 +113,11 @@ class Meta{
 			}
 		}
 		if(count($values) < 0){
-			throw new \Exception(_("Meta insert no found data"));
+			throw new \Exception(___("Meta insert no found data"));
 		}
 		$stmt = db()->getWriter()->prepare("Insert into `$table`(`$out_key`,`meta_key`,`meta_value`)values" . implode(', ', $values) . ";");
 		if(!$stmt->execute($map)){
-			throw new \Exception(_("Meta insert Sql error.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
+			throw new \Exception(___("Meta insert Sql error.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
 		}
 		return $stmt->rowCount();
 	}
@@ -146,20 +146,20 @@ class Meta{
 			$stmt = $pdo->prepare("Update `$table` set `meta_value`=:meta_value where `$out_key`=:out_key_value AND `meta_key`=:meta_key;");
 			if(!$stmt->execute($arr)){
 				$pdo->rollBack();
-				throw new \Exception(_("Meta set Error on Update.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
+				throw new \Exception(___("Meta set Error on Update.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
 			}
 			if($stmt->rowCount() == 0){
 				$tmp = $pdo->quote($name);
 				$stmt = $pdo->query("SELECT EXISTS(SELECT 1 FROM `$table` where `$out_key`=$out_key_value AND `meta_key`=$tmp);");
 				if($stmt === false){
 					$pdo->rollBack();
-					throw new \Exception(_("Meta set Error on EXISTS.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
+					throw new \Exception(___("Meta set Error on EXISTS.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
 				}
 				if($stmt->fetchColumn() !== '1'){
 					$stmt = $pdo->prepare("Insert into `$table`(`$out_key`,`meta_key`,`meta_value`)values(:out_key_value,:meta_key, :meta_value);");
 					if(!$stmt->execute($arr)){
 						$pdo->rollBack();
-						throw new \Exception(_("Meta set Error on Insert.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
+						throw new \Exception(___("Meta set Error on Insert.") . debug("ERROR:" . implode(", ", $stmt->errorInfo())));
 					}
 				}
 			}
@@ -183,7 +183,7 @@ class Meta{
 				]
 			]) === false
 		){
-			throw new \Exception(_("Meta key delete error on SQL.") . debug("SQL MSG:" . implode(",", db()->error()['write'])));
+			throw new \Exception(___("Meta key delete error on SQL.") . debug("SQL MSG:" . implode(",", db()->error()['write'])));
 		}
 	}
 
@@ -211,7 +211,7 @@ class Meta{
 			]);
 		}
 		if($data === false){
-			throw new \Exception(_("Get meta on ") . $this->table . " error." . debug(implode(', ', db()->error()['read'])));
+			throw new \Exception(___("Get meta on ") . $this->table . " error." . debug(implode(', ', db()->error()['read'])));
 		}
 		//print_r($data);
 		//预防该标签不存在的情况

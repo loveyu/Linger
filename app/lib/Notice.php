@@ -117,19 +117,19 @@ class Notice extends AppException{
 	public function getMailList(){
 		if($this->mail_list === NULL){
 			$this->mail_list = [
-				'follow_me' => _("When someone follow about me"),
-				'follow_gallery' => _("When someone follow about my gallery"),
-				'comment_picture' => _("When someone commented on my picture"),
-				'comment_gallery' => _("When someone commented on my gallery"),
-				'comment_reply' => _("When someone replies to my comment"),
-				'like_pic' => _("When someone like my pictures"),
-				'like_gallery' => _("When someone like my gallery"),
-				'like_comment' => _("When someone like my comment"),
-				'send_message' => _("When someone sends a message to me"),
-				'send_system_message' => _("When the system sends a message to me"),
-				'exception_login' => _("When an exception is generated login information"),
-				'login_restrictions' => _("Error login too many times"),
-				'site_activity_information' => _("When the site has information on activities"),
+				'follow_me' => ___("When someone follow about me"),
+				'follow_gallery' => ___("When someone follow about my gallery"),
+				'comment_picture' => ___("When someone commented on my picture"),
+				'comment_gallery' => ___("When someone commented on my gallery"),
+				'comment_reply' => ___("When someone replies to my comment"),
+				'like_pic' => ___("When someone like my pictures"),
+				'like_gallery' => ___("When someone like my gallery"),
+				'like_comment' => ___("When someone like my comment"),
+				'send_message' => ___("When someone sends a message to me"),
+				'send_system_message' => ___("When the system sends a message to me"),
+				'exception_login' => ___("When an exception is generated login information"),
+				'login_restrictions' => ___("Error login too many times"),
+				'site_activity_information' => ___("When the site has information on activities"),
 			];
 		}
 		return $this->mail_list;
@@ -141,17 +141,17 @@ class Notice extends AppException{
 	public function getMessageList(){
 		if($this->message_list === NULL){
 			$this->message_list = [
-				'follow_me' => _("When someone follow about me"),
-				'follow_gallery' => _("When someone follow about my gallery"),
-				'comment_picture' => _("When someone commented on my picture"),
-				'comment_gallery' => _("When someone commented on my gallery"),
-				'comment_reply' => _("When someone replies to my comment"),
-				'like_pic' => _("When someone like my pictures"),
-				'like_gallery' => _("When someone like my gallery"),
-				'like_comment' => _("When someone like my comment"),
-				'exception_login' => _("When an exception is generated login information"),
-				'login_restrictions' => _("Error login too many times"),
-				'site_activity_information' => _("When the site has information on activities"),
+				'follow_me' => ___("When someone follow about me"),
+				'follow_gallery' => ___("When someone follow about my gallery"),
+				'comment_picture' => ___("When someone commented on my picture"),
+				'comment_gallery' => ___("When someone commented on my gallery"),
+				'comment_reply' => ___("When someone replies to my comment"),
+				'like_pic' => ___("When someone like my pictures"),
+				'like_gallery' => ___("When someone like my gallery"),
+				'like_comment' => ___("When someone like my comment"),
+				'exception_login' => ___("When an exception is generated login information"),
+				'login_restrictions' => ___("Error login too many times"),
+				'site_activity_information' => ___("When the site has information on activities"),
 			];
 		}
 		return $this->message_list;
@@ -190,11 +190,11 @@ class Notice extends AppException{
 		// TODO: Implement getMsg() method.
 		switch(intval($code)){
 			case -1:
-				return _("Update param is miss.");
+				return ___("Update param is miss.");
 			case -2:
-				return _("Notice class initialization error.");
+				return ___("Notice class initialization error.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 

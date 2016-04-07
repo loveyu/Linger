@@ -81,27 +81,27 @@ class UserLogin{
 	public function getCodeMsg($id){
 		switch($id){
 			case -1:
-				return _("Account check name error");
+				return ___("Account check name error");
 			case -2:
-				return _("Account not found");
+				return ___("Account not found");
 			case -3:
-				return _("Hash Password does not match rule");
+				return ___("Hash Password does not match rule");
 			case -4:
-				return _("Account password does not match");
+				return ___("Account password does not match");
 			case -5:
-				return _("Captcha Error");
+				return ___("Captcha Error");
 			case -6:
-				return _("Cookie Set Error");
+				return ___("Cookie Set Error");
 			case -7:
-				return _("Can't set last login info");
+				return ___("Can't set last login info");
 			case -8:
-				return _("Error login count to much");
+				return ___("Error login count to much");
 			case -9:
 				return $this->user->getStatusInfo($this->user->getStatus());
 			case -10:
-				return _("Post login param error");
+				return ___("Post login param error");
 		}
-		return _("unknown error");
+		return ___("unknown error");
 	}
 
 	/**
@@ -256,7 +256,7 @@ class UserLogin{
 								try{
 									self::setLastLoginInfo($user);
 								} catch(\Exception $ex){
-									Log::write(_("User last login info set error.ID: ") . $user->getId() . _(".Exception:") . $ex->getMessage(), Log::SQL);
+									Log::write(___("User last login info set error.ID: ") . $user->getId() . ___(".Exception:") . $ex->getMessage(), Log::SQL);
 								}
 							}
 							return $user;

@@ -111,7 +111,7 @@ class Comment{
 			}
 			self::$comment_stack[$this->getCommentId()] = $this;
 		} else{
-			Log::write(_("Comment class construct error"), Log::ALERT);
+			Log::write(___("Comment class construct error"), Log::ALERT);
 		}
 	}
 

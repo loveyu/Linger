@@ -123,7 +123,7 @@ class POTCreator{
 	 */
 	public function write_pot($filename){
 		if(!file_exists($filename)){
-			echo _("file not exists");
+			echo ___("file not exists");
 		} else{
 			file_put_contents($filename, $this->get_pot());
 		}

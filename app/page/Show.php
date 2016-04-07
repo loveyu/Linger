@@ -1,6 +1,7 @@
 <?php
 namespace UView;
 
+use CLib\pager;
 use Core\Page;
 use ULib\CountMessage;
 use ULib\Gallery;
@@ -25,6 +26,7 @@ class Show extends Page{
 		} else{
 			$this->theme = theme();
 		}
+		c_lib()->load('pager');
 	}
 
 	public function home(){
@@ -37,9 +39,7 @@ class Show extends Page{
 		$g_list = $g->select_new_gallery(8, true);
 		$u_list = $um->get_new_users(5);
 		$this->__view("Show/home.php", [
-			'pic_list' => $p_list,
-			'gallery_list' => $g_list,
-			'user_list' => $u_list
+			'pic_list' => $p_list, 'gallery_list' => $g_list, 'user_list' => $u_list
 		]);
 		$this->__view("Home/footer.php");
 	}
@@ -66,8 +66,7 @@ class Show extends Page{
 			$this->theme->setTitle("第 {$info['pic_id']} 号图片");
 			$this->__view("Home/header.php");
 			$this->__view("Show/picture.php", [
-				'info' => $info,
-				'CommentData' => new PictureComment($info['pic_id'], $c_p, $info)
+				'info' => $info, 'CommentData' => new PictureComment($info['pic_id'], $c_p, $info)
 			]);
 			$this->__view("Home/footer.php");
 		}
@@ -94,9 +93,7 @@ class Show extends Page{
 			$this->theme->setTitle($info['gallery_title'] . " [图集]");
 			$this->__view("Home/header.php");
 			$this->__view("Show/gallery.php", [
-				'gallery' => $g,
-				'info' => $info,
-				'CommentData' => new GalleryComment($id, $c_p, $info)
+				'gallery' => $g, 'info' => $info, 'CommentData' => new GalleryComment($id, $c_p, $info)
 			]);
 			$this->__view("Home/footer.php");
 		}
@@ -112,8 +109,7 @@ class Show extends Page{
 			$this->theme->setTitle($user->getAliases() . "(" . $user->getName() . ") 的主页");
 			$this->__view("Home/header.php");
 			$this->__view("Show/user.php", [
-				'user' => $user,
-				'count' => $count->getUserCount($user)
+				'user' => $user, 'count' => $count->getUserCount($user)
 			]);
 			$this->__view("Home/footer.php");
 		}
@@ -129,9 +125,7 @@ class Show extends Page{
 			$this->theme->setTitle($info['post_title'] . " - 文章");
 			$this->__view("Home/header.php");
 			$this->__view("Show/post.php", [
-				'info' => $info,
-				'user' => $post->getPostUser(),
-				'CommentData' => new PostComment($info['post_id'], $c_p, $info)
+				'info' => $info, 'user' => $post->getPostUser(), 'CommentData' => new PostComment($info['post_id'], $c_p, $info)
 			]);
 			$this->__view("Home/footer.php");
 		}
@@ -150,8 +144,7 @@ class Show extends Page{
 		$this->theme->setTitle("文章列表");
 		$this->__view("Home/header.php");
 		$this->__view("Show/post_list.php", [
-			'list' => $list,
-			'count' => $count
+			'list' => $list, 'count' => $count
 		]);
 		$this->__view("Home/footer.php");
 	}
@@ -163,6 +156,11 @@ class Show extends Page{
 	public function tag_gallery_list($tag_name = '', $page = 0){
 		var_dump(__METHOD__);
 		var_dump(func_get_args());
+		$this->__lib("tag_query/Gallery");
+		$gallery = new \ULib\tag_query\Gallery($tag_name);
+		var_dump($gallery->get_count());
+		var_dump(new pager());
+		return NULL;
 	}
 
 	public function tag_picture_list($tag_name = '', $page = 0){
@@ -173,10 +171,7 @@ class Show extends Page{
 	public function tag(){
 		$this->__lib("Tag");
 		$tag = new Tag();
-		$tags = $tag->get_hot_tags([
-			0,
-			50
-		]);
+		$tags = $tag->get_hot_tags([0, 50]);
 		$font_size = function ($count){
 			$m = $count / 5;
 			if($m > 10){
@@ -209,8 +204,7 @@ class Show extends Page{
 		$lg = new ListGallery();
 		$lg->setPager($page, 6);
 		$pager = [
-			'previous' => NULL,
-			'next' => NULL
+			'previous' => NULL, 'next' => NULL
 		];
 		$list = $lg->getListOfUser($user);
 		if(!isset($list[0]) || !reset($list[0])){
@@ -240,10 +234,7 @@ class Show extends Page{
 			$this->__view("Home/header.php");
 			$this->__view("Show/user_header.php", ['user' => $user]);
 			$this->__view("Show/gallery_list.php", [
-				'list' => $list,
-				'pager' => $pager,
-				'type' => 'user',
-				'number' => $count['page'],
+				'list' => $list, 'pager' => $pager, 'type' => 'user', 'number' => $count['page'],
 			]);
 			$this->__view("Home/footer.php");
 		}
@@ -255,8 +246,7 @@ class Show extends Page{
 		$lg = new ListGallery();
 		$lg->setPager($page, 6);
 		$pager = [
-			'previous' => NULL,
-			'next' => NULL
+			'previous' => NULL, 'next' => NULL
 		];
 		$list = $lg->getList();
 
@@ -285,10 +275,7 @@ class Show extends Page{
 			}
 			$this->__view("Home/header.php");
 			$this->__view("Show/gallery_list.php", [
-				'list' => $list,
-				'pager' => $pager,
-				'number' => $count['page'],
-				'type' => 'all'
+				'list' => $list, 'pager' => $pager, 'number' => $count['page'], 'type' => 'all'
 			]);
 			$this->__view("Home/footer.php");
 		}

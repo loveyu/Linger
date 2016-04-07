@@ -126,12 +126,12 @@ class Server{
 	public function getMsg($code){
 		switch($code){
 			case -2:
-				return _("Url format error.");
+				return ___("Url format error.");
 			case -1:
-				return _("Database write error.") . debug("ERROR" . implode(", ", db()->error()['write']));
+				return ___("Database write error.") . debug("ERROR" . implode(", ", db()->error()['write']));
 			case -3:
-				return _("Name is error, only allow a-z.");
+				return ___("Name is error, only allow a-z.");
 		}
-		return _("Unknown Error");
+		return ___("Unknown Error");
 	}
 } 

@@ -51,7 +51,7 @@ class Queue{
 			} catch(\Exception $ex){
 				--$status;
 				$message = $ex->getMessage();
-				Log::write(_("Queue Error:") . $message, Log::ERR);
+				Log::write(___("Queue Error:") . $message, Log::ERR);
 			}
 			//更新队列信息
 			if($status < 1 || _Debug_){
@@ -114,7 +114,7 @@ class Queue{
 			]) < 0
 		){
 			//添加错误记录
-			$this->record_error(_("Add queue error on sql.") . debug("SQL error:" . implode(",", db()->error()['write'])));
+			$this->record_error(___("Add queue error on sql.") . debug("SQL error:" . implode(",", db()->error()['write'])));
 		}
 	}
 
@@ -156,12 +156,12 @@ class Queue{
 		$call = @unserialize($callback);
 		if(!is_object($call)){
 			//初步判断是否为对象
-			throw new \Exception(_("unserialize error"));
+			throw new \Exception(___("unserialize error"));
 		}
 		$ref = new \ReflectionClass($call);
 		if(!in_array("ULib\\QueueCallback", $ref->getInterfaceNames())){
 			//检测是否为正确的实现了接口
-			throw new \Exception(_("callback class error."));
+			throw new \Exception(___("callback class error."));
 		}
 		//最后执行,并使用对应的参数
 		@$call->run($id, @unserialize($param));

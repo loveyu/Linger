@@ -94,7 +94,7 @@ class UserRegister{
 
 		$reg_code = db()->insert("users", $register_array);
 		if($reg_code <= 0){
-			Log::write(_("User register insert sql error."), Log::SQL);
+			Log::write(___("User register insert sql error."), Log::SQL);
 			return -3;
 		}
 		try{
@@ -106,7 +106,7 @@ class UserRegister{
 				$this->SendActivationMail($u);
 			}
 		} catch(\Exception $ex){
-			Log::write(_("User register success exception notice"), Log::NOTICE);
+			Log::write(___("User register success exception notice"), Log::NOTICE);
 		}
 		return $reg_code;
 	}
@@ -152,20 +152,20 @@ class UserRegister{
 	 */
 	public static function UserActivation($user, $code){
 		if($user->is_active()){
-			throw new \Exception(_("User is already activation"));
+			throw new \Exception(___("User is already activation"));
 		}
 		$meta = $user->getMeta()->get([
 			"activation_code",
 			"activation_time"
 		], '');
 		if(empty($meta['activation_time']) || empty($meta['activation_code'])){
-			throw new \Exception(_("Activation code is invalid"));
+			throw new \Exception(___("Activation code is invalid"));
 		}
 		if(time() - strtotime($meta['activation_time']) > hook()->apply('UserRegister_UserActivation_time', 3 * 24 * 60 * 60)){
-			throw new \Exception(_("Activation code is time out"));
+			throw new \Exception(___("Activation code is time out"));
 		}
 		if($meta['activation_code'] != $code){
-			throw new \Exception(_("Activation code is error"));
+			throw new \Exception(___("Activation code is error"));
 		} else{
 			$user->set(['status' => 1]);
 		}
@@ -188,15 +188,15 @@ class UserRegister{
 	public function CodeMsg($code){
 		switch($code){
 			case -1:
-				return _("Captcha code Error");
+				return ___("Captcha code Error");
 			case -2:
-				return _("Password char error");
+				return ___("Password char error");
 			case -4:
-				return _("Name already exists or does not comply with the rules");
+				return ___("Name already exists or does not comply with the rules");
 			case -5:
-				return _("Email is exists");
+				return ___("Email is exists");
 			case -3:
-				return _("Sql Insert Error") . debug(" :" . join(", ", db()->error()['write']));
+				return ___("Sql Insert Error") . debug(" :" . join(", ", db()->error()['write']));
 		}
 		return hook()->apply("UserRegister_CodeMsg", "Unknown Error", $code);
 	}

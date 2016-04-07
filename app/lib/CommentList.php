@@ -80,11 +80,11 @@ class CommentList extends AppException{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("CommentList class construct error.");
+				return ___("CommentList class construct error.");
 			case -2:
-				return _("Data get error.");
+				return ___("Data get error.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 	/**
@@ -193,7 +193,7 @@ class CommentList extends AppException{
 	 */
 	private function getListDataParse(&$list){
 		if($list === false){
-			Log::write(_("Get comment list of user error."), Log::SQL);
+			Log::write(___("Get comment list of user error."), Log::SQL);
 			$this->throwMsg(-2);
 		}
 		$ol = [];
@@ -206,7 +206,7 @@ class CommentList extends AppException{
 				$list[$i]['info'] = & $info[$list[$i][$this->type . "_id"]];
 			} else{
 				//此处数据出错，或者数据不完整
-				Log::write(_("Data loss on CommentList class."), Log::NOTICE);
+				Log::write(___("Data loss on CommentList class."), Log::NOTICE);
 				unset($list[$i]);
 			}
 		}

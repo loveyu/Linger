@@ -166,7 +166,7 @@ class User{
 						self::$user_stack_name[$user->getName()] = $user->getId();
 						return true;
 					} else{
-						Log::write(_("User add stack error.") . print_r($user, true), Log::ALERT);
+						Log::write(___("User add stack error.") . print_r($user, true), Log::ALERT);
 					}
 					break;
 				case '-':
@@ -223,14 +223,14 @@ class User{
 	 */
 	public function __construct($user_id, $exists_array = false){
 		$this->status_info = [
-			-1 => _('Unknown'),
-			0 => _('Unverified'),
+			-1 => ___('Unknown'),
+			0 => ___('Unverified'),
 			//用户未经过验证
-			1 => _('Normal'),
+			1 => ___('Normal'),
 			//正常用户
-			2 => _('Restrict Login'),
+			2 => ___('Restrict Login'),
 			//限制用户，取消限制后成为正常用户
-			3 => _('Lockout Login'),
+			3 => ___('Lockout Login'),
 			//被锁用户,取消后成为未验证用户
 		];
 		if($exists_array === true && is_array($user_id)){
@@ -243,9 +243,9 @@ class User{
 					$user_id = ['user_name' => trim($user_id)];
 				}
 			} else if(count($user_id) != 1 || is_object($user_id)){
-				throw new \Exception(_("User ID param error."));
+				throw new \Exception(___("User ID param error."));
 			} else if(!isset($user_id['id']) && !isset($user_id['user_name']) && !isset($user_id['user_email'])){
-				throw new \Exception(_("User ID array param col error."));
+				throw new \Exception(___("User ID array param col error."));
 			}
 			$user = db()->get("users", [
 				'id',
@@ -269,7 +269,7 @@ class User{
 			], $user_id);
 		}
 		if(!is_array($user)){
-			throw(new \Exception(_("Unknown User")));
+			throw(new \Exception(___("Unknown User")));
 		} else{
 			foreach($user as $key => $value){
 				if(in_array($key, self::$column_list)){
@@ -583,23 +583,23 @@ class User{
 		}
 		lib()->load('UserCheck');
 		if(isset($update['user_aliases']) && empty($update['user_aliases'])){
-			throw new \Exception(_("Aliases can't set empty."));
+			throw new \Exception(___("Aliases can't set empty."));
 		}
 		if(isset($update['user_email']) && !UserCheck::CheckEmailChar($update['user_email'])){
-			throw new \Exception(_("Email verify check Error"));
+			throw new \Exception(___("Email verify check Error"));
 		}
 		if(isset($update['user_name']) && !UserCheck::CheckUsernameChar($update['user_name'])){
-			throw new \Exception(_("Username verify check Error"));
+			throw new \Exception(___("Username verify check Error"));
 		}
 		if(isset($update['user_password']) && !UserCheck::CheckPasswordChar($update['user_password'])){
-			throw new \Exception(_("Password verify check Error"));
+			throw new \Exception(___("Password verify check Error"));
 		}
 		if(isset($update['user_url']) && $update['user_url'] != "" && !filter_var($update['user_url'], FILTER_VALIDATE_URL)){
-			throw new \Exception(_("Url check error"));
+			throw new \Exception(___("Url check error"));
 		}
 		if(count($update) > 0){
 			if(db()->update("users", $update, ['id' => $this->id]) === false){
-				throw new \Exception(_("Can't update User info.") . debug("SQL msg:" . implode(",", db()->error()['write'])));
+				throw new \Exception(___("Can't update User info.") . debug("SQL msg:" . implode(",", db()->error()['write'])));
 			}
 			foreach($data as $n => $v){
 				$this->$n = $v;
