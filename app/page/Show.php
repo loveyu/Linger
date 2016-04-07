@@ -154,12 +154,10 @@ class Show extends Page{
 	}
 
 	public function tag_gallery_list($tag_name = '', $page = 0){
-		var_dump(__METHOD__);
-		var_dump(func_get_args());
 		$this->__lib("tag_query/Gallery");
 		$gallery = new \ULib\tag_query\Gallery($tag_name);
-		var_dump($gallery->get_count());
-		var_dump(new pager());
+		$count = $gallery->get_count();
+		$pager = new pager($count, 30, $page);
 		return NULL;
 	}
 
