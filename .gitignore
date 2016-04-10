@@ -15,3 +15,4 @@ node_modules
 bower_components
 web_resource/vue/dist.min.js
 components
+auto_tools/post_gallery/config.php
