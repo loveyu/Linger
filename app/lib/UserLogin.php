@@ -168,8 +168,7 @@ class UserLogin{
 					0,
 					1,
 					2
-				])
-				){
+				])){
 					if($this->user->getErrorLoginCount() > 0){
 						//错误登录清零
 						$this->user->set(array(
@@ -230,6 +229,47 @@ class UserLogin{
 	}
 
 	/**
+	 * 使用Header信息登录系统
+	 * @return bool|User
+	 */
+	private static function HeaderLogin(){
+		if(!defined('HEADER_LOGIN_TOKEN') || !HEADER_LOGIN_TOKEN){
+			return false;
+		}
+		$user = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : NULL;
+		$pwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : NULL;
+		$token = isset($_SERVER['HTTP_TOKEN']) ? $_SERVER['HTTP_TOKEN'] : NULL;
+		if(empty($user) || empty($pwd) || empty($token) || $token != HEADER_LOGIN_TOKEN){
+			return false;
+		}
+		$user_login = new UserLogin();
+		$user = $user_login->getUserByPwd($user, $pwd);
+		if(is_object($user)){
+			return $user;
+		}
+		return false;
+	}
+
+	/**
+	 * 依据用户名和密码获取用户信息
+	 * @param string $user
+	 * @param string $pwd
+	 * @return User|false
+	 */
+	public function getUserByPwd($user, $pwd){
+		try{
+			$this->GetAccountUser($user);
+			$now_pwd = UserCheck::CreatePassword($pwd, $this->user->getSalt());
+			$user_pwd = $this->user->getPassword();
+			if($now_pwd === $user_pwd){
+				return $this->user;
+			}
+		} catch(\Exception $ex){
+		}
+		return false;
+	}
+
+	/**
 	 * 使用COOKIE登录系统
 	 * @return bool|User
 	 */
@@ -238,33 +278,34 @@ class UserLogin{
 		if(!empty($cookie)){
 			$cookie = explode("\t", $cookie);
 		}
-		if(count($cookie) == 2){
-			$cookie[0] = intval($cookie[0]);
-			$cookie[1] = trim($cookie[1]);
-			if($cookie[0] > 0){
-				try{
-					$user = new User($cookie[0]);
-					if($user->getCookieLogin() == $cookie[1]){
-						if(in_array($user->getStatus(), [
-							0,
-							1,
-							2
-						])
-						){
-							if(trim(req()->cookie('LoginFlag')) != date("Y-m-d")){
-								//如果COOKIE中的日期和当前日期不相符就设置
-								try{
-									self::setLastLoginInfo($user);
-								} catch(\Exception $ex){
-									Log::write(___("User last login info set error.ID: ") . $user->getId() . ___(".Exception:") . $ex->getMessage(), Log::SQL);
-								}
+		if(count($cookie) != 2){
+			//检测header登录
+			return self::HeaderLogin();
+		}
+		$cookie[0] = intval($cookie[0]);
+		$cookie[1] = trim($cookie[1]);
+		if($cookie[0] > 0){
+			try{
+				$user = new User($cookie[0]);
+				if($user->getCookieLogin() == $cookie[1]){
+					if(in_array($user->getStatus(), [
+						0,
+						1,
+						2
+					])){
+						if(trim(req()->cookie('LoginFlag')) != date("Y-m-d")){
+							//如果COOKIE中的日期和当前日期不相符就设置
+							try{
+								self::setLastLoginInfo($user);
+							} catch(\Exception $ex){
+								Log::write(___("User last login info set error.ID: ") . $user->getId() . ___(".Exception:") . $ex->getMessage(), Log::SQL);
 							}
-							return $user;
 						}
+						return $user;
 					}
-				} catch(\Exception $ex){
-					return false;
 				}
+			} catch(\Exception $ex){
+				return false;
 			}
 		}
 		return false;

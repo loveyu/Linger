@@ -289,6 +289,28 @@ class UserApi extends Page{
 		}
 	}
 
+	/**
+	 * 获取用户自己的信息
+	 */
+	public function user_info(){
+		try{
+			print_r($_SERVER);
+			$this->throwMsgCheck('is_login');
+			$user = login_user();
+			$this->rt_msg['content'] = [
+				'user_id' => $user->getId(),
+				'email' => $user->getEmail(),
+				'avatar' => $user->getAvatar(),
+				'name' => $user->getName(),
+				'aliases' => $user->getAliases(),
+				'url' => $user->getUrl()
+			];
+			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+		}
+	}
+
 
 	/**
 	 * 编辑邮箱地址
@@ -990,8 +1012,8 @@ class UserApi extends Page{
 	 * 析构方法，输出JSON数据
 	 */
 	function __destruct(){
-		if($this->ajax || req()->is_ajax()){
-			echo json_encode($this->rt_msg);
+		if($this->ajax || req()->is_ajax() || (isset($_REQUEST['show_json']) && $_REQUEST['show_json'] == "1")){
+			echo json_encode($this->rt_msg, JSON_UNESCAPED_UNICODE);
 		} else{
 			echo "状态:", $this->rt_msg['status'] ? "成功" : "错误", "\n状态码:", $this->rt_msg['code'], "\n信息:", $this->rt_msg['msg'];
 		}

@@ -108,6 +108,17 @@ function salt_hash($hash, $salt){
 }
 
 /**
+ * 字符串明文转换为要提交的哈希值
+ * @param string $str
+ * @return string
+ */
+function str_to_pwd_hash($str){
+	$arr = mb_split("/(?<!^)(?!$)/u", $str);
+	sort($arr);
+	return sha1($str . md5(implode('', $arr)));
+}
+
+/**
  * 单独封装hash函数
  * @param      $str
  * @param bool $raw_output 为true时返回二进制数据
@@ -211,6 +222,7 @@ function site_static_url(){
 		return $c;
 	}
 }
+
 /**
  * 网站HTTPS URL
  * @return string
@@ -451,14 +463,14 @@ function cdn_info($type = 'all', $name = ''){
 			return $cdn_info['status'] === true;
 		case 'filed':
 			if(isset($cdn_info['list'][$name])){
-				$x = explode("|",$cdn_info['list'][$name]);
+				$x = explode("|", $cdn_info['list'][$name]);
 				if(isset($x[1])){
 					if(is_ssl()){
 						return $x[1];
-					}else{
+					} else{
 						return $x[0];
 					}
-				}else{
+				} else{
 					return trim($x[0]);
 				}
 			}
