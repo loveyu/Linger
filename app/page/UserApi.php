@@ -403,6 +403,9 @@ class UserApi extends Page{
 			$this->__lib('Picture', 'Server');
 			$pic = new Picture();
 			$server = new Server();
+			if(!array_key_exists('files', $_FILES)){
+				$_FILES['files'] = array();
+			}
 			$this->rt_msg['content'] = $pic->add($req->post('name'), $req->post('tag'), $req->post('desc'), @$_FILES['files'], $server->getNowServer(), login_user());
 			$this->rt_msg['status'] = count($this->rt_msg['content']['list']) > 0;
 			if($this->rt_msg['status'] && $req->post('get_msg') == 1){
