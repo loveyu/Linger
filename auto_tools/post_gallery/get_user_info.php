@@ -21,7 +21,6 @@ $header = array(
 	'X-REQUESTED-WITH:XMLHTTPREQUEST'
 );
 curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-curl_setopt($ch, CURLOPT_USERAGENT, "TEST");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 echo curl_exec($ch);
 curl_close($ch);

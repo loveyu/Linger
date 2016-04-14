@@ -37,4 +37,25 @@ foreach($list as $v){
 	$tags = array_unique($tags);
 	$data[] = compact('path', 'title', 'desc', 'tags');
 }
+$api = $config['url'] . "UserApi/picture_upload";
+$count = count($data);
+foreach($data as $i => $item){
+	$i += 1;
+	echo "\nRun:{$i}/{$count}\n";
+	$ch = curl_init($api);
+	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_USERPWD, "{$config['user']}:{$config['password']}");
+	$fields = [
 
+	];
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+	$header = array(
+		"token:{$config['token']}",
+		'X-REQUESTED-WITH:XMLHTTPREQUEST'
+	);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	echo mb_convert_encoding(curl_exec($ch), "GBK", 'UTF-8');
+	curl_close($ch);
+}
