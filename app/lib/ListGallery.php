@@ -174,6 +174,9 @@ class ListGallery{
 		]);
 		$this->initUser($list);
 		$this->parseList($list);
+		if(empty($list)){
+			return array();
+		}
 		foreach($list as $v){
 			$rt[$v['gallery_id']] = $v;
 		}
@@ -192,6 +195,9 @@ class ListGallery{
 
 	private function initUser(&$data){
 		$ids = [];
+		if(empty($data)){
+			return;
+		}
 		foreach($data as &$v){
 			if(!isset($ids[$v['users_id']]) && User::UserStack($v['users_id']) === false){
 				$ids[$v['users_id']] = $v['users_id'];

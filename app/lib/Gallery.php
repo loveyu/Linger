@@ -408,6 +408,9 @@ class Gallery extends AppException{
 	 */
 	public function listAddTags(&$list){
 		$ids = [];
+		if(empty($list)){
+			return;
+		}
 		foreach($list as $v){
 			$ids[] = $v['gallery_id'];
 		}
