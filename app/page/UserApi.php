@@ -294,7 +294,6 @@ class UserApi extends Page{
 	 */
 	public function user_info(){
 		try{
-			print_r($_SERVER);
 			$this->throwMsgCheck('is_login');
 			$user = login_user();
 			$this->rt_msg['content'] = [
