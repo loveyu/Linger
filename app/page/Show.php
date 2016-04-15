@@ -1,6 +1,7 @@
 <?php
 namespace UView;
 
+use CLib\pager;
 use Core\Page;
 use ULib\CountMessage;
 use ULib\Gallery;
@@ -25,6 +26,7 @@ class Show extends Page{
 		} else{
 			$this->theme = theme();
 		}
+		c_lib()->load('pager');
 	}
 
 	public function home(){
@@ -157,13 +159,29 @@ class Show extends Page{
 	}
 
 	public function tag_list($tag_name = '', $page = 0){
-		var_dump(__METHOD__);
-		var_dump(func_get_args());
+		return $this->tag_gallery_list($tag_name, $page);
 	}
 
 	public function tag_gallery_list($tag_name = '', $page = 0){
-		var_dump(__METHOD__);
-		var_dump(func_get_args());
+		$this->__lib("tag_query/Gallery");
+		$gallery = new \ULib\tag_query\Gallery($tag_name);
+		$count = $gallery->get_count();
+		$pager = new pager($count, 30, $page);
+		if($page > $pager->getAllPage()){
+			$this->__load_404();
+			return;
+		}
+		$list = $gallery->query($pager->get_limit());
+		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 标签");
+		$this->__view("Home/header.php");
+		$this->__view("Show/gallery_tag.php", [
+			'list' => $list,
+			'number' => $pager->getCurrentPage(),
+			'tag_name' => $tag_name,
+			'pager'=>$pager->get_pager()
+		]);
+		$this->__view("Home/footer.php");
+		return NULL;
 	}
 
 	public function tag_picture_list($tag_name = '', $page = 0){
@@ -174,10 +192,7 @@ class Show extends Page{
 	public function tag(){
 		$this->__lib("Tag");
 		$tag = new Tag();
-		$tags = $tag->get_hot_tags([
-			0,
-			50
-		]);
+		$tags = $tag->get_hot_tags([0, 50]);
 		$font_size = function ($count){
 			$m = $count / 5;
 			if($m > 10){

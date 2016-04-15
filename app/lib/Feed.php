@@ -72,7 +72,7 @@ SQL_INPUT;
 		}
 		$stmt = $this->db->query($sql);
 		if($stmt === false){
-			Log::write(_("Get feed list error."), Log::SQL);
+			Log::write(___("Get feed list error."), Log::SQL);
 			return [];
 		}
 		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -166,7 +166,7 @@ SQL_INPUT;
 				'user_avatar' => 'avatar',
 			], ['id' => $idl]);
 			if($list === false){
-				Log::write(_("Select other users error."), Log::SQL);
+				Log::write(___("Select other users error."), Log::SQL);
 			} else{
 				foreach($list as &$v){
 					//保存数据到堆栈
@@ -355,7 +355,7 @@ SQL_INPUT;
 				'time' => date("Y-m-d H:i:s")
 			]);
 			if($status < 1){
-				Log::write(_("Insert feed error.") . "On " . $action, Log::SQL);
+				Log::write(___("Insert feed error.") . "On " . $action, Log::SQL);
 				return false;
 			}
 			return $status;
@@ -385,21 +385,21 @@ SQL_INPUT;
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Init share picture error.");
+				return ___("Init share picture error.");
 			case -2:
-				return _("Share picture data insert error.");
+				return ___("Share picture data insert error.");
 			case -3:
-				return _("Share gallery data insert error.");
+				return ___("Share gallery data insert error.");
 			case -4:
-				return _("Init share gallery error.");
+				return ___("Init share gallery error.");
 			case -5:
-				return _("Share content is empty.");
+				return ___("Share content is empty.");
 			case -6:
-				return _("Share talk data error.");
+				return ___("Share talk data error.");
 			case -7:
-				return _("Create share data error.");
+				return ___("Create share data error.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 } 

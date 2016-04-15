@@ -127,6 +127,59 @@ class ListGallery{
 		return $list;
 	}
 
+	/**
+	 * 通过ID列表获取全部
+	 * @param array $ids
+	 * @return array|bool
+	 */
+	public function getListByGalleryIds($ids){
+		$rt = array_fill_keys($ids, NULL);
+		$list = $this->db->select("pictures", [
+			'[<]gallery' => ['id' => 'gallery_front_cover'],
+			'[>]server' => ['server_name' => 'name'],
+		], [
+			'gallery.id' => 'gallery_id',
+			'gallery.users_id' => 'users_id',
+			'gallery.gallery_title' => 'gallery_title',
+			'gallery.gallery_description' => 'gallery_description',
+			'gallery.gallery_create_time' => 'gallery_create_time',
+			'gallery.gallery_update_time' => 'gallery_update_time',
+			'gallery.gallery_like_count' => 'gallery_like_count',
+			'gallery.gallery_comment_count' => 'gallery_comment_count',
+			'gallery.gallery_comment_status' => 'gallery_comment_status',
+			'gallery.gallery_front_cover' => 'gallery_front_cover',
+			'pictures.id' => 'pic_id',
+			'pictures.server_name' => 'server_name',
+			'server.url' => 'server_url',
+			'pictures.pic_name' => 'pic_name',
+			'pictures.pic_path' => 'pic_path',
+			'pictures.pic_create_time' => 'pic_create_time',
+			'pictures.pic_width' => 'pic_width',
+			'pictures.pic_height' => 'pic_height',
+			'pictures.pic_description' => 'pic_description',
+			'pictures.pic_thumbnails_path' => 'pic_thumbnails_path',
+			'pictures.pic_thumbnails_width' => 'pic_thumbnails_width',
+			'pictures.pic_thumbnails_height' => 'pic_thumbnails_height',
+			'pictures.pic_hd_path' => 'pic_hd_path',
+			'pictures.pic_hd_width' => 'pic_hd_width',
+			'pictures.pic_hd_height' => 'pic_hd_height',
+			'pictures.pic_status' => 'pic_status',
+			'pictures.pic_comment_count' => 'pic_comment_count',
+			'pictures.pic_display_path' => 'pic_display_path',
+			'pictures.pic_display_width' => 'pic_display_width',
+			'pictures.pic_display_height' => 'pic_display_height'
+		], [
+			'gallery.id' => $ids,
+			'ORDER' => 'gallery.id DESC',
+		]);
+		$this->initUser($list);
+		$this->parseList($list);
+		foreach($list as $v){
+			$rt[$v['gallery_id']] = $v;
+		}
+		return array_values($rt);
+	}
+
 	private function parseList(&$list){
 		if(count($list) > 0){
 			lib()->load('Picture', 'Gallery');
@@ -157,7 +210,7 @@ class ListGallery{
 				'user_avatar' => 'avatar',
 			], ['id' => $ids]);
 			if($list === false){
-				Log::write(_("Select other users error."), Log::SQL);
+				Log::write(___("Select other users error."), Log::SQL);
 			} else{
 				foreach($list as &$v){
 					//保存数据到堆栈

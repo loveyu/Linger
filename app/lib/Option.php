@@ -90,7 +90,7 @@ class Option{
 		}
 		$hook->add("UserRegister_CodeMsg", function ($msg, $code){
 			if($code == -11){
-				return _("User register already closed.");
+				return ___("User register already closed.");
 			}
 			return $msg;
 		});
@@ -134,7 +134,7 @@ class Option{
 			}
 			if(($row = $db->update("options", ['option_value' => $v], ['option_name' => $name])) === false){
 				$db->pdo->rollBack();
-				throw new \Exception(_("Update option error") . debug("ERROR:" . implode(", ", $db->error())));
+				throw new \Exception(___("Update option error") . debug("ERROR:" . implode(", ", $db->error())));
 			}
 			if($row == 0){
 				if($db->insert("options", [
@@ -144,7 +144,7 @@ class Option{
 					]) < 0
 				){
 					$db->pdo->rollBack();
-					throw new \Exception(_("Insert unknown option error.") . debug("ERROR:" . implode(", ", $db->error()) . ",SQL:" . $db->last_query()));
+					throw new \Exception(___("Insert unknown option error.") . debug("ERROR:" . implode(", ", $db->error()) . ",SQL:" . $db->last_query()));
 				}
 			}
 		}

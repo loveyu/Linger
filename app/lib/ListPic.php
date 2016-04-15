@@ -329,12 +329,12 @@ class ListPic{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("User is error.");
+				return ___("User is error.");
 			case -2:
 				Log::write(implode(", ", db()->error()['read']) . "\n" . db()->last_query()['read'], Log::SQL);
-				return _("Data select error on sql.");
+				return ___("Data select error on sql.");
 			default:
-				return _("Unknown error");
+				return ___("Unknown error");
 		}
 	}
 

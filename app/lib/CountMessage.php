@@ -51,7 +51,7 @@ class CountMessage{
 				'unread_message_count'
 			], ['users_id' => $user->getId()]);
 			if($rt === false){
-				Log::write(_("Get user count info error.") . "USER ID:" . $user->getId(), Log::SQL);
+				Log::write(___("Get user count info error.") . "USER ID:" . $user->getId(), Log::SQL);
 				return false;
 			}
 			$this->count_info[$user->getId()] = & $rt;
@@ -98,7 +98,7 @@ class CountMessage{
 			'LIMIT' => 1
 		]);
 		if($count === false){
-			Log::write(_("Count info get error."), Log::SQL);
+			Log::write(___("Count info get error."), Log::SQL);
 			return false;
 		}
 		if(isset($count[0]['views_count'])){
@@ -109,7 +109,7 @@ class CountMessage{
 				]
 			]);
 			if($status === false){
-				Log::write(_("Count info update error."), Log::SQL);
+				Log::write(___("Count info update error."), Log::SQL);
 				return false;
 			}
 			if($status > 0){
@@ -124,7 +124,7 @@ class CountMessage{
 			if($status !== -1){
 				return 1;
 			} else{
-				Log::write(_("Count info insert error."), Log::SQL);
+				Log::write(___("Count info insert error."), Log::SQL);
 			}
 		}
 		return false;

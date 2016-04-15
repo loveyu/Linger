@@ -195,13 +195,13 @@ class UserControl{
 				'Reset_password_time'
 			], '');
 			if(empty($meta['Reset_password_code']) || empty($meta['Reset_password_time'])){
-				return _("reset param error.");
+				return ___("reset param error.");
 			}
 			if(time() - strtotime($meta['Reset_password_time']) > hook()->apply('UserControl_reset_password_check_time', 3 * 24 * 60 * 60)){
-				return _("Code time out.");
+				return ___("Code time out.");
 			}
 			if($meta['Reset_password_code'] !== trim($code)){
-				return _("Code error.");
+				return ___("Code error.");
 			}
 			$this->reset_password_user = $user;
 			return true;
@@ -367,39 +367,39 @@ class UserControl{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Permission is exists");
+				return ___("Permission is exists");
 			case -2:
-				return _("Permission is not change.");
+				return ___("Permission is not change.");
 			case -3:
-				return _("Captcha code error.");
+				return ___("Captcha code error.");
 			case -4:
-				return _("User is locked, can't reset password.");
+				return ___("User is locked, can't reset password.");
 			case -5:
-				return _("Reset user ex.");
+				return ___("Reset user ex.");
 			case -6:
-				return _("Reset Password check error.");
+				return ___("Reset Password check error.");
 			case -7:
-				return _("The password param is error format.");
+				return ___("The password param is error format.");
 			case -8:
-				return _("Old password is not match.");
+				return ___("Old password is not match.");
 			case -9:
-				return _("Cookie reset type is not in match list");
+				return ___("Cookie reset type is not in match list");
 			case -10:
-				return _("User password error.");
+				return ___("User password error.");
 			case -11:
-				return _("Time out, please send mail again.");
+				return ___("Time out, please send mail again.");
 			case -12:
-				return _("Code error.");
+				return ___("Code error.");
 			case -13:
-				return _("email address is change, please send mail again.");
+				return ___("email address is change, please send mail again.");
 			case -14:
-				return _("avatar type is not defined.");
+				return ___("avatar type is not defined.");
 			case -15:
-				return _("user upload avatar error or not found.");
+				return ___("user upload avatar error or not found.");
 			case -16:
-				return _("upload form data is not defined");
+				return ___("upload form data is not defined");
 			default:
-				return _("Unknown");
+				return ___("Unknown");
 		}
 	}
 

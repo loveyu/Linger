@@ -467,40 +467,40 @@ abstract class CommentData extends Page{
 		$code = intval($code);
 		switch($code){
 			case -1:
-				$msg = _("Comment relation table error.");
+				$msg = ___("Comment relation table error.");
 				break;
 			case -2:
-				$msg = _("Comment data is empty.");
+				$msg = ___("Comment data is empty.");
 				break;
 			case -3:
-				$msg = _("Reply id is error.");
+				$msg = ___("Reply id is error.");
 				break;
 			case -4:
-				$msg = _("Reply comment is not exists.");
+				$msg = ___("Reply comment is not exists.");
 				break;
 			case -5:
-				$msg = _("Comment error on data.");
+				$msg = ___("Comment error on data.");
 				break;
 			case -6:
-				$msg = _("Comment error on table.");
+				$msg = ___("Comment error on table.");
 				break;
 			case -7:
-				$msg = _("Comment can't count.");
+				$msg = ___("Comment can't count.");
 				break;
 			case -8:
-				$msg = _("Comment load error.");
+				$msg = ___("Comment load error.");
 				break;
 			case -9:
-				$msg = _("Comment page not found.");
+				$msg = ___("Comment page not found.");
 				break;
 			case -10:
-				$msg = _("Oh, no comments yet, you can write something at now.");
+				$msg = ___("Oh, no comments yet, you can write something at now.");
 				break;
 			case -11:
-				$msg = _("Comment are closed.");
+				$msg = ___("Comment are closed.");
 				break;
 			default:
-				$msg = _("Unknown error");
+				$msg = ___("Unknown error");
 		}
 		throw new \Exception($msg, $code);
 	}

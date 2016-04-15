@@ -53,10 +53,10 @@ class UserCheck{
 	public static function CheckEmail($email){
 		$email = strtolower(trim($email));
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-			return _("Email does not comply with the rules");
+			return ___("Email does not comply with the rules");
 		}
 		if(db()->has("users", ['user_email' => $email])){
-			return _('Email already exists');
+			return ___('Email already exists');
 		}
 		return hook()->apply('UserCheck_CheckEmail', true, $email);
 	}
@@ -68,7 +68,7 @@ class UserCheck{
 	public static function CheckPassword($password){
 		$password = strtolower(trim($password));
 		if(!self::CheckPasswordChar($password)){
-			return _('Password hash is incorrect');
+			return ___('Password hash is incorrect');
 		}
 		return hook()->apply('UserCheck_CheckPassword', true, $password);
 	}
@@ -80,11 +80,11 @@ class UserCheck{
 	public static function CheckName($name){
 		$name = strtolower(trim($name));
 		if(!self::CheckUsernameChar($name)){
-			return _("User name does not comply with the rules");
+			return ___("User name does not comply with the rules");
 		}
 
 		if(db()->has("users", ['user_name' => $name])){
-			return _('User name already exists');
+			return ___('User name already exists');
 		}
 		return hook()->apply('UserCheck_CheckEmail', true, $name);
 	}

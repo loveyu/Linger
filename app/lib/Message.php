@@ -130,7 +130,7 @@ class Message extends AppException{
 			'ORDER' => "message.id DESC"
 		]);
 		if($rt === false){
-			Log::write(_("Get system message error on sql."), Log::SQL);
+			Log::write(___("Get system message error on sql."), Log::SQL);
 			return [];
 		}
 		return $rt;
@@ -171,7 +171,7 @@ class Message extends AppException{
 			'ORDER' => "message.id DESC"
 		]);
 		if($rt === false){
-			Log::write(_("Get outbox message error on sql."), Log::SQL);
+			Log::write(___("Get outbox message error on sql."), Log::SQL);
 			return [];
 		}
 		return $rt;
@@ -222,7 +222,7 @@ class Message extends AppException{
 		if(count($data) > 0){
 			$rt = $this->db->update("message", $data, ['id' => $id]);
 			if($rt === false){
-				Log::write(_("Message set del error."), Log::SQL);
+				Log::write(___("Message set del error."), Log::SQL);
 				$this->throwMsg(-15);
 			}
 		}
@@ -291,7 +291,7 @@ class Message extends AppException{
 			]);
 			$list = [];
 			if($list_id === false){
-				Log::write(_("select user id list error on message."), Log::SQL);
+				Log::write(___("select user id list error on message."), Log::SQL);
 			}
 			foreach($list_id as $v){
 				$list[] = $v['id'];
@@ -321,7 +321,7 @@ class Message extends AppException{
 				//运行成功处理
 				hook()->apply('Message_send_success', NULL, $data, $insert);
 			} else{
-				Log::write(_("Insert message error."), Log::SQL);
+				Log::write(___("Insert message error."), Log::SQL);
 				++$status['error'];
 			}
 		}
@@ -363,7 +363,7 @@ class Message extends AppException{
 			'to_users_id' => $uid
 		];
 		if($this->db->insert("message", $data) < 0){
-			Log::write(_("Add message notice error."), Log::SQL);
+			Log::write(___("Add message notice error."), Log::SQL);
 			$this->throwMsg(-18);
 		}
 	}
@@ -403,7 +403,7 @@ class Message extends AppException{
 			'ORDER' => "message.id DESC"
 		]);
 		if($rt === false){
-			Log::write(_("Get inbox message error on sql."), Log::SQL);
+			Log::write(___("Get inbox message error on sql."), Log::SQL);
 			return [];
 		}
 		return $rt;
@@ -446,7 +446,7 @@ EOM;
 				'read_time' => $msg['read_time']
 			], ['id' => $id]);
 			if($s === false){
-				Log::write(_("Set "));
+				Log::write(___("Set "));
 			}
 		}
 		lib()->load('Markdown');
@@ -500,7 +500,7 @@ OR
 EOM;
 			$stmt = $this->db->getReader()->query($sql);
 			if($stmt === false){
-				Log::write(_("Get sql message users error."), Log::SQL);
+				Log::write(___("Get sql message users error."), Log::SQL);
 				$this->throwMsg(-8);
 			}
 			$ss = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -547,47 +547,47 @@ EOM;
 		$code = intval($code);
 		switch($code){
 			case -1:
-				return _("The sender id error!");
+				return ___("The sender id error!");
 			case -2:
-				return _("You have no permission to send system message.");
+				return ___("You have no permission to send system message.");
 			case -3:
-				return _("Your must activation you account.");
+				return ___("Your must activation you account.");
 			case -4:
-				return _("The message content is empty.");
+				return ___("The message content is empty.");
 			case -5:
-				return _("You post users list is too big.");
+				return ___("You post users list is too big.");
 			case -6:
-				return _("Does not have a valid user.");
+				return ___("Does not have a valid user.");
 			case -7:
-				return _("Too large number of users.");
+				return ___("Too large number of users.");
 			case -8:
-				return _("Send error on users parse.");
+				return ___("Send error on users parse.");
 			case -9:
-				return _("Your message is sent too fast.");
+				return ___("Your message is sent too fast.");
 			case -10:
-				return _("You do not have permission to perform this operation.");
+				return ___("You do not have permission to perform this operation.");
 			case -11:
-				return _("Get pager count error.");
+				return ___("Get pager count error.");
 			case -12:
-				return _("This message was not found.");
+				return ___("This message was not found.");
 			case -13:
-				return _("You can't send message to yourself.");
+				return ___("You can't send message to yourself.");
 			case -14:
-				return _("Message does not belong to you.");
+				return ___("Message does not belong to you.");
 			case -15:
-				return _("Delete message error, please try later.");
+				return ___("Delete message error, please try later.");
 			case -16:
-				return _("Flag message to read is error, maybe is already read or not found.");
+				return ___("Flag message to read is error, maybe is already read or not found.");
 			case -17:
-				return _("Add notice error, data is verify error.");
+				return ___("Add notice error, data is verify error.");
 			case -18:
-				return _("Add message notice error.");
+				return ___("Add message notice error.");
 			case -19:
-				return _("System message title can not be empty.");
+				return ___("System message title can not be empty.");
 			case -20:
-				return _("System does not delete any message data.");
+				return ___("System does not delete any message data.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 } 

@@ -123,7 +123,7 @@ class Gallery extends AppException{
 		if(isset($meta['more_info'])){
 			$this->meta->set(['more_info' => htmlspecialchars($meta['more_info'], ENT_NOQUOTES)]);
 		} else{
-			throw new \Exception(_("Set gallery more info error."));
+			throw new \Exception(___("Set gallery more info error."));
 		}
 		//传入数据未过滤
 		hook()->apply("Gallery_set_meta_info", NULL, $meta, $this->meta);
@@ -572,7 +572,7 @@ class Gallery extends AppException{
 		], $where);
 		if(!isset($this->info[0])){
 			$this->info = NULL;
-			$this->error = _('Gallery not found.');
+			$this->error = ___('Gallery not found.');
 		} else{
 			lib()->load('Avatar', 'User');
 			$this->info = $this->info[0];
@@ -667,7 +667,7 @@ class Gallery extends AppException{
 			]
 		]);
 		if($d === false){
-			Log::write(_("Gallery set public error."), Log::SQL);
+			Log::write(___("Gallery set public error."), Log::SQL);
 			$this->throwMsg(-16);
 		}
 		//对于更新成功后的信息钩子
@@ -699,7 +699,7 @@ class Gallery extends AppException{
 			]
 		]);
 		if($d === false){
-			Log::write(_("Gallery set draft error."), Log::SQL);
+			Log::write(___("Gallery set draft error."), Log::SQL);
 			$this->throwMsg(-17);
 		}
 		hook()->apply('Gallery_set_draft', NULL, $this->gallery_id, $this->user_id);
@@ -798,7 +798,7 @@ class Gallery extends AppException{
 						'ORDER' => 'id'
 					]);
 					if($info === false){
-						Log::write(_("Get gallery previous and next info error.") . join(",", $read->error()), Log::SQL);
+						Log::write(___("Get gallery previous and next info error.") . join(",", $read->error()), Log::SQL);
 						$this->throwMsg(-15);
 					} else{
 						for($i = 0, $c = count($info); $i < $c; ++$i){
@@ -814,7 +814,7 @@ class Gallery extends AppException{
 					//可能仅仅一页，数组留空
 				}
 			} else{
-				Log::write(_("Gallery get previous and next page id error.") . join(", ", $read->error()), Log::SQL);
+				Log::write(___("Gallery get previous and next page id error.") . join(", ", $read->error()), Log::SQL);
 				$this->throwMsg(-15);
 			}
 		}
@@ -834,50 +834,50 @@ class Gallery extends AppException{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Insert gallery error sql.") . debug(implode(", ", $this->db->error()['write']));
+				return ___("Insert gallery error sql.") . debug(implode(", ", $this->db->error()['write']));
 			case -2:
-				return _("Insert failed.");
+				return ___("Insert failed.");
 			case -3:
-				return _("title not be empty");
+				return ___("title not be empty");
 			case -4:
-				return _("delete create a error.") . debug(implode(", ", $this->db->error()['write']));
+				return ___("delete create a error.") . debug(implode(", ", $this->db->error()['write']));
 			case -5:
-				return _("No delete any gallery");
+				return ___("No delete any gallery");
 			case -6:
-				return _("No permission on this gallery");
+				return ___("No permission on this gallery");
 			case -7:
-				return _("comment status error.");
+				return ___("comment status error.");
 			case -8:
-				return _("Gallery info update error.") . debug(implode(", ", $this->db->error()['write']));
+				return ___("Gallery info update error.") . debug(implode(", ", $this->db->error()['write']));
 			case -9:
-				return _("Pic list is empty");
+				return ___("Pic list is empty");
 			case -10:
-				return _("User own pic list is empty");
+				return ___("User own pic list is empty");
 			case -11:
-				return _("No new pictures add");
+				return ___("No new pictures add");
 			case -12:
-				return _("Delete gallery pictures make a sql error.") . debug(implode(", ", $this->db->error()['write']));
+				return ___("Delete gallery pictures make a sql error.") . debug(implode(", ", $this->db->error()['write']));
 			case -13:
-				return _("Cancel like gallery error.");
+				return ___("Cancel like gallery error.");
 			case -14:
-				return _("Like gallery error.");
+				return ___("Like gallery error.");
 			case -15:
-				return _("Gallery get previous and next page id error.");
+				return ___("Gallery get previous and next page id error.");
 			case -16:
-				return _("Gallery set public error.");
+				return ___("Gallery set public error.");
 			case -17:
-				return _("Gallery set draft error.");
+				return ___("Gallery set draft error.");
 			case -18:
-				return _("Gallery must be have a title.");
+				return ___("Gallery must be have a title.");
 			case -19:
-				return _("Gallery must be have a description");
+				return ___("Gallery must be have a description");
 			case -20:
-				return _("Gallery must be have a front cover.");
+				return ___("Gallery must be have a front cover.");
 			case -21:
-				return _("Gallery must be have a tag.");
+				return ___("Gallery must be have a tag.");
 			case -22:
-				return _("Gallery must be have a picture.");
+				return ___("Gallery must be have a picture.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 } 

@@ -67,7 +67,7 @@ class FollowManagement extends AppException{
 			]
 		]);
 		if($get === false){
-			Log::write(_("users follow table get error."), Log::SQL);
+			Log::write(___("users follow table get error."), Log::SQL);
 			$this->throwMsg(-3);
 		}
 		if(isset($get[0])){
@@ -81,7 +81,7 @@ class FollowManagement extends AppException{
 			'follow_update_time' => date("Y-m-d H:i:s")
 		]);
 		if($status === -1){
-			Log::write(_("follow message insert error."), Log::SQL);
+			Log::write(___("follow message insert error."), Log::SQL);
 			$this->throwMsg(-3);
 		}
 		hook()->apply('FollowManagement_follow', NULL, $id, $u_id);
@@ -118,11 +118,11 @@ class FollowManagement extends AppException{
 			]
 		]);
 		if($status === false){
-			Log::write(_("follow message delete error."), Log::SQL);
+			Log::write(___("follow message delete error."), Log::SQL);
 			$this->throwMsg(-14);
 		}
 		if($status < 1){
-			Log::write(_("follow message can not be delete."), Log::ERR);
+			Log::write(___("follow message can not be delete."), Log::ERR);
 			$this->throwMsg(-8);
 		}
 		hook()->apply('FollowManagement_follow_cancel', NULL, $id, $u_id);
@@ -169,7 +169,7 @@ EOM;
 
 				$stmt = $this->db->query($sql);
 				if($stmt === false){
-					Log::write(_("Count follow message error"), Log::SQL);
+					Log::write(___("Count follow message error"), Log::SQL);
 				} else{
 					$count = +$stmt->fetchColumn();
 				}
@@ -239,7 +239,7 @@ EOM;
 			'ORDER' => "users_follow_users.follow_time DESC"
 		]);
 		if($rt === false){
-			Log::write(_("Get me follow users list error on sql."), Log::SQL);
+			Log::write(___("Get me follow users list error on sql."), Log::SQL);
 		}
 		return $this->parse_data($rt);
 	}
@@ -284,7 +284,7 @@ EOM;
 			'ORDER' => "users_follow_users.follow_time DESC"
 		]);
 		if($rt === false){
-			Log::write(_("Get follow me users list error on sql."), Log::SQL);
+			Log::write(___("Get follow me users list error on sql."), Log::SQL);
 		}
 		return $this->parse_data($rt);
 	}
@@ -333,7 +333,7 @@ LIMIT {$b}, {$this->count['number']};
 EOM;
 		$stmt = $this->db->getReader()->query($sql);
 		if($stmt === false){
-			Log::write(_("Get mutual follow users list error on sql."), Log::SQL);
+			Log::write(___("Get mutual follow users list error on sql."), Log::SQL);
 		}
 		$rt = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		unset($stmt);
@@ -356,7 +356,7 @@ EOM;
 			'gallery.gallery_front_cover' => 'gallery_front_cover',
 		], ['id' => $gid]);
 		if($s === false){
-			Log::write(_("Follow gallery sql error."), Log::SQL);
+			Log::write(___("Follow gallery sql error."), Log::SQL);
 			$this->throwMsg(-7);
 		}
 		if(!isset($s[0]['gallery_users_id']) || $s[0]['gallery_users_id'] < 1){
@@ -383,7 +383,7 @@ EOM;
 			'follow_update_time' => date("Y-m-d H:i:s")
 		]);
 		if($status < 0){
-			Log::write(_("insert follow gallery error"), Log::SQL);
+			Log::write(___("insert follow gallery error"), Log::SQL);
 			$this->throwMsg(-7);
 		}
 		hook()->apply('FollowManagement_follow_gallery', NULL, $gid, $g_uid, $uid, $s[0]);
@@ -413,7 +413,7 @@ EOM;
 				]
 			]);
 			if($del === false){
-				Log::write(_("Delete gallery follow data error."));
+				Log::write(___("Delete gallery follow data error."));
 				$this->throwMsg(-12);
 			}
 			if($del < 1){
@@ -463,7 +463,7 @@ EOM;
 			'users.user_avatar' => 'user_avatar'
 		], ["users_follow_gallery.users_id" => $user_id]);
 		if($sd === false){
-			Log::write(_("Get user follow gallery error!"), Log::SQL);
+			Log::write(___("Get user follow gallery error!"), Log::SQL);
 			return [];
 		}
 		return $this->parse_data($sd);
@@ -512,34 +512,34 @@ EOM;
 		$code = intval($code);
 		switch($code){
 			case -1:
-				return _("User id error . ");
+				return ___("User id error . ");
 			case -2:
-				return _("Can't follow yourself.");
+				return ___("Can't follow yourself.");
 			case -3:
-				return _("Follow user error.");
+				return ___("Follow user error.");
 			case -4:
-				return _("You've already attention to this user . ");
+				return ___("You've already attention to this user . ");
 			case -5:
-				return _("Follow user not found!");
+				return ___("Follow user not found!");
 			case -6:
-				return _("Follow count info flag error . ");
+				return ___("Follow count info flag error . ");
 			case -7:
-				return _("Follow gallery error . ");
+				return ___("Follow gallery error . ");
 			case -8:
-				return _("Follow gallery is not exists");
+				return ___("Follow gallery is not exists");
 			case -9:
-				return _("You can't follow yourself gallery.");
+				return ___("You can't follow yourself gallery.");
 			case -10:
-				return _("You have already attention to this gallery.");
+				return ___("You have already attention to this gallery.");
 			case -11:
-				return _("The gallery concern does not exists.");
+				return ___("The gallery concern does not exists.");
 			case -12:
-				return _("Delete gallery follow data error.");
+				return ___("Delete gallery follow data error.");
 			case -13:
-				return _("Delete gallery error.");
+				return ___("Delete gallery error.");
 			case -14:
-				return _("Cancel follow user error.");
+				return ___("Cancel follow user error.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 } 

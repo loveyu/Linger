@@ -26,7 +26,7 @@ class CheckUpdate{
 	 */
 	function __construct($update_uri, $default_get_param = []){
 		if(!filter_var($update_uri, FILTER_VALIDATE_URL)){
-			throw new \Exception(_("The update uri validate error."));
+			throw new \Exception(___("The update uri validate error."));
 		}
 		$this->_uri = $update_uri;
 		$this->add_get_param($default_get_param);

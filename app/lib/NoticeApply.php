@@ -141,7 +141,7 @@ class NoticeApply{
 				//当用户不存在时，Notice会抛出异常信息
 				$this->list[$uid] = new Notice(User::getUser($uid)->getId());
 			} catch(\Exception $ex){
-				Log::write(_("NoticeApply notice create ex.") . $ex->getMessage(), Log::NOTICE);
+				Log::write(___("NoticeApply notice create ex.") . $ex->getMessage(), Log::NOTICE);
 				unset($this->list[$uid]);
 				return false;
 			}
@@ -180,7 +180,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($user->getName(), $user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply comment_picture create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply comment_picture create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -210,7 +210,7 @@ class NoticeApply{
 			]);
 			$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $user->getId());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_comment_picture create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_comment_picture create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -239,7 +239,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($user->getName(), $user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_comment_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_comment_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -268,7 +268,7 @@ class NoticeApply{
 			]);
 			$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $user->getId());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_comment_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_comment_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -315,7 +315,7 @@ class NoticeApply{
 				unset($parent_top);
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_comment_reply create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_comment_reply create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -362,7 +362,7 @@ class NoticeApply{
 				unset($parent_top);
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_comment_reply create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_comment_reply create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -391,7 +391,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($user->getName(), $user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_like_pic create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_like_pic create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -420,7 +420,7 @@ class NoticeApply{
 			]);
 			$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $user->getId());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_like_pic create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_like_pic create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -447,7 +447,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($user->getName(), $user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_like_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_like_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -474,7 +474,7 @@ class NoticeApply{
 			]);
 			$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $user->getId());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_like_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_like_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -518,7 +518,7 @@ class NoticeApply{
 				$mt->mailSend($comment->getUser()->getName(), $comment->getUser()->getEmail());
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_like_comment create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_like_comment create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -562,7 +562,7 @@ class NoticeApply{
 				$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $comment->getUser()->getId());
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_like_comment create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_like_comment create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -592,7 +592,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($to_user->getName(), $to_user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_send_message create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_send_message create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -617,7 +617,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($to_user->getName(), $to_user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_send_system_message create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_send_system_message create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -633,7 +633,7 @@ class NoticeApply{
 			//TODO 待实现
 
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_exception_login create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_exception_login create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -649,7 +649,7 @@ class NoticeApply{
 			//TODO 待实现
 
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_exception_login create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_exception_login create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -676,7 +676,7 @@ class NoticeApply{
 			]);
 			$mt->mailSend($user->getName(), $user->getEmail());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_login_restrictions create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_login_restrictions create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -703,7 +703,7 @@ class NoticeApply{
 			]);
 			$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $user->getId());
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_login_restrictions create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_login_restrictions create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -713,7 +713,7 @@ class NoticeApply{
 			//TODO
 
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_site_activity_information create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_site_activity_information create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -723,7 +723,7 @@ class NoticeApply{
 			//TODO
 
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_site_activity_information create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_site_activity_information create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -757,7 +757,7 @@ class NoticeApply{
 				$mt->mailSend($follow_user->getName(), $follow_user->getEmail());
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_follow_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_follow_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -790,7 +790,7 @@ class NoticeApply{
 				$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $g_uid);
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply message_follow_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply message_follow_gallery create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -818,7 +818,7 @@ class NoticeApply{
 				$mt->mailSend($follow_user->getName(), $follow_user->getEmail());
 			}
 		} catch(\Exception $ex){
-			Log::write(_("NoticeApply mail_follow_me create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("NoticeApply mail_follow_me create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}
@@ -846,7 +846,7 @@ class NoticeApply{
 				$this->message->addNoticeMsg($mt->getTitle(), $mt->getContent(), $f_id);
 			}
 		} catch(\Exception $ex){
-			Log::write(_("Message to message_follow_me create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
+			Log::write(___("Message to message_follow_me create a Exception.") . "EX:[" . $ex->getCode() . "]:" . $ex->getMessage(), Log::NOTICE);
 		}
 		return $rt;
 	}

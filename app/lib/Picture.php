@@ -515,7 +515,7 @@ class Picture{
 			'pictures.id' => intval($pic_id)
 		]);
 		if(!isset($ps[0])){
-			Log::write(_("get simple picture info error."), Log::SQL);
+			Log::write(___("get simple picture info error."), Log::SQL);
 			return [];
 		}
 		$this->parsePic($ps, false);
@@ -619,7 +619,7 @@ class Picture{
 					'like_time' => date("Y-m-d H:i:s")
 				]) < 0
 			){
-				Log::write(_("Like picture error."), Log::SQL);
+				Log::write(___("Like picture error."), Log::SQL);
 				$this->throwMsg(-12);
 			}
 			hook()->apply('Picture_like', NULL, $pic_id, $user_id);
@@ -750,7 +750,7 @@ class Picture{
 			$tag = new Tag();
 			$tag->pic_set($id, $tags);
 		} catch(\Exception $ex){
-			Log::write(_("Picture tag can not set on insert."), Log::NOTICE);
+			Log::write(___("Picture tag can not set on insert."), Log::NOTICE);
 		}
 		return $id;
 	}
@@ -854,7 +854,7 @@ class Picture{
 	private function createPath($path){
 		if(!is_dir($path)){
 			if(!mkdir($path, 0777, true)){
-				throw new \Exception(_("Path create error."));
+				throw new \Exception(___("Path create error."));
 			}
 		}
 	}
@@ -899,32 +899,32 @@ class Picture{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Server info check Error.");
+				return ___("Server info check Error.");
 			case -2:
-				return _("Upload param error.");
+				return ___("Upload param error.");
 			case -3:
-				return _("A maximum of 20 allowed to upload pictures.");
+				return ___("A maximum of 20 allowed to upload pictures.");
 			case -4:
-				return _("Delete picture error.") . debug(implode(", ", db()->error()['write']));
+				return ___("Delete picture error.") . debug(implode(", ", db()->error()['write']));
 			case -5:
-				return _("Picture not found.");
+				return ___("Picture not found.");
 			case -6:
-				return _("Picture not found on the user");
+				return ___("Picture not found on the user");
 			case -7:
-				return _("status code error");
+				return ___("status code error");
 			case -8:
-				return _("Update picture info error.") . debug(implode(", ", db()->error()['write']));
+				return ___("Update picture info error.") . debug(implode(", ", db()->error()['write']));
 			case -9:
-				return _("User id error on select pictures.");
+				return ___("User id error on select pictures.");
 			case -10:
-				return _("Select pictures error on sql.") . debug(implode(", ", db()->error()['read']));
+				return ___("Select pictures error on sql.") . debug(implode(", ", db()->error()['read']));
 			case -11:
-				return _("Cancel like fail.");
+				return ___("Cancel like fail.");
 			case -12:
-				return _("Like fail.");
+				return ___("Like fail.");
 			case -13:
-				return _("First change gallery front cover, than delete it!");
+				return ___("First change gallery front cover, than delete it!");
 		}
-		return _("Unknown Error.");
+		return ___("Unknown Error.");
 	}
 }

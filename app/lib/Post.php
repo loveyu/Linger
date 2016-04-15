@@ -91,7 +91,7 @@ class Post extends AppException{
 		}
 		$rt = $this->db->delete("posts", ['id' => $this->post_id]);
 		if($rt < 1){
-			Log::write(_("delete post error."), Log::SQL);
+			Log::write(___("delete post error."), Log::SQL);
 			$this->throwMsg(-6);
 		}
 	}
@@ -231,7 +231,7 @@ class Post extends AppException{
 			'post_comment_count'
 		], ['users_id' => $uid]);
 		if($rt === false){
-			Log::write(_("Select post list error."), Log::SQL);
+			Log::write(___("Select post list error."), Log::SQL);
 			return [];
 		}
 		return $rt;
@@ -260,7 +260,7 @@ class Post extends AppException{
 			]
 		]);
 		if($rt === false){
-			Log::write(_("Select public post list error."), Log::SQL);
+			Log::write(___("Select public post list error."), Log::SQL);
 			return [];
 		}
 		return $rt;
@@ -293,7 +293,7 @@ class Post extends AppException{
 		];
 		$insert = $this->db->insert("posts", $data);
 		if($insert < 1){
-			Log::write(_("Insert post content error."), Log::SQL);
+			Log::write(___("Insert post content error."), Log::SQL);
 			$this->throwMsg(-3);
 		}
 		$data['id'] = $insert;
@@ -353,7 +353,7 @@ class Post extends AppException{
 			'post_allow_comment' => $allow_comment > 0 ? 1 : 0
 		];
 		if($this->db->update('posts', $data, ['id' => $this->post_id]) < 0){
-			Log::write(_("Update post error.") . Log::SQL);
+			Log::write(___("Update post error.") . Log::SQL);
 			$this->throwMsg(-12);
 		}
 	}
@@ -402,31 +402,31 @@ class Post extends AppException{
 	public function getMsg($code){
 		switch(intval($code)){
 			case -1:
-				return _("Post title can no be empty.");
+				return ___("Post title can no be empty.");
 			case -2:
-				return _("Post name check error.");
+				return ___("Post name check error.");
 			case -3:
-				return _("Post create error.");
+				return ___("Post create error.");
 			case -4:
-				return _("You do not have permission.");
+				return ___("You do not have permission.");
 			case -5:
-				return _("The post is not exists.");
+				return ___("The post is not exists.");
 			case -6:
-				return _("Delete post error.");
+				return ___("Delete post error.");
 			case -7:
-				return _("This name is exists.");
+				return ___("This name is exists.");
 			case -8:
-				return _("Post content can not be empty!");
+				return ___("Post content can not be empty!");
 			case -9:
-				return _("This post name is exists, please try for another.");
+				return ___("This post name is exists, please try for another.");
 			case -10:
-				return _("This post category is not exists.");
+				return ___("This post category is not exists.");
 			case -11:
-				return _("This post status code is error.");
+				return ___("This post status code is error.");
 			case -12:
-				return _("Update post error.");
+				return ___("Update post error.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 }

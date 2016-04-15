@@ -274,11 +274,11 @@ function convert_time($time, $deep = 2){
 	}
 	$rt = convert_time_deep(time() - $time, $deep);
 	if($rt === ''){
-		return _("at now");
+		return ___("at now");
 	} else if($rt === NULL){
 		return $t;
 	} else{
-		return $rt . _(" ago.");
+		return $rt . ___(" ago.");
 	}
 }
 
@@ -295,21 +295,21 @@ function convert_time_deep($time, $deep){
 	if($time < 30){
 		return '';
 	} else if($time < 60){
-		return '30' . _("seconds");
+		return '30' . ___("seconds");
 	} else if($time < 3600){
-		return floor($time / 60) . _("minutes");
+		return floor($time / 60) . ___("minutes");
 	} else if($time < 86400){
 		$f = floor($time / 3600);
-		return $f . _("hours") . convert_time_deep($time - $f * 3600, $deep - 1);
+		return $f . ___("hours") . convert_time_deep($time - $f * 3600, $deep - 1);
 	} else if($time < 2592000){
 		$f = floor($time / 86400);
-		return $f . _("days") . convert_time_deep($time - $f * 86400, $deep - 1);
+		return $f . ___("days") . convert_time_deep($time - $f * 86400, $deep - 1);
 	} else if($time < 31536000){
 		$f = floor($time / 2592000);
-		return $f . _("months") . convert_time_deep($time - $f * 2592000, $deep - 1);
+		return $f . ___("months") . convert_time_deep($time - $f * 2592000, $deep - 1);
 	} else{
 		$f = floor($time / 31536000);
-		return $f . _("years") . convert_time_deep($time - $f * 31536000, $deep - 1);
+		return $f . ___("years") . convert_time_deep($time - $f * 31536000, $deep - 1);
 	}
 }
 
@@ -519,14 +519,14 @@ function tag($list, $class = 'label label-info', $html_tag = 'span', $exp = '', 
 		$url = tag_list_link($v);
 		$list[$k] = "<a href=\"{$url}\" title=\"{$v}\">{$v}</a>";
 	}
-	$rt .= $w_before . _("tags:");
+	$rt .= $w_before . ___("tags:");
 	if(count($list)){
 		$class = trim($class);
 		$html_tag = trim($html_tag);
 		$exp = trim($exp);
 		$rt .= $before . "<{$html_tag} class=\"{$class}\">" . implode("</{$html_tag}>{$exp}<{$html_tag} class=\"{$class}\">", $list) . "</{$html_tag}>" . $end;
 	} else{
-		$rt .= _("none") . $w_end;
+		$rt .= ___("none") . $w_end;
 	}
 	return $rt;
 }

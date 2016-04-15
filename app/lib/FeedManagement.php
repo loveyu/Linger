@@ -94,7 +94,7 @@ class FeedManagement extends AppException{
 			'ORDER' => 'id DESC'
 		]);
 		if($data === false){
-			Log::write(_("Get feed list error."), Log::SQL);
+			Log::write(___("Get feed list error."), Log::SQL);
 			return [];
 		}
 		return Feed::getInstance()->parseList($data);
@@ -119,7 +119,7 @@ class FeedManagement extends AppException{
 			]
 		]);
 		if($status === false){
-			Log::write(_("Delete feed error."), Log::SQL);
+			Log::write(___("Delete feed error."), Log::SQL);
 			$this->throwMsg(-2);
 		}
 		if($status != 1){
@@ -142,13 +142,13 @@ class FeedManagement extends AppException{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("No found this feed.");
+				return ___("No found this feed.");
 			case -2:
-				return _("Delete error, please try later.");
+				return ___("Delete error, please try later.");
 			case -3:
-				return _("No delete any data, please try later.");
+				return ___("No delete any data, please try later.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 

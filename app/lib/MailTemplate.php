@@ -60,7 +60,7 @@ class MailTemplate{
 		if(is_file($path) && is_readable($path)){
 			$this->content = $this->get_template($path);
 		} else{
-			throw(new \Exception(_("Template is not exists.")));
+			throw(new \Exception(___("Template is not exists.")));
 		}
 	}
 
@@ -183,7 +183,7 @@ class MailTemplate{
 	public function mailSend($name, $email, $title = NULL, $textContent = NULL, $queue = true){
 		if(!hook()->apply("MailTemplate_mailSend", true)){
 			//是否取消所有邮件发送记录
-			Log::write(_("Mail send is cancel.") . print_r(func_get_args(), true), Log::NOTICE);
+			Log::write(___("Mail send is cancel.") . print_r(func_get_args(), true), Log::NOTICE);
 			return;
 		}
 		if(!$this->is_set_values){
@@ -215,7 +215,7 @@ class MailTemplate{
 				]);
 			}
 		} catch(\Exception $ex){
-			throw new \Exception(_("Mail Send Error.") . debug(" :" . $ex->getMessage()));
+			throw new \Exception(___("Mail Send Error.") . debug(" :" . $ex->getMessage()));
 		}
 	}
 }

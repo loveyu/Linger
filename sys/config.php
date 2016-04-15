@@ -49,6 +49,11 @@ define('ROUTER_SPLIT_CHAR', '/');
 define('COOKIE_KEY', 'xS/087N*+O:JTd%3z8+YTrkjrz<\'$K<^No@@L`wh');
 
 /**
+ * 使用HEADER信息登录的密钥，如果禁用该功能，请直接置空
+ */
+define('HEADER_LOGIN_TOKEN', 'afOtaLDgmzCfhngPGsrkjghgiBiWaxvLAElEIACA');
+
+/**
  * COOKIE前缀
  */
 define('COOKIE_PREFIX', 'LC_');

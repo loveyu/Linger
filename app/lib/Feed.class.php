@@ -443,11 +443,11 @@ class FeedSharePicture extends AppException implements FeedInterface{
 	public function getMsg($code){
 		switch((int)$code){
 			case -1:
-				return _("This picture share are close.");
+				return ___("This picture share are close.");
 			case -2:
-				return _("This picture are not found.");
+				return ___("This picture are not found.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 }
 
@@ -514,11 +514,11 @@ class FeedShareGallery extends AppException implements FeedInterface{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Gallery are not found.");
+				return ___("Gallery are not found.");
 			case -2:
-				return _("Gallery share are close.");
+				return ___("Gallery share are close.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 	/**
@@ -646,11 +646,11 @@ class FeedTalk extends AppException implements FeedInterface{
 	public function getMsg($code){
 		switch($code){
 			case -1:
-				return _("Share content is empty.");
+				return ___("Share content is empty.");
 			case -2:
-				return _("Share content is to long.");
+				return ___("Share content is to long.");
 		}
-		return _("Unknown error.");
+		return ___("Unknown error.");
 	}
 
 	/**

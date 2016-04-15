@@ -89,7 +89,7 @@ class CommentManagement extends AppException{
 				if(isset($s[0]['users_id'])){
 					foreach($s as $v){
 						$i = [];
-						$i['title'] = ($v['pic_name'] ? : _("Number of ") . $v['id']) . " [" . _("PICTURE") . "]";
+						$i['title'] = ($v['pic_name'] ? : ___("Number of ") . $v['id']) . " [" . ___("PICTURE") . "]";
 						$i['link'] = picture_link($v['id']);
 						$i['user_id'] = $v['users_id'];
 						$rt[$v['id']] = $i;
@@ -105,7 +105,7 @@ class CommentManagement extends AppException{
 				if(isset($s[0]['users_id'])){
 					foreach($s as $v){
 						$i = [];
-						$i['title'] = $v['gallery_title'] . " [" . _("GALLERY") . "]";
+						$i['title'] = $v['gallery_title'] . " [" . ___("GALLERY") . "]";
 						$i['link'] = gallery_link($v['id']);
 						$i['user_id'] = $v['users_id'];
 						$rt[$v['id']] = $i;
@@ -122,7 +122,7 @@ class CommentManagement extends AppException{
 				if(isset($s[0]['users_id'])){
 					foreach($s as $v){
 						$i = [];
-						$i['title'] = $v['post_title'] . " [" . _("POST") . "]";
+						$i['title'] = $v['post_title'] . " [" . ___("POST") . "]";
 						$i['link'] = post_link($v['post_name']);
 						$i['user_id'] = $v['users_id'];
 						$rt[$v['id']] = $i;
@@ -135,7 +135,7 @@ class CommentManagement extends AppException{
 		if(!is_array($id)){
 			$rt = reset($rt);
 			if(empty($rt['title'])){
-				Log::write(_("Comment get type data error."));
+				Log::write(___("Comment get type data error."));
 				return false;
 			}
 		} else{
@@ -174,7 +174,7 @@ class CommentManagement extends AppException{
 			'comments.comment_ip' => 'comment_ip',
 		], $column), ['comments.id' => $id]);
 		if($info === false){
-			Log::write(_("Get comment type error."), Log::SQL);
+			Log::write(___("Get comment type error."), Log::SQL);
 			return false;
 		}
 		if(!isset($info[0]['user_id'])){
@@ -381,24 +381,24 @@ class CommentManagement extends AppException{
 	public function getMsg($code){
 		switch(intval($code)){
 			case -1:
-				Log::write(_("Delete comment error.") . implode(",", $this->db->error()['write']), Log::SQL);
-				return _("Delete comment error.");
+				Log::write(___("Delete comment error.") . implode(",", $this->db->error()['write']), Log::SQL);
+				return ___("Delete comment error.");
 			case -2:
-				return _("No comment had delete.");
+				return ___("No comment had delete.");
 			case -3:
-				return _("Comment is not exists.");
+				return ___("Comment is not exists.");
 			case -4:
-				return _("Comment type id not defined.");
+				return ___("Comment type id not defined.");
 			case -5:
-				return _("Comment top add error.");
+				return ___("Comment top add error.");
 			case -6:
-				Log::write(_("Cancel comment like error.") . implode(",", $this->db->error()['write']), Log::SQL);
-				return _("Cancel comment like error.");
+				Log::write(___("Cancel comment like error.") . implode(",", $this->db->error()['write']), Log::SQL);
+				return ___("Cancel comment like error.");
 			case -7:
-				Log::write(_("Like comment error.") . implode(",", $this->db->error()['write']), Log::SQL);
-				return _("Like comment error.");
+				Log::write(___("Like comment error.") . implode(",", $this->db->error()['write']), Log::SQL);
+				return ___("Like comment error.");
 			default:
-				return _("Unknown error.");
+				return ___("Unknown error.");
 		}
 	}
 

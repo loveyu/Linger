@@ -2,19 +2,15 @@
 /**
  * @var array    $__list
  * @var string[] $__pager
- * @var string   $__type
  * @var int      $__number
  */
 ?>
-<?php if($__type === 'all'): ?>
-	<h2>图集列表
+
+	<h2>图集标签 - <span><?php echo $__tag_name?></span>
+		<?php if($__number>1):?>
 		<small>第<?php echo $__number ?>页</small>
+		<?php endif;?>
 	</h2>
-<?php elseif($__type === 'user'): ?>
-	<h2>用户图集列表
-		<small>第<?php echo $__number ?>页</small>
-	</h2>
-<?php endif; ?>
 	<div id="Gallery_list">
 		<?php $i = 0;
 		$count = count($__list);

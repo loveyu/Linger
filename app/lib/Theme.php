@@ -528,7 +528,7 @@ class Theme{
 		if($now <= 1){
 			$rt .= "<li class='disabled'><a href=\"#\">&laquo;</a></li>";
 		} else{
-			$rt .= "<li><a title=\"" . _("Previous") . "\" href=\"" . str_replace("{number}", $now - 1, $url_replace) . "\">&laquo;</a></li>";
+			$rt .= "<li><a title=\"" . ___("Previous") . "\" href=\"" . str_replace("{number}", $now - 1, $url_replace) . "\">&laquo;</a></li>";
 		}
 
 		$bb = $now - 4;
@@ -540,22 +540,22 @@ class Theme{
 			$nn = $max;
 		}
 		if($now > 1 && $bb > 1){
-			$rt .= "<li><a title='" . _('The first page') . "' href=\"" . str_replace("{number}", 1, $url_replace) . "\">" . _("Index") . "</a></li>";
+			$rt .= "<li><a title='" . ___('The first page') . "' href=\"" . str_replace("{number}", 1, $url_replace) . "\">" . ___("Index") . "</a></li>";
 		}
 		for(; $bb <= $nn; $bb++){
 			$class = "";
 			if($bb == $now){
 				$class = " class=\"active\"";
 			}
-			$rt .= "<li$class><a title='" . _('The ') . $bb . _(' page') . "' href=\"" . str_replace("{number}", $bb, $url_replace) . "\">" . $bb . "</a></li>";
+			$rt .= "<li$class><a title='" . ___('The ') . $bb . ___(' page') . "' href=\"" . str_replace("{number}", $bb, $url_replace) . "\">" . $bb . "</a></li>";
 		}
 		if($bb < $max){
-			$rt .= "<li><a title='" . _('The ') . $max . _(' page') . "' href=\"" . str_replace("{number}", $max, $url_replace) . "\">" . _("End") . "</a></li>";
+			$rt .= "<li><a title='" . ___('The ') . $max . ___(' page') . "' href=\"" . str_replace("{number}", $max, $url_replace) . "\">" . ___("End") . "</a></li>";
 		}
 		if($now >= $max){
 			$rt .= "<li class='disabled'><a href=\"#\">&raquo;</a></li>";
 		} else{
-			$rt .= "<li><a title=\"" . _("Next") . "\" href=\"" . str_replace("{number}", $now + 1, $url_replace) . "\">&raquo;</a></li>";
+			$rt .= "<li><a title=\"" . ___("Next") . "\" href=\"" . str_replace("{number}", $now + 1, $url_replace) . "\">&raquo;</a></li>";
 		}
 		return $rt;
 	}

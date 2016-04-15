@@ -31,7 +31,7 @@ class FileAction{
 				$path = $this->root . $v;
 				if(is_file($path) && is_writable($path)){
 					if(!unlink($path)){
-						Log::write(_("Image file delete fail:") . $path);
+						Log::write(___("Image file delete fail:") . $path);
 					}
 				}
 			}
