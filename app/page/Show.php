@@ -2,6 +2,7 @@
 namespace UView;
 
 use CLib\pager;
+use Core\Exception\PageException404;
 use Core\Page;
 use ULib\CountMessage;
 use ULib\Gallery;
@@ -159,7 +160,13 @@ class Show extends Page{
 	}
 
 	public function tag_list($tag_name = '', $page = 0){
-		return $this->tag_gallery_list($tag_name, $page);
+		try{
+			//首先加载图集
+			$this->tag_gallery_list($tag_name, $page);
+		} catch(PageException404 $ex){
+			//如果报404异常，执行图片标签列表
+			$this->tag_picture_list($tag_name, $page);
+		}
 	}
 
 	public function tag_gallery_list($tag_name = '', $page = 0){
@@ -172,13 +179,16 @@ class Show extends Page{
 			return;
 		}
 		$list = $gallery->query($pager->get_limit());
+		if(empty($list)){
+			throw new PageException404();
+		}
 		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 标签");
 		$this->__view("Home/header.php");
 		$this->__view("Show/gallery_tag.php", [
 			'list' => $list,
 			'number' => $pager->getCurrentPage(),
 			'tag_name' => $tag_name,
-			'pager'=>$pager->get_pager()
+			'pager' => $pager->get_pager()
 		]);
 		$this->__view("Home/footer.php");
 		return NULL;

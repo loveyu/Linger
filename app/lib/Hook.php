@@ -14,8 +14,9 @@ class Hook{
 	/**
 	 * 构造函数
 	 */
-	function __construct(){
+	public function __construct(){
 		set_language();
+		spl_autoload_register(__NAMESPACE__ . '\\Hook::auto_load');
 		c_lib()->load('sql', 'ip')->add('sql', new Sql(cfg()->get('sql', 'write'), cfg()->get('sql', 'read')));
 		l_h("system.php", 'theme.php');
 	}
@@ -83,22 +84,22 @@ class Hook{
 				echo "<script>var SITE_URL='" . get_url() . "';var IS_LOGIN=" . (is_login() ? "true" : "false") . ";</script>\n";
 			});
 			$this->publish_cdn();
-			if(!cfg()->get('cache','status')){
+			if(!cfg()->get('cache', 'status')){
 				//启用页面缓存设置
-				hook()->add("Cache_set",function(){
+				hook()->add("Cache_set", function (){
 					//关闭缓存输出
 					return false;
 				});
-			}else{
+			} else{
 				pcache();//允许缓存时初始化信息，并加载钩子机制
 			}
-			$hook->add('footer_hook',function(){
+			$hook->add('footer_hook', function (){
 				//输出数据库中的设置
-				echo cfg()->get('option','footer');
+				echo cfg()->get('option', 'footer');
 			});
 
 			//移除验证码
-			if(cfg()->get('option','register_captcha')==='no'){
+			if(cfg()->get('option', 'register_captcha') === 'no'){
 				$hook->add('UserRegister_Captcha', function (){
 					return true;
 				});
@@ -130,5 +131,24 @@ class Hook{
 				});
 			}
 		}
+	}
+
+	/**
+	 * @param string $class 自动化类库加载方法
+	 * @return bool
+	 */
+	public static function auto_load($class){
+		$map = array(
+			'QueueCallback' => 'Queue'
+		);
+		if(isset($map[$class])){
+			$class = $map[$class];
+		}
+		$path = __DIR__ . "/{$class}.php";
+		if(is_file($path)){
+			require_once $path;
+			return true;
+		}
+		return false;
 	}
 }
