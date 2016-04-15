@@ -416,6 +416,23 @@ class UserApi extends Page{
 		}
 	}
 
+	/**
+	 * 测试POST信息
+	 */
+	public function _post_info(){
+		try{
+			$this->throwMsgCheck('is_post', 'is_login', 'is_active');
+			$this->rt_msg['content'] = [
+				'POST' => $_POST,
+				'FILES' => $_FILES
+			];
+			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
 	public function picture_delete(){
 		try{
 			$this->throwMsgCheck('is_post', 'is_login', 'is_active');

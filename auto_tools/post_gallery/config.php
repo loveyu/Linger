@@ -16,7 +16,7 @@ $str_to_pwd_hash = function ($str){
 };
 return array(
 	'dir_path' => 'F://Pictures/壁纸/其他/',
-	'url' => 'http://127.0.0.1:81/',
+	'url' => 'http://pitus.loc/',
 	'user' => 'loveyu',
 	'password' => $str_to_pwd_hash('123456'),
 	'token' => 'afOtaLDgmzCfhngPGsrkjghgiBiWaxvLAElEIACA',

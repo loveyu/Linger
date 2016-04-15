@@ -28,7 +28,7 @@ foreach($list as $v){
 		continue;
 	}
 	$title = mb_substr($config['content'], rand(0, $content_length - 30), rand(15, 30));
-	$desc = mb_substr($config['content'], rand(0, $content_length - 200), rand(15, 200));
+	$desc = mb_substr($config['content'], rand(0, $content_length - 120), rand(15, 120));
 	$tags = [];
 	$tag_length = rand(0, 8);
 	for($i = 0; $i < $tag_length; $i++){
@@ -41,13 +41,25 @@ $api = $config['url'] . "UserApi/picture_upload";
 $count = count($data);
 foreach($data as $i => $item){
 	$i += 1;
+	if($i < 68){
+		continue;
+	}
 	echo "\nRun:{$i}/{$count}\n";
 	$ch = curl_init($api);
 	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_USERPWD, "{$config['user']}:{$config['password']}");
+	if(class_exists('CURLFile')){//new method
+		curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
+	} elseif(defined('CURLOPT_SAFE_UPLOAD')){//may be defined in old method.
+		curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
+	}
+	$file_path = realpath($file::utf82sys($item['path']));
 	$fields = [
-
+		'name[]' => $item['title'],
+		'tag[]' => implode(",", $item['tags']),
+		'desc[]' => $item['desc'],
+		'files[]' => curl_file_create($file_path, "image/jpeg", date("YmdHis" . sprintf("%05d", (int)$i)) . ".jpg")
 	];
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 	$header = array(
