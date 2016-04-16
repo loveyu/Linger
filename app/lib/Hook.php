@@ -3,7 +3,6 @@ namespace ULib;
 if(!defined('_CorePath_')){
 	exit;
 }
-use CLib\Cache;
 use CLib\Sql;
 use CLib\Cookie;
 
@@ -17,7 +16,7 @@ class Hook{
 	public function __construct(){
 		set_language();
 		spl_autoload_register(__NAMESPACE__ . '\\Hook::auto_load');
-		c_lib()->load('sql', 'ip')->add('sql', new Sql(cfg()->get('sql', 'write'), cfg()->get('sql', 'read')));
+		\c_lib()->load('sql', 'ip')->add('sql', new Sql(\cfg()->get('sql', 'write'), \cfg()->get('sql', 'read')));
 		l_h("system.php", 'theme.php');
 	}
 
@@ -25,8 +24,8 @@ class Hook{
 	 * 添加钩子,并初始化部分信息
 	 */
 	public function add(){
-		$hook = hook();
-		if(!db()->status()){
+		$hook = \hook();
+		if(!\db()->status()){
 			$hook->add('UriInfo_process', function (){
 				return [
 					'Home',
@@ -34,10 +33,10 @@ class Hook{
 				];
 			});
 		} else{
-			$lib = lib();
-			c_lib()->load('cookie')->add('cookie', new Cookie(cfg()->get('cookie', 'encode')));
+			$lib = \lib();
+			\c_lib()->load('cookie')->add('cookie', new Cookie(\cfg()->get('cookie', 'encode')));
 			$lib->load('AppException', 'UserLogin', 'Option', 'Router', 'User', 'NoticeApply', 'Feed')->add('option', new Option());
-			if(count(cfg()->get('option')) <= 0){
+			if(count(\cfg()->get('option')) <= 0){
 				//系统初始化失败，要求进行系统安装
 				define('INIT_ERROR', true);
 				$hook->add('UriInfo_process', function (){
@@ -48,12 +47,12 @@ class Hook{
 				});
 				return;
 			}
-			if(!cfg()->get('mail_queue')){
+			if(!\cfg()->get('mail_queue')){
 				$hook->add('MailTemplate_mailSend_noQueue', function (){
 					return true;
 				});
 			}
-			option()->register_hook();
+			\option()->register_hook();
 			//添加动态钩子
 			Feed::getInstance()->addHook();
 			$hook->add("Router_createRouter", function ($list){
@@ -72,7 +71,7 @@ class Hook{
 			//添加头像处理钩子
 			//开始根据路由信息处理
 			$hook->add('UriInfo_process', function ($list){
-				return lib()->using('router')->process($list);
+				return \lib()->using('router')->process($list);
 			});
 			$hook->add('Markdown_encodeUrlAttribute', function ($url){
 				return get_url([
@@ -84,9 +83,9 @@ class Hook{
 				echo "<script>var SITE_URL='" . get_url() . "';var IS_LOGIN=" . (is_login() ? "true" : "false") . ";</script>\n";
 			});
 			$this->publish_cdn();
-			if(!cfg()->get('cache', 'status')){
+			if(!\cfg()->get('cache', 'status')){
 				//启用页面缓存设置
-				hook()->add("Cache_set", function (){
+				\hook()->add("Cache_set", function (){
 					//关闭缓存输出
 					return false;
 				});
@@ -95,11 +94,11 @@ class Hook{
 			}
 			$hook->add('footer_hook', function (){
 				//输出数据库中的设置
-				echo cfg()->get('option', 'footer');
+				echo \cfg()->get('option', 'footer');
 			});
 
 			//移除验证码
-			if(cfg()->get('option', 'register_captcha') === 'no'){
+			if(\cfg()->get('option', 'register_captcha') === 'no'){
 				$hook->add('UserRegister_Captcha', function (){
 					return true;
 				});
@@ -109,7 +108,7 @@ class Hook{
 
 	private function publish_cdn(){
 		if(cdn_info('status')){
-			$hook = hook();
+			$hook = \hook();
 			if(cdn_info('filed', 'get_static_style_url')){
 				$hook->add('get_static_style_url', function (){
 					return cdn_info('filed', 'get_static_style_url') . path_of_style() . "/" . get_style();

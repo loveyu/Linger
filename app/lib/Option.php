@@ -19,7 +19,7 @@ class Option{
 	}
 
 	private function get_option(){
-		$data = db()->select("options", [
+		$data = \db()->select("options", [
 			"option_name",
 			"option_value"
 		], ['option_autoload' => 1]);
@@ -33,11 +33,11 @@ class Option{
 	}
 
 	private function set_option(){
-		cfg()->merge('option', $this->option);
+		\cfg()->merge('option', $this->option);
 	}
 
 	public function register_hook(){
-		$hook = hook();
+		$hook = \hook();
 		$hook->add('UserRegister_Register_before', function ($code){
 			if($code === 0 && !allowed_register()){
 				return -11;
@@ -103,7 +103,7 @@ class Option{
 		}
 		if(email_notice()){
 			$hook->add('UserRegister_Register_success', function ($user_id){
-				lib()->load('MailTemplate');
+				\lib()->load('MailTemplate');
 				$user = User::getUser($user_id);
 				$mt = new MailTemplate("new_user_registered.html");
 				$mt->setUserInfo($user->getInfo());
@@ -127,7 +127,7 @@ class Option{
 	 * @throws \Exception
 	 */
 	public function update($list, $auto = 1){
-		$db = db()->getWriter();
+		$db = \db()->getWriter();
 		$db->pdo->beginTransaction();
 		foreach($list as $name => $v){
 			if(isset($this->option[$name]) && $this->option[$name] == $v){
@@ -164,7 +164,7 @@ class Option{
 				$this->option[$name] = '';
 			}
 		}
-		$data = db()->select("options", [
+		$data = \db()->select("options", [
 			"option_name",
 			"option_value"
 		], ["option_name" => $none]);
