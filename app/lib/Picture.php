@@ -170,6 +170,24 @@ class Picture{
 		}
 	}
 
+	/**
+	 * 返回用户拥有的图片ID列表
+	 * @param int $user_id
+	 * @return array
+	 */
+	public function select_pic_ids_by_user($user_id){
+		$user_id = (int)$user_id;
+		$list = \db()->select("pictures", ['id'], ['users_id' => $user_id, 'ORDER' => 'pic_create_time']);
+		if(!is_array($list)){
+			return [];
+		}
+		$rt = [];
+		foreach($list as $v){
+			$rt[] = (int)$v['id'];
+		}
+		return $rt;
+	}
+
 
 	/**
 	 * 选择用户图片列表
@@ -204,7 +222,7 @@ class Picture{
 			'count' => 0,
 			'error' => false
 		];
-		$db = db()->getReader();
+		$db = \db()->getReader();
 		$rt['count'] = $db->count("pictures", ['users_id' => $user_id]);
 		if($rt['count'] < 1){
 			//图片未找到
@@ -215,7 +233,7 @@ class Picture{
 			//大于最大页
 			return $rt;
 		}
-		$list = db()->select("pictures", [
+		$list = \db()->select("pictures", [
 			'[><]server' => ['server_name' => 'name']
 		], [
 			'pictures.id' => 'pic_id',
@@ -679,7 +697,7 @@ class Picture{
 	 */
 	private function makePictureUrl($sever_url, $server_path, $pic_path){
 		if(substr($sever_url, 0, 4) != "http"){
-			$sever_url = (is_ssl()?"https:":"http:").$sever_url;
+			$sever_url = (is_ssl() ? "https:" : "http:") . $sever_url;
 		}
 		switch($server_path){
 			case "thumbnail":

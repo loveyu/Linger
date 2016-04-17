@@ -417,6 +417,24 @@ class UserApi extends Page{
 	}
 
 	/**
+	 * 获取用户的图片ID列表
+	 */
+	public function get_user_pic_ids(){
+		try{
+			$this->ajax = true;
+			$req = \req()->_plain();
+			$this->throwMsgCheck('is_login');
+			$this->__lib('Picture');
+			$pic = new Picture();
+			$user = \login_user();
+			$this->rt_msg['content'] = $pic->select_pic_ids_by_user($user->getId());
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
+	/**
 	 * 测试POST信息
 	 */
 	public function _post_info(){
