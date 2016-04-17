@@ -20,7 +20,7 @@
 			<table id="Gallery_list" class="table table-striped table-hover">
 				<thead>
 				<tr>
-					<th>标题</th>
+					<th width="300">标题</th>
 					<th><span class="glyphicon glyphicon-time"></span>创建时间</th>
 					<th><span class="glyphicon glyphicon-tags"></span>标签</th>
 					<th><span class="glyphicon glyphicon-comment"></span>评论数</th>
