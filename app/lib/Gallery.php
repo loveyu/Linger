@@ -56,10 +56,10 @@ class Gallery extends AppException{
 	 * @param null $user_id
 	 */
 	public function __construct($id = 0, $user_id = NULL){
-		$this->db = db();
+		$this->db = \db();
 		$this->gallery_id = intval($id);
 		$this->user_id = $user_id;
-		lib()->load('Meta');
+		\lib()->load('Meta');
 		$this->meta = new Meta("gallery_meta", "gallery_id", $id);
 	}
 
@@ -69,7 +69,7 @@ class Gallery extends AppException{
 	 * @param int $user_id
 	 */
 	public function like($g_id, $user_id){
-		$db = db();
+		$db = \db();
 		$g_id = intval($g_id);
 		$user_id = intval($user_id);
 		if($db->has("users_like_gallery", [
@@ -88,7 +88,7 @@ class Gallery extends AppException{
 			){
 				$this->throwMsg(-13);
 			}
-			hook()->apply('Gallery_unlike', NULL, $g_id, $user_id);
+			\hook()->apply('Gallery_unlike', NULL, $g_id, $user_id);
 		} else{
 			if($db->insert("users_like_gallery", [
 					'users_id' => $user_id,
@@ -98,7 +98,7 @@ class Gallery extends AppException{
 			){
 				$this->throwMsg(-14);
 			}
-			hook()->apply('Gallery_like', NULL, $g_id, $user_id);
+			\hook()->apply('Gallery_like', NULL, $g_id, $user_id);
 		}
 	}
 
@@ -126,7 +126,7 @@ class Gallery extends AppException{
 			throw new \Exception(___("Set gallery more info error."));
 		}
 		//传入数据未过滤
-		hook()->apply("Gallery_set_meta_info", NULL, $meta, $this->meta);
+		\hook()->apply("Gallery_set_meta_info", NULL, $meta, $this->meta);
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Gallery extends AppException{
 		$p_id = intval($p_id);
 		$u_id = intval($u_id);
 		$this->galleryOwnerCheck($g_id, $u_id);
-		lib()->load('Picture');
+		\lib()->load('Picture');
 		if($p_id < 1){
 			$p_id = NULL;
 			$this->db->update("gallery", ['gallery_front_cover' => $p_id], ['id' => $g_id]);
@@ -200,7 +200,7 @@ class Gallery extends AppException{
 		$user_id = intval($user_id);
 		$tag_name = trim($tag);
 		$this->galleryOwnerCheck($g_id, $user_id);
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		return $tag->add_tag($g_id, $tag_name, "gallery");
 	}
@@ -283,7 +283,7 @@ class Gallery extends AppException{
 		$user_id = intval($user_id);
 		$tag_name = trim($tag_name);
 		$this->galleryOwnerCheck($g_id, $user_id);
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		$tag->del_tag($g_id, $tag_name, "gallery");
 	}
@@ -293,7 +293,7 @@ class Gallery extends AppException{
 	 * @param $user_id
 	 */
 	private function galleryOwnerCheck($g_id, $user_id){
-		if(!db()->has("gallery", [
+		if(!\db()->has("gallery", [
 			'AND' => [
 				'id' => $g_id,
 				'users_id' => $user_id
@@ -318,7 +318,7 @@ class Gallery extends AppException{
 		){
 			$this->throwMsg(-7);
 		}
-		if(db()->update("gallery", [
+		if(\db()->update("gallery", [
 				'gallery_comment_status' => $comment_status,
 				'gallery_description' => trim($desc),
 				'gallery_title' => trim($title),
@@ -396,7 +396,7 @@ class Gallery extends AppException{
 			'pictures.pic_display_width' => 'pic_display_width',
 			'pictures.pic_display_height' => 'pic_display_height'
 		], $where);
-		lib()->load('Picture');
+		\lib()->load('Picture');
 		$pic = new Picture();
 		$pic->parsePic($list, false);
 		return $list;
@@ -417,7 +417,7 @@ class Gallery extends AppException{
 		$tmp = [];
 
 		if(count($ids) > 0){
-			$tags = db()->select("gallery_has_tags", [
+			$tags = \db()->select("gallery_has_tags", [
 				'gallery_id',
 				'tags_name'
 			], ['gallery_id' => $ids]);
@@ -521,7 +521,7 @@ class Gallery extends AppException{
 	 * @return array|bool
 	 */
 	public static function getSimpleInfo($id){
-		return db()->get("gallery", [
+		return \db()->get("gallery", [
 			'gallery.id' => 'gallery_id',
 			'users_id',
 			'gallery_title',
@@ -552,7 +552,7 @@ class Gallery extends AppException{
 			'[><]users' => ['users_id' => 'id'],
 			'[>]users_like_gallery' => [
 				'id' => 'gallery_id',
-				'______' => ['users_like_gallery.users_id' => is_login() ? login_user()->getId() : 0]
+				'______' => ['users_like_gallery.users_id' => is_login() ? \login_user()->getId() : 0]
 			]
 		], [
 			'users.user_name' => 'user_name',
@@ -577,14 +577,14 @@ class Gallery extends AppException{
 			$this->info = NULL;
 			$this->error = ___('Gallery not found.');
 		} else{
-			lib()->load('Avatar', 'User');
+			\lib()->load('Avatar', 'User');
 			$this->info = $this->info[0];
 			$this->info['user_avatar'] = Avatar::get($this->info['user_avatar'], User::getUser($this->info['user_id']));
 			$this->info['gallery_tags'] = $this->getTags($this->gallery_id);
 			$this->info['gallery_pictures'] = $this->getPictures($this->gallery_id);
 			$front_cover = intval($this->info['gallery_front_cover']);
 			if($front_cover > 0){
-				lib()->load('Picture');
+				\lib()->load('Picture');
 				$pic = new Picture();
 				$this->info['front_cover'] = $pic->get_pic($front_cover);
 			}
@@ -630,7 +630,7 @@ class Gallery extends AppException{
 		//				$rt[$i]['url'] = $rt[$i]['server_url'] . $rt[$i]['pic_thumbnails_path'];
 		//			}
 		//		}
-		lib()->load('Picture');
+		\lib()->load('Picture');
 		$pic = new Picture();
 		$pic->parsePic($rt, false);
 		$pic->list_add_tags($rt);
@@ -674,16 +674,16 @@ class Gallery extends AppException{
 			$this->throwMsg(-16);
 		}
 		//对于更新成功后的信息钩子
-		hook()->apply('Gallery_set_public', NULL, $si);
+		\hook()->apply('Gallery_set_public', NULL, $si);
 	}
 
 	/**
 	 * 图集信息已更新
 	 */
 	public function updated(){
-		if(hook()->check("Gallery_updated")){
+		if(\hook()->check("Gallery_updated")){
 			$si = $this->getSimpleInfo($this->gallery_id);
-			hook()->apply('Gallery_updated', NULL, $si);
+			\hook()->apply('Gallery_updated', NULL, $si);
 		}
 	}
 
@@ -705,7 +705,7 @@ class Gallery extends AppException{
 			Log::write(___("Gallery set draft error."), Log::SQL);
 			$this->throwMsg(-17);
 		}
-		hook()->apply('Gallery_set_draft', NULL, $this->gallery_id, $this->user_id);
+		\hook()->apply('Gallery_set_draft', NULL, $this->gallery_id, $this->user_id);
 	}
 
 	/**
@@ -721,7 +721,7 @@ class Gallery extends AppException{
 		}
 		$db = $this->db->getWriter();
 		$db->pdo->beginTransaction();
-		$rt = hook()->apply("Gallery_delete", true, $id, $db);
+		$rt = \hook()->apply("Gallery_delete", true, $id, $db);
 		if($rt !== true){
 			$db->pdo->rollBack();
 			$this->throwMsg(-4);
@@ -755,7 +755,7 @@ class Gallery extends AppException{
 	 * @return array
 	 */
 	public function getTags($g_id){
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		return $tag->getGalleryTags($g_id);
 	}

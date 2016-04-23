@@ -650,7 +650,7 @@ class Picture{
 	 * @param int $user_id
 	 */
 	public function picOwnerCheck($pic_id, $user_id){
-		if(!db()->has("pictures", [
+		if(!\db()->has("pictures", [
 			'AND' => [
 				'id' => $pic_id,
 				'users_id' => $user_id

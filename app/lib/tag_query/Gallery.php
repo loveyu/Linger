@@ -25,7 +25,7 @@ class Gallery{
 	 * @param string $tag
 	 */
 	public function __construct($tag){
-		$this->db = db();
+		$this->db = \db();
 		$this->tag = $tag;
 	}
 
@@ -41,7 +41,10 @@ class Gallery{
 		foreach($query as $v){
 			$list[] = $v['id'];
 		}
-		lib()->load("ListGallery");
+		if(empty($list)){
+			return [];
+		}
+		\lib()->load("ListGallery");
 		$list_gallery = new ListGallery();
 		return $list_gallery->getListByGalleryIds($list);
 	}

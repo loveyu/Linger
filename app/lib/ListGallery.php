@@ -185,7 +185,7 @@ class ListGallery{
 
 	private function parseList(&$list){
 		if(count($list) > 0){
-			lib()->load('Picture', 'Gallery');
+			\lib()->load('Picture', 'Gallery');
 			$pic = new Picture();
 			$g = new Gallery();
 			$pic->parsePic($list, false);

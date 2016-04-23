@@ -17,17 +17,20 @@ use ULib\User;
 use ULib\UserManagement;
 
 class Show extends Page{
+	/**
+	 * @var \ULib\Theme
+	 */
 	private $theme;
 
 	function __construct(){
 		parent::__construct();
-		if(strpos(u()->getUriInfo()->getPath(), "/Show") === 0){
+		if(strpos(\u()->getUriInfo()->getPath(), "/Show") === 0){
 			$this->__load_404();
 			exit;
 		} else{
-			$this->theme = theme();
+			$this->theme = \theme();
 		}
-		c_lib()->load('pager');
+		\c_lib()->load('pager');
 	}
 
 	public function home(){
@@ -91,7 +94,7 @@ class Show extends Page{
 		$this->__lib("Gallery", 'GalleryComment');
 		$g = new Gallery($id);
 		$info = $g->getInfo(true);
-		if(!is_array($info) || !isset($info['gallery_status']) || ($info['gallery_status'] != 1 && !(is_login() && $info['user_id'] == login_user()->getId() && strtolower(req()->get('preview')) == 'true'))){
+		if(!is_array($info) || !isset($info['gallery_status']) || ($info['gallery_status'] != 1 && !(is_login() && $info['user_id'] == \login_user()->getId() && strtolower(\req()->get('preview')) == 'true'))){
 			$this->__load_404();
 		} else{
 			$this->theme->setTitle($info['gallery_title'] . " [图集]");
@@ -126,7 +129,7 @@ class Show extends Page{
 		$this->__lib('Post', 'PostComment');
 		$post = new Post(NULL, $name);
 		$info = $post->getInfo();
-		if(!isset($info['post_id']) || ($info['post_status'] != 1 && !(is_login() && $info['post_users_id'] == login_user()->getId() && strtolower(req()->get('preview')) == 'true'))){
+		if(!isset($info['post_id']) || ($info['post_status'] != 1 && !(is_login() && $info['post_users_id'] == \login_user()->getId() && strtolower(\req()->get('preview')) == 'true'))){
 			$this->__load_404();
 		} else{
 			$this->theme->setTitle($info['post_title'] . " - 文章");
@@ -246,7 +249,7 @@ class Show extends Page{
 			/**
 			 * @var \ULib\Router $router
 			 */
-			$router = lib()->using('router');
+			$router = \lib()->using('router');
 			if($count['page'] > 1){
 				if($count['page'] == 2){
 					$pager['previous'] = get_url($router->getLink("user_gallery_list", $user));
@@ -293,7 +296,7 @@ class Show extends Page{
 			/**
 			 * @var \ULib\Router $router
 			 */
-			$router = lib()->using('router');
+			$router = \lib()->using('router');
 			if($count['page'] > 1){
 				if($count['page'] == 2){
 					$pager['previous'] = get_url($router->getLink("gallery_list"));
