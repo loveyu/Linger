@@ -6,10 +6,10 @@
  */
 ?>
 
-	<h2>图集标签 - <span><?php echo $__tag_name?></span>
-		<?php if($__number>1):?>
-		<small>第<?php echo $__number ?>页</small>
-		<?php endif;?>
+	<h2>图集标签 - <span><?php echo $__tag_name ?></span>
+		<?php if($__number > 1): ?>
+			<small>第<?php echo $__number ?>页</small>
+		<?php endif; ?>
 	</h2>
 	<div id="Gallery_list">
 		<?php $i = 0;
@@ -23,9 +23,11 @@
 			<div class="row list_box">
 		<?php endif; ?>
 			<div class="media col-md-6">
-				<a href="<?php echo $pic_link ?>" rel="external">
-					<img class="media-object img-thumbnail" src="<?php echo $v['pic_thumbnails_url'] ?>" alt="第<?php echo $v['pic_id'] ?>号图片">
-				</a>
+				<div class="media-left">
+					<a href="<?php echo $pic_link ?>" rel="external">
+						<img class="media-object img-thumbnail" src="<?php echo $v['pic_thumbnails_url'] ?>" alt="第<?php echo $v['pic_id'] ?>号图片">
+					</a>
+				</div>
 
 				<div class="media-body">
 					<h3 class="media-heading">
@@ -37,7 +39,7 @@
 					<p class="time">创建于：<span class="glyphicon glyphicon-time"></span><span
 							class="time"><?php echo explode(" ", $v['gallery_create_time'])[0] ?></span></p>
 
-					<p class="tags"><?php echo tag($v['gallery_tags'],'label label-success') ?></p>
+					<p class="tags"><?php echo tag($v['gallery_tags'], 'label label-success') ?></p>
 
 					<p class="author">作者：
 						<a href="<?php echo user_link($user->getName()) ?>">
