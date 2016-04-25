@@ -185,7 +185,7 @@ class Show extends Page{
 		if(empty($list)){
 			throw new PageException404();
 		}
-		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 标签");
+		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 图集标签");
 		$this->__view("Home/header.php");
 		$this->__view("Show/gallery_tag.php", [
 			'list' => $list,
@@ -198,8 +198,28 @@ class Show extends Page{
 	}
 
 	public function tag_picture_list($tag_name = '', $page = 0){
-		var_dump(__METHOD__);
-		var_dump(func_get_args());
+		$this->__lib("tag_query/Picture");
+		$pictures = new \ULib\tag_query\Picture($tag_name);
+		$count = $pictures->get_count();
+		$pager = new pager($count, 30, $page);
+		if($page > $pager->getAllPage()){
+			$this->__load_404();
+			return;
+		}
+		$list = $pictures->query($pager->get_limit());
+		if(empty($list)){
+			throw new PageException404();
+		}
+		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 图片标签");
+		$this->__view("Home/header.php");
+		$this->__view("Show/pictures_tag.php", [
+			'list' => $list,
+			'number' => $pager->getCurrentPage(),
+			'tag_name' => $tag_name,
+			'pager' => $pager->get_pager()
+		]);
+		$this->__view("Home/footer.php");
+		return NULL;
 	}
 
 	public function tag(){

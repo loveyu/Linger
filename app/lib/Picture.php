@@ -44,7 +44,7 @@ class Picture{
 			$this->throwMsg(-2);
 		}
 		unset($n_c, $t_c, $d_c, $f_c);
-		c_lib()->load('upload');
+		\c_lib()->load('upload');
 		$lib = $server['meta']['_Lib'] . "";
 		$upload = new Upload([
 			'exts' => [
@@ -89,12 +89,12 @@ class Picture{
 		if(!isset($info['pic_id'])){
 			$this->throwMsg(-5);
 		}
-		if(db()->has("gallery", ['gallery_front_cover' => $pic_id])){
+		if(\db()->has("gallery", ['gallery_front_cover' => $pic_id])){
 			$this->throwMsg(-13);
 		}
-		$db = db()->getWriter();
+		$db = \db()->getWriter();
 		$db->pdo->beginTransaction();
-		$rt = hook()->apply("Picture_delete", true, $pic_id, $user_id, $db);
+		$rt =\ hook()->apply("Picture_delete", true, $pic_id, $user_id, $db);
 		if($rt !== true){
 			$db->pdo->rollBack();
 			$this->throwMsg(-4);
@@ -122,18 +122,18 @@ class Picture{
 	 * @param $info
 	 */
 	public function deleteFile($info){
-		lib()->load('Server');
+		\lib()->load('Server');
 		$server = new Server();
 		$meta = $server->get($info['server_name'])[0]['meta'];
 		if(isset($meta['_Lib'])){
 			switch($meta['_Lib']){
 				case "Local":
-					lib()->load('FileAction');
+					\lib()->load('FileAction');
 					$fa = new FileAction($meta);
 					$fa->delete($info['pic_path'], $info['pic_thumbnails_path'], $info['pic_hd_path'], $info['pic_display_path']);
 					break;
 				case 'Qiniu':
-					c_lib()->load('upLoad/Qiniu');
+					\c_lib()->load('upLoad/Qiniu');
 					$qiniu = new Upload\Qiniu("", $meta);
 					$path = $info['pic_path'];
 					$status = $qiniu->qiniu->del($path);
@@ -283,7 +283,7 @@ class Picture{
 		if($number < 1){
 			$number = 1;
 		}
-		$list = db()->select("pictures", [
+		$list = \db()->select("pictures", [
 			'[><]server' => ['server_name' => 'name']
 		], [
 			'pictures.id' => 'pic_id',
@@ -333,7 +333,7 @@ class Picture{
 		$tmp = [];
 
 		if(count($ids) > 0){
-			$tags = db()->select("pictures_has_tags", [
+			$tags = \db()->select("pictures_has_tags", [
 				'pictures_id',
 				'tags_name'
 			], ['pictures_id' => $ids]);
@@ -360,12 +360,12 @@ class Picture{
 	 * @return bool|array
 	 */
 	public function get_pic($id){
-		$info = db()->select("pictures", [
+		$info = \db()->select("pictures", [
 			'[><]server' => ['server_name' => 'name'],
 			'[><]users' => ['users_id' => 'id'],
 			'[>]users_like_pictures' => [
 				'id' => 'pictures_id',
-				'______' => ['users_like_pictures.users_id' => is_login() ? login_user()->getId() : 0]
+				'______' => ['users_like_pictures.users_id' => \is_login() ? \login_user()->getId() : 0]
 			]
 		], [
 			'pictures.id' => 'pic_id',
@@ -416,7 +416,7 @@ class Picture{
 	 * @return array
 	 */
 	private function getNextPrevious($id){
-		$db = db()->getReader();
+		$db = \db()->getReader();
 		$rt = [
 			0 => $db->max("pictures", 'id', ['id[<]' => $id]),
 			1 => $db->min("pictures", 'id', ['id[>]' => $id]),
@@ -438,7 +438,7 @@ class Picture{
 			$ids = intval($ids);
 			$flag = true;
 		}
-		$ps = db()->select("pictures", [
+		$ps = \db()->select("pictures", [
 			'[><]server' => ['server_name' => 'name'],
 			'[><]users' => ['users_id' => 'id']
 		], [
@@ -504,7 +504,7 @@ class Picture{
 	}
 
 	public function get_simple_pic($pic_id){
-		$ps = db()->select("pictures", [
+		$ps = \db()->select("pictures", [
 			'[><]server' => ['server_name' => 'name'],
 		], [
 			'pictures.id' => 'pic_id',
@@ -552,7 +552,7 @@ class Picture{
 		$user_id = intval($user_id);
 		$tag_name = trim($tag_name);
 		$this->picOwnerCheck($pic_id, $user_id);
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		$tag->del_tag($pic_id, $tag_name, "pictures");
 	}
@@ -569,7 +569,7 @@ class Picture{
 		$user_id = intval($user_id);
 		$tag_name = trim($tag);
 		$this->picOwnerCheck($pic_id, $user_id);
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		return $tag->add_tag($pic_id, $tag_name, "pictures");
 	}
@@ -594,7 +594,7 @@ class Picture{
 		){
 			$this->throwMsg(-7);
 		}
-		if(db()->update("pictures", [
+		if(\db()->update("pictures", [
 				'pic_status' => $status,
 				'pic_description' => trim($desc),
 				'pic_name' => trim($name),
@@ -610,7 +610,7 @@ class Picture{
 	 * @param int $user_id
 	 */
 	public function like($pic_id, $user_id){
-		$db = db();
+		$db = \db();
 		$pic_id = intval($pic_id);
 		$user_id = intval($user_id);
 		if($db->has("users_like_pictures", [
@@ -629,7 +629,7 @@ class Picture{
 			){
 				$this->throwMsg(-11);
 			}
-			hook()->apply('Picture_unlike', NULL, $pic_id, $user_id);
+			\hook()->apply('Picture_unlike', NULL, $pic_id, $user_id);
 		} else{
 			if($db->insert("users_like_pictures", [
 					'users_id' => $user_id,
@@ -640,7 +640,7 @@ class Picture{
 				Log::write(___("Like picture error."), Log::SQL);
 				$this->throwMsg(-12);
 			}
-			hook()->apply('Picture_like', NULL, $pic_id, $user_id);
+			\hook()->apply('Picture_like', NULL, $pic_id, $user_id);
 		}
 	}
 
@@ -669,7 +669,7 @@ class Picture{
 	 */
 	public function parsePic(&$list, $convert_avatar = true){
 		if($convert_avatar){
-			lib()->load('User', 'Avatar');
+			\lib()->load('User', 'Avatar');
 		}
 		for($i = 0, $l = count($list); $i < $l; $i++){
 			if(!empty($list[$i]['user_avatar'])){
@@ -755,16 +755,16 @@ class Picture{
 			'pic_status' => 1
 		];
 		$insert = array_merge($insert, $data);
-		$id = db()->insert("pictures", $insert);
+		$id =\ db()->insert("pictures", $insert);
 		if($id < 0){
-			return db()->error()['write'];
+			return \db()->error()['write'];
 		} else{
 			if($queue_flag){
 				$this->queueThumbnail($id, $server['meta']);
 			}
 		}
 		try{
-			lib()->load('Tag');
+			\lib()->load('Tag');
 			$tag = new Tag();
 			$tag->pic_set($id, $tags);
 		} catch(\Exception $ex){
@@ -794,7 +794,7 @@ class Picture{
 			$img_path = $root . "/" . $path;
 			if(is_file($img_path) && is_readable($img_path)){
 				try{
-					c_lib()->load('image');
+					\c_lib()->load('image');
 					$img = new Image(Image::IMAGE_GD, $img_path);
 					$img_w = $img->width();
 					$img_h = $img->height();
@@ -923,7 +923,7 @@ class Picture{
 			case -3:
 				return ___("A maximum of 20 allowed to upload pictures.");
 			case -4:
-				return ___("Delete picture error.") . debug(implode(", ", db()->error()['write']));
+				return ___("Delete picture error.") . debug(implode(", ", \db()->error()['write']));
 			case -5:
 				return ___("Picture not found.");
 			case -6:
@@ -931,11 +931,11 @@ class Picture{
 			case -7:
 				return ___("status code error");
 			case -8:
-				return ___("Update picture info error.") . debug(implode(", ", db()->error()['write']));
+				return ___("Update picture info error.") . debug(implode(", ", \db()->error()['write']));
 			case -9:
 				return ___("User id error on select pictures.");
 			case -10:
-				return ___("Select pictures error on sql.") . debug(implode(", ", db()->error()['read']));
+				return ___("Select pictures error on sql.") . debug(implode(", ", \db()->error()['read']));
 			case -11:
 				return ___("Cancel like fail.");
 			case -12:

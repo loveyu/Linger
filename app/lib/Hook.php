@@ -138,7 +138,8 @@ class Hook{
 	 */
 	public static function auto_load($class){
 		$map = array(
-			'QueueCallback' => 'Queue'
+			'QueueCallback' => 'Queue',
+			'ULib\Picture' => 'Picture'
 		);
 		if(isset($map[$class])){
 			$class = $map[$class];

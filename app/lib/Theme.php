@@ -44,11 +44,11 @@ class Theme{
 	private $footer_list = [];
 
 	function __construct(){
-		hook()->add('header_hook', array(
+		\hook()->add('header_hook', array(
 			$this,
 			'header_hook'
 		));
-		hook()->add('footer_hook', array(
+		\hook()->add('footer_hook', array(
 			$this,
 			'footer_hook'
 		));
@@ -448,7 +448,7 @@ class Theme{
 							'User',
 							'activation'
 						],
-						'hide' => login_user()->is_active()
+						'hide' => \login_user()->is_active()
 					],
 				]
 			],
@@ -480,7 +480,7 @@ class Theme{
 				]
 			]
 		];
-		if(login_user()->Permission('Posts')){
+		if(\login_user()->Permission('Posts')){
 			$menu[] = [
 				'name' => '文章发布',
 				'url' => ['Posts'],
@@ -510,7 +510,7 @@ class Theme{
 				]
 			];
 		}
-		return hook()->apply('Theme_get_menu', $menu);
+		return \hook()->apply('Theme_get_menu', $menu);
 	}
 
 	/**
@@ -567,7 +567,7 @@ class Theme{
 	public function get_user_menu($class = "active"){
 		$list = $this->get_user_menu_list();
 		$rt = "";
-		$ui = u()->getUriInfo()->getUrlList();
+		$ui = \u()->getUriInfo()->getUrlList();
 		foreach($list as $v){
 			$flag = [
 				$v['url'][0] == $ui[0],

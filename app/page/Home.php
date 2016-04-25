@@ -1,8 +1,7 @@
 <?php
 namespace UView;
 
-use Core\Log;
-use \Core\Page;
+use Core\Page;
 use ULib\UserControl;
 use ULib\UserLogin;
 
@@ -18,7 +17,7 @@ class Home extends Page{
 	}
 
 	public function register(){
-		if(req()->is_ajax()){
+		if(\req()->is_ajax()){
 			$this->__view("Home/register.php");
 			return;
 		}
@@ -29,19 +28,19 @@ class Home extends Page{
 	}
 
 	public function login(){
-		if(req()->is_ajax()){
-			$this->__view("Home/login.php", ['account' => req()->_plain()->get('account')]);
+		if(\req()->is_ajax()){
+			$this->__view("Home/login.php", ['account' => \req()->_plain()->get('account')]);
 			return;
 		}
 		$this->theme->setTitle("用户登录");
 		$this->__view("Home/header.php");
-		$this->__view("Home/login.php", ['account' => req()->_plain()->get('account')]);
+		$this->__view("Home/login.php", ['account' => \req()->_plain()->get('account')]);
 		$this->__view("Home/footer.php");
 	}
 
 	public function logout(){
 		try{
-			lib()->load('UserLogin');
+			\lib()->load('UserLogin');
 			UserLogin::Logout();
 			redirect();
 		} catch(\Exception $ex){
@@ -60,7 +59,7 @@ class Home extends Page{
 	}
 
 	public function reset_password($user = NULL, $code = NULL){
-		lib()->load('UserControl');
+		\lib()->load('UserControl');
 		$uc = new UserControl();
 		$this->theme->setTitle("密码重置");
 		$this->__view("Home/header.php");
@@ -73,12 +72,12 @@ class Home extends Page{
 	}
 
 	public function sql_error(){
-		if(db()->status()){
+		if(\db()->status()){
 			$this->not_found();
 		} else{
 			$this->__view("Home/sql_error.php", [
-				'msg' => db()->ex_message(),
-				'email' => cfg()->get('mail', 'From')
+				'msg' => \db()->ex_message(),
+				'email' => \cfg()->get('mail', 'From')
 			]);
 		}
 	}
