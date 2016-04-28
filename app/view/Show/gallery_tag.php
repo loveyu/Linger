@@ -3,6 +3,7 @@
  * @var array    $__list
  * @var string[] $__pager
  * @var int      $__number
+ * @var string   $__tag_name
  */
 ?>
 
