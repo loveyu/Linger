@@ -342,4 +342,14 @@ class Show extends Page{
 			$this->__view("Home/footer.php");
 		}
 	}
+
+	public function pictures(){
+		if(func_num_args()>0){
+			throw new PageException404();
+		}
+		$this->theme->setTitle("分享图片流");
+		$this->__view("Home/header.php");
+		$this->__view("Show/pictures_list.php");
+		$this->__view("Home/footer.php");
+	}
 }

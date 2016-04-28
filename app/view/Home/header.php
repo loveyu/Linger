@@ -49,6 +49,10 @@
 					'Show',
 					'gallery_list'
 				]);
+				echo create_menu_link(pictures_list_link(), "图片流", NULL, [
+					'Show',
+					'pictures'
+				]);
 				echo create_menu_link(post_list_link(), "文章列表", NULL, [
 					'Show',
 					'post_list'

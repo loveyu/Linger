@@ -155,6 +155,17 @@ function gallery_list_link(){
 	return get_url($router->getLink('gallery_list'));
 }
 
+function pictures_list_link(){
+	/**
+	 * @var \ULib\Router $router
+	 */
+	static $router = NULL;
+	if($router === NULL){
+		$router = lib()->using('router');
+	}
+	return get_url($router->getLink('pictures_list'));
+}
+
 function user_gallery_list_link($user_name){
 	/**
 	 * @var \ULib\Router $router
