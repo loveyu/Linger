@@ -54,7 +54,8 @@
 		<?php endif; ?>
 			<?php $i++;endforeach; ?>
 	</div>
-<?php if($__pager['previous'] != NULL || $__pager['next'] != NULL): ?>
+<?php
+if($__pager['previous'] != NULL || $__pager['next'] != NULL): ?>
 	<ul class="pager">
 		<?php if($__pager['previous'] != NULL): ?>
 			<li class="previous"><a href="<?php echo $__pager['previous'] ?>">&larr; 上一页</a></li>

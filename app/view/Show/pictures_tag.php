@@ -29,4 +29,14 @@
 					 alt="<?php echo $v['pic_description'] ?>"></a>
 		<?php endforeach; ?>
 	</div>
+	<?php if($__pager['previous'] != NULL || $__pager['next'] != NULL): ?>
+		<ul class="pager">
+			<?php if($__pager['previous'] != NULL): ?>
+				<li class="previous"><a href="<?php echo $__pager['previous'] ?>">&larr; 上一页</a></li>
+			<?php endif;
+			if($__pager['next'] != NULL): ?>
+				<li class="next"><a href="<?php echo $__pager['next'] ?>">下一页 &rarr;</a></li>
+			<?php endif; ?>
+		</ul>
+	<?php endif; ?>
 </div>

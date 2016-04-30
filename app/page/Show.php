@@ -176,11 +176,18 @@ class Show extends Page{
 		$this->__lib("tag_query/Gallery");
 		$gallery = new \ULib\tag_query\Gallery($tag_name);
 		$count = $gallery->get_count();
-		$pager = new pager($count, 30, $page);
+		$pager = new pager($count, 16, $page);
 		if($page > $pager->getAllPage()){
 			$this->__load_404();
 			return;
 		}
+		$pager->setLinkCreator(function ($p) use ($tag_name){
+			/**
+			 * @var \ULib\Router $router
+			 */
+			$router = \lib()->using('router');
+			return get_url($router->getLink('tag_type_list_pager', $tag_name, 'gallery', $p));
+		});
 		$list = $gallery->query($pager->get_limit());
 		if(empty($list)){
 			throw new PageException404();
@@ -210,6 +217,13 @@ class Show extends Page{
 		if(empty($list)){
 			throw new PageException404();
 		}
+		$pager->setLinkCreator(function ($p) use ($tag_name){
+			/**
+			 * @var \ULib\Router $router
+			 */
+			$router = \lib()->using('router');
+			return get_url($router->getLink('tag_type_list_pager', $tag_name, 'picture', $p));
+		});
 		$this->theme->setTitle($tag_name . "- 第{$pager->getCurrentPage()}页 - 图片标签");
 		$this->__view("Home/header.php");
 		$this->__view("Show/pictures_tag.php", [
@@ -344,7 +358,7 @@ class Show extends Page{
 	}
 
 	public function pictures(){
-		if(func_num_args()>0){
+		if(func_num_args() > 0){
 			throw new PageException404();
 		}
 		$this->theme->setTitle("分享图片流");
