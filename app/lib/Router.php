@@ -18,9 +18,9 @@ class Router{
 	private $router_list;
 
 	function __construct(){
-		$this->c_router = c_lib()->load('router')->add('router', new \CLib\Router());
+		$this->c_router = \c_lib()->load('router')->add('router', new \CLib\Router());
 		//对路由信息反序列化
-		$router = @unserialize(cfg()->get('option', 'router_list'));
+		$router = @unserialize(\cfg()->get('option', 'router_list'));
 		if(is_array($router)){
 			foreach(array_keys($router) as $c){
 				if(empty($router[$c])){
@@ -60,7 +60,7 @@ class Router{
 	}
 
 	public function createRouter(){
-		$this->c_router->add_preg(hook()->apply("Router_createRouter",$this->createPregList()));
+		$this->c_router->add_preg(\hook()->apply("Router_createRouter",$this->createPregList()));
 		//$this->c_router->add_preg('/^picture-([1-9]{1}[0-9]*)\.html$/', 'Show/picture/[1]');
 		//$this->c_router->add_preg('/^picture-([1-9]{1}[0-9]*)-p([1-9]{1}[0-9]*)\.html$/', 'Show/picture/[1]/[2]');
 	}
