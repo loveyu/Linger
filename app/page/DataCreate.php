@@ -32,7 +32,7 @@ class DataCreate extends Page{
 	}
 
 	public function createUrlList(){
-		$db = db();
+		$db = \db();
 		header("Content-Type: text/plain; charset=utf-8");
 		echo get_url(), "\n";
 		echo gallery_list_link(), "\n";
@@ -40,7 +40,7 @@ class DataCreate extends Page{
 		/**
 		 * @var \ULib\Router $router
 		 */
-		$router = lib()->using('router');
+		$router = \lib()->using('router');
 		$list = $db->select("users", ['user_name'], ['LIMIT' => 20]);
 		foreach($list as $v){
 			echo user_link($v['user_name']), "\n";
@@ -71,7 +71,7 @@ class DataCreate extends Page{
 			'User'
 		];
 		foreach($page_list as $f){
-			u()->require_page_class($f . '.php');
+			\u()->require_page_class($f . '.php');
 			$list = get_class_methods("\\UView\\$f");
 			foreach($list as $v){
 				if(substr($v, 0, 2) == "__"){
@@ -95,28 +95,15 @@ class DataCreate extends Page{
 	}
 
 	public function pot_create(){
-		lib()->load('POTCreator');
+		\lib()->load('POTCreator');
 		$pot = new POTCreator();
 		$pot->write_pot(_Language_ . "/zh_CN/LC_MESSAGES/" . _AppName_ . ".pot");
-		echo c()->getTimer()->get_second();
-	}
-
-	public function class_time($i = 10){
-		$t = c()->getTimer();
-		$v = [];
-		$this->__lib('Comment');
-		$user = new User(1);
-		echo $b = $t->get_second(), "\n$i...\n";
-		for($m = 0; $m < $i; ++$m){
-			$v[] = new Comment([], $user);
-		}
-		echo $e = $t->get_second() . "\n";
-		echo ($e - $b) / $i . "\n";
+		echo \c()->getTimer()->get_second();
 	}
 
 	public function tag_test(){
 		header("Content-type:text/html; charset=utf-8");
-		lib()->load('Tag');
+		\lib()->load('Tag');
 		$tag = new Tag();
 		try{
 			$tag->pic_set(156, "巴黎，风景，独好");
@@ -129,16 +116,16 @@ class DataCreate extends Page{
 		set_time_limit(0);
 		header("Content-Type: text/plain; charset=utf-8");
 		$number = 0 + $number;
-		lib()->load('UserRegister', 'UserCheck');
+		\lib()->load('UserRegister', 'UserCheck');
 		$ur = new UserRegister();
 		$t = time();
 		$e = 0;
 		$s = 0;
-		hook()->add('UserRegister_Captcha', function (){
+		\hook()->add('UserRegister_Captcha', function (){
 			//通过钩子去掉用户注册验证码
 			return true;
 		});
-		hook()->add('MailTemplate_mailSend', function (){
+		\hook()->add('MailTemplate_mailSend', function (){
 			//去掉发送邮件发送功能
 			return false;
 		});
