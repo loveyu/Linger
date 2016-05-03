@@ -362,6 +362,7 @@ class Show extends Page{
 			throw new PageException404();
 		}
 		$this->theme->setTitle("分享图片流");
+		$this->theme->footer_add($this->theme->js(['src' => get_style("pictures_flow.js")]));
 		$this->__view("Home/header.php");
 		$this->__view("Show/pictures_list.php");
 		$this->__view("Home/footer.php");

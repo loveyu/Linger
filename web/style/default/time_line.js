@@ -254,6 +254,5 @@ TimeLine.prototype = {
 			'</div>' +
 			'</div>';
 	}
-}
-;
+};
 
