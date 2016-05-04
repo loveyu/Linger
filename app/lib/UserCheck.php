@@ -20,7 +20,7 @@ class UserCheck{
 	 */
 	public static function CheckPasswordChar($pwd){
 		$pwd = strtolower($pwd);
-		return hook()->apply("UserCheck_CheckPasswordChar", strlen($pwd) == 40 && preg_match("/^[0-9a-f]+$/", $pwd) > 0, $pwd);
+		return \hook()->apply("UserCheck_CheckPasswordChar", strlen($pwd) == 40 && preg_match("/^[0-9a-f]+$/", $pwd) > 0, $pwd);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class UserCheck{
 	public static function CheckUsernameChar($name){
 		$name = strtolower(trim($name));
 		$l = strlen($name);
-		return hook()->apply("UserCheck_CheckUsernameChar", $l <= 20 && $l > 5 && preg_match("/^[_a-z]{1}[a-z0-9_.]{5,19}$/", $name) > 0, $name);
+		return \hook()->apply("UserCheck_CheckUsernameChar", $l <= 20 && $l > 5 && preg_match("/^[_a-z]{1}[a-z0-9_.]{5,19}$/", $name) > 0, $name);
 	}
 
 	/**
@@ -55,10 +55,10 @@ class UserCheck{
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 			return ___("Email does not comply with the rules");
 		}
-		if(db()->has("users", ['user_email' => $email])){
+		if(\db()->has("users", ['user_email' => $email])){
 			return ___('Email already exists');
 		}
-		return hook()->apply('UserCheck_CheckEmail', true, $email);
+		return \hook()->apply('UserCheck_CheckEmail', true, $email);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class UserCheck{
 		if(!self::CheckPasswordChar($password)){
 			return ___('Password hash is incorrect');
 		}
-		return hook()->apply('UserCheck_CheckPassword', true, $password);
+		return \hook()->apply('UserCheck_CheckPassword', true, $password);
 	}
 
 	/**
@@ -83,10 +83,10 @@ class UserCheck{
 			return ___("User name does not comply with the rules");
 		}
 
-		if(db()->has("users", ['user_name' => $name])){
+		if(\db()->has("users", ['user_name' => $name])){
 			return ___('User name already exists');
 		}
-		return hook()->apply('UserCheck_CheckEmail', true, $name);
+		return \hook()->apply('UserCheck_CheckEmail', true, $name);
 	}
 
 	/**
@@ -115,7 +115,7 @@ class UserCheck{
 	 * @return string
 	 */
 	public static function DefaultAvatar(){
-		return hook()->apply("UserCheck_DefaultAvatar", "{default}");
+		return \hook()->apply("UserCheck_DefaultAvatar", "{default}");
 	}
 
 }

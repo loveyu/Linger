@@ -32,13 +32,7 @@ header("Pragma: no-cache");
 
 $post = $req->post('s');
 
-foreach([
-	'title',
-	'desc',
-	'url',
-	'email',
-	'static_url'
-] as $v){
+foreach(['title', 'desc', 'url', 'email', 'static_url'] as $v){
 
 	if(!isset($post[$v]) || empty($post[$v])){
 		die("系统设置有空字段:" . $v);
@@ -71,8 +65,8 @@ $option_setting = str_replace([
 ], $option_setting);
 
 $pdo = $sql->getWriter();
-$pdo->exec("delete from `options` where `id` > 0");
-$pdo->exec("alter table `options` auto_increment=1;");
+$pdo->exec("DELETE FROM `options` WHERE `id` > 0");
+$pdo->exec("ALTER TABLE `options` AUTO_INCREMENT=1;");
 $pdo->exec($option_setting);
 
 lib()->load('UserRegister', 'UserCheck', 'User');
@@ -88,21 +82,21 @@ $ur = new \ULib\UserRegister();
 if(($code = $ur->Register($user['email'], $user['pwd'], $user['name'], "244")) <= 0){
 	die("注册失败:" . $ur->CodeMsg($code));
 }
-$pdo->exec("delete from `user_meta` where `id` > 0");
-$pdo->exec("alter table `user_meta` auto_increment=1;");
+$pdo->exec("DELETE FROM `user_meta` WHERE `id` > 0");
+$pdo->exec("ALTER TABLE `user_meta` AUTO_INCREMENT=1;");
 $insert = "INSERT INTO `user_meta` (`users_id`, `meta_key`, `meta_value`) VALUES ('{$code}', 'Permission', 'Control\nMessageSystem\nPosts');";
 $pdo->exec($insert);
-$pdo->exec("delete from `server` where `id` > 0");
-$pdo->exec("alter table `server` auto_increment=1;");
+$pdo->exec("DELETE FROM `server` WHERE `id` > 0");
+$pdo->exec("ALTER TABLE `server` AUTO_INCREMENT=1;");
 $insert = "INSERT INTO `server` (`name`, `url`, `meta`) VALUES ('local', '{$post['static_url']}images/'," . $pdo->quote(serialize([
-		'server_root_path' => _BasePath_."/images/",
+		'server_root_path' => realpath(_BasePath_ . "/images/") . "/",
 		'_Lib' => 'Local',
-	])).");";
+	])) . ");";
 $pdo->exec($insert);
 
 $session->set('install', [
 	'number' => '4',
 	'list' => []
 ]);
-$session->set("home_url",$post['url']);
+$session->set("home_url", $post['url']);
 echo "true";

@@ -10,7 +10,7 @@ date_default_timezone_set("PRC");
 /**
  * 程序版本
  */
-define("_VERSION_", "1.3.0");
+define("_VERSION_", "1.4.0");
 
 /**
  * 检测更新地址
@@ -46,7 +46,7 @@ define('ROUTER_SPLIT_CHAR', '/');
 /**
  * COOKIE加密密钥
  */
-define('COOKIE_KEY', 'xS/087N*+O:JTd%3z8+YTrkjrz<\'$K<^No@@L`wh');
+define('COOKIE_KEY', '/[/l/.~$a{OS}\'[~g%-xBI_*5Gt,<-fy1BR[B}$,');
 
 /**
  * 使用HEADER信息登录的密钥，如果禁用该功能，请直接置空

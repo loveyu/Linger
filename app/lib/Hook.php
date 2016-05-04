@@ -5,6 +5,7 @@ if(!defined('_CorePath_')){
 }
 use CLib\Sql;
 use CLib\Cookie;
+use Core\Exception\SqlException;
 
 /**
  * 自定义Hook类
@@ -35,8 +36,13 @@ class Hook{
 		} else{
 			$lib = \lib();
 			\c_lib()->load('cookie')->add('cookie', new Cookie(\cfg()->get('cookie', 'encode')));
-			$lib->load('AppException', 'UserLogin', 'Option', 'Router', 'User', 'NoticeApply', 'Feed')->add('option', new Option());
-			if(count(\cfg()->get('option')) <= 0){
+			$is_init_error = false;//是否初始化错误
+			try{
+				$lib->load('AppException', 'UserLogin', 'Option', 'Router', 'User', 'NoticeApply', 'Feed')->add('option', new Option());
+			} catch(SqlException $ex){
+				$is_init_error = true;
+			}
+			if($is_init_error || count(\cfg()->get('option')) <= 0){
 				//系统初始化失败，要求进行系统安装
 				define('INIT_ERROR', true);
 				$hook->add('UriInfo_process', function (){
