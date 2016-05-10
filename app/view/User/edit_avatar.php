@@ -84,7 +84,7 @@
 						<blockquote>
 							<?php $u_a = \ULib\Avatar::upload_avatar(login_user());
 							if(!empty($u_a)): ?>
-								<p><img class="img-rounded" src="<?php echo $u_a ?>?rand=<?php echo time() ?>" alt="avatar" width="200" height="200"></p>
+								<p><img class="img-rounded" src="<?php echo $u_a ?>?rand=<?php echo NOW_TIME ?>" alt="avatar" width="200" height="200"></p>
 								<small>当前上传的头像</small>
 							<?php else: ?>
 								<small>当前未上传图片到服务器</small>

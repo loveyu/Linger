@@ -283,7 +283,7 @@ function convert_time($time, $deep = 2){
 	if($deep < 1){
 		$deep = 1;
 	}
-	$rt = convert_time_deep(time() - $time, $deep);
+	$rt = convert_time_deep(NOW_TIME - $time, $deep);
 	if($rt === ''){
 		return ___("at now");
 	} else if($rt === NULL){
