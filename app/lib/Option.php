@@ -58,8 +58,7 @@ class Option{
 					return site_static_url_ssl();
 				});
 				break;
-			case
-				"all":
+			case "all":
 				if(is_ssl()){
 					$hook->add('get_url', function (){
 						return site_url_ssl();
@@ -80,7 +79,7 @@ class Option{
 				if(is_ssl()){
 					header("Cache-Control: no-cache, must-revalidate");
 					header("Pragma: no-cache");
-					redirect("http://" . substr(URL_NOW, 7), "header", 301);
+					redirect("http://" . preg_replace("/^https?:\\/\\//","",URL_NOW), "header", 301);
 				}
 				$hook->add('get_url', function (){
 					return site_url();
