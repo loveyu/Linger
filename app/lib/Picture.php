@@ -855,9 +855,9 @@ class Picture{
 						$x_h = $img_h;
 						$x_w = ceil($x_h * $c_w / $c_h);
 					}
-					Log::write(print_r(get_defined_vars(), true));
+					//Log::write(print_r(get_defined_vars(), true));
 					$img->thumb($x_w, $x_h, Image::IMAGE_THUMB_CENTER);
-					Log::write(print_r(get_defined_vars(), true));
+					//Log::write(print_r(get_defined_vars(), true));
 					//$img->thumb($c_w, $c_h, Image::IMAGE_THUMB_SCALE);
 					$t_path = "thumbnail/" . dirname($path);
 					$this->createPath($root . "/" . $t_path);
