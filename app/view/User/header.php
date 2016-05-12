@@ -34,11 +34,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo site_url(); ?>" title="返回 <?php echo site_title() ?> 首页"><?php echo site_title() ?></a>
+			<a class="navbar-brand" href="<?php echo get_url(); ?>" title="返回 <?php echo site_title() ?> 首页"><?php echo site_title() ?></a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="<?php echo site_url(); ?>">首页</a></li>
+				<li><a href="<?php echo get_url(); ?>">首页</a></li>
 				<li><a href="<?php echo time_line_link(); ?>">时间线</a></li>
 				<li><a href="<?php echo gallery_list_link(); ?>">图集</a></li>
 			</ul>

@@ -49,7 +49,7 @@ class Option{
 				if(!is_ssl()){
 					header("Cache-Control: no-cache, must-revalidate");
 					header("Pragma: no-cache");
-					redirect("https://" . preg_replace("/^http[s]*:\\/\\//", "", URL_NOW), "header", 301);
+					redirect("https://" . preg_replace("/^https?:\\/\\//", "", URL_NOW), "header", 301);
 				}
 				$hook->add('get_url', function (){
 					return site_url_ssl();

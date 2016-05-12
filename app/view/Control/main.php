@@ -23,7 +23,7 @@
 	<![endif]-->
 	<script>
 		var API_URL = '<?php echo get_url("UserControlApi")?>';
-		var SITE_URL = '<?php echo site_url();?>';
+		var SITE_URL = '<?php echo get_url();?>';
 	</script>
 	<?php hook()->apply("view_control_main", NULL); ?>
 </head>
