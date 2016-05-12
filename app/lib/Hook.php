@@ -15,6 +15,7 @@ class Hook{
 	 * 构造函数
 	 */
 	public function __construct(){
+		header("HTTP/1.1 200 OK");//默认输出200状态码
 		set_language();
 		spl_autoload_register(__NAMESPACE__ . '\\Hook::auto_load');
 		\c_lib()->load('sql', 'ip')->add('sql', new Sql(\cfg()->get('sql', 'write'), \cfg()->get('sql', 'read')));

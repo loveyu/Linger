@@ -5,3 +5,4 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php [L]
 
+ErrorDocument 404 /index.php
