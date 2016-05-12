@@ -273,10 +273,10 @@ class ListPic{
 		if(!empty($this->tag)){
 			$rt = db()->select("pictures", [
 				'[><]pictures_has_tags' => ['id' => 'pictures_id'],
-				'[><]server' => ['server_name' => 'name']
+				'[>]server' => ['server_name' => 'name']
 			], $col, $where);
 		} else{
-			$rt = db()->select("pictures", ['[><]server' => ['server_name' => 'name']], $col, $where);
+			$rt = db()->select("pictures", ['[>]server' => ['server_name' => 'name']], $col, $where);
 		}
 		if($rt === false){
 			$this->throwMsg(-2);

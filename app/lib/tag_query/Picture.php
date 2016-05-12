@@ -43,7 +43,7 @@ class Picture{
 	public function query($limit){
 		$limit = array_map('intval', $limit);
 		$list = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name'],
+			'[>]server' => ['server_name' => 'name'],
 			'[><]pictures_has_tags' => ['id' => 'pictures_id']
 		], [
 			'pictures.id' => 'pic_id',

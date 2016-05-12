@@ -600,7 +600,7 @@ class Gallery extends AppException{
 	public function getPictures($gallery_id){
 		$rt = $this->db->select("pictures", [
 			'[><]gallery_has_pictures' => ['id' => 'pictures_id'],
-			'[><]server' => ['server_name' => 'name']
+			'[>]server' => ['server_name' => 'name']
 		], [
 			'gallery_has_pictures.gallery_id' => 'gallery_id',
 			'pictures.id' => 'pic_id',

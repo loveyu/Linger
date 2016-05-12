@@ -239,7 +239,7 @@ class Picture{
 			return $rt;
 		}
 		$list = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name']
+			'[>]server' => ['server_name' => 'name']
 		], [
 			'pictures.id' => 'pic_id',
 			'pictures.users_id' => 'user_id',
@@ -291,7 +291,7 @@ class Picture{
 			$number = 1;
 		}
 		$list = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name']
+			'[>]server' => ['server_name' => 'name']
 		], [
 			'pictures.id' => 'pic_id',
 			'pictures.users_id' => 'user_id',
@@ -368,7 +368,7 @@ class Picture{
 	 */
 	public function get_pic($id){
 		$info = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name'],
+			'[>]server' => ['server_name' => 'name'],
 			'[><]users' => ['users_id' => 'id'],
 			'[>]users_like_pictures' => [
 				'id' => 'pictures_id',
@@ -446,7 +446,7 @@ class Picture{
 			$flag = true;
 		}
 		$ps = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name'],
+			'[>]server' => ['server_name' => 'name'],
 			'[><]users' => ['users_id' => 'id']
 		], [
 			'pictures.id' => 'pic_id',
@@ -512,7 +512,7 @@ class Picture{
 
 	public function get_simple_pic($pic_id){
 		$ps = \db()->select("pictures", [
-			'[><]server' => ['server_name' => 'name'],
+			'[>]server' => ['server_name' => 'name'],
 		], [
 			'pictures.id' => 'pic_id',
 			'pictures.users_id' => 'user_id',
