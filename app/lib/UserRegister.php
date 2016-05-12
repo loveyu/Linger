@@ -9,14 +9,13 @@
 namespace ULib;
 
 if(!class_exists('\ULib\UserCheck')){
-	lib()->load('UserCheck');
+	\lib()->load('UserCheck');
 }
 if(!class_exists('\CLib\Ip')){
-	c_lib()->load('ip');
+	\c_lib()->load('ip');
 }
 
 use Core\Log;
-use \ULib\UserCheck;
 use \CLib\Ip;
 
 /**
@@ -37,13 +36,13 @@ class UserRegister{
 	 * @return bool
 	 */
 	private function Captcha($captcha){
-		if(hook()->apply('UserRegister_Captcha', false, $captcha)){
+		if(\hook()->apply('UserRegister_Captcha', false, $captcha)){
 			return true;
 		}
 		if(empty($captcha)){
 			return false;
 		}
-		lib()->load('Captcha');
+		\lib()->load('Captcha');
 		$c = new Captcha();
 		return $c->verify($captcha, true);
 	}
@@ -61,7 +60,7 @@ class UserRegister{
 		$password = strtolower(trim($password));
 		$name = strtolower(trim($name));
 		$captcha = trim($captcha);
-		if(($code = hook()->apply("UserRegister_Register_before", 0, $email, $password, $name, $captcha)) < 0){
+		if(($code = \hook()->apply("UserRegister_Register_before", 0, $email, $password, $name, $captcha)) < 0){
 			return $code;
 		}
 		if(!$this->Captcha($captcha)){
@@ -83,7 +82,7 @@ class UserRegister{
 			'user_aliases' => $name,
 			'user_password' => '',
 			'user_salt' => salt(64),
-			'user_registered_time' => date("Y-m-d H:i:s"),
+			'user_registered_time' => date("Y-m-d H:i:s", NOW_TIME),
 			'user_registered_ip' => $ip->ip2bin($ip->realip()),
 			'user_cookie_salt' => salt(64),
 			'user_avatar' => UserCheck::DefaultAvatar(),
@@ -92,15 +91,15 @@ class UserRegister{
 
 		$register_array['user_password'] = UserCheck::CreatePassword($password, $register_array['user_salt']);
 
-		$reg_code = db()->insert("users", $register_array);
+		$reg_code = \db()->insert("users", $register_array);
 		if($reg_code <= 0){
 			Log::write(___("User register insert sql error."), Log::SQL);
 			return -3;
 		}
 		try{
 			//关于注册成功的提醒
-			hook()->apply("UserRegister_Register_success", $reg_code, $register_array);
-			if(hook()->apply("UserRegister_Register_success_send_mail", true)){
+			\hook()->apply("UserRegister_Register_success", $reg_code, $register_array);
+			if(\hook()->apply("UserRegister_Register_success_send_mail", true)){
 				//判断是否注册过程中需要发送注册邮件
 				$u = new User($reg_code);
 				$this->SendActivationMail($u);
@@ -117,7 +116,7 @@ class UserRegister{
 	 * @return bool
 	 */
 	public function SendActivationMail(&$user){
-		lib()->load('MailTemplate');
+		\lib()->load('MailTemplate');
 		try{
 			$mt = new MailTemplate("activation.html");
 			$mt->setUserInfo($user->getInfo());
@@ -141,7 +140,7 @@ class UserRegister{
 			"activation_code" => $code,
 			"activation_time" => date("Y-m-d H:i:s")
 		]);
-		return hook()->apply("UserRegister_CreateActivationUrl", get_url("User", "activation", $code), $code, $user);
+		return \hook()->apply("UserRegister_CreateActivationUrl", get_url("User", "activation", $code), $code, $user);
 	}
 
 	/**
@@ -161,7 +160,7 @@ class UserRegister{
 		if(empty($meta['activation_time']) || empty($meta['activation_code'])){
 			throw new \Exception(___("Activation code is invalid"));
 		}
-		if(time() - strtotime($meta['activation_time']) > hook()->apply('UserRegister_UserActivation_time', 3 * 24 * 60 * 60)){
+		if(NOW_TIME - strtotime($meta['activation_time']) > \hook()->apply('UserRegister_UserActivation_time', 3 * 24 * 60 * 60)){
 			throw new \Exception(___("Activation code is time out"));
 		}
 		if($meta['activation_code'] != $code){
@@ -196,8 +195,8 @@ class UserRegister{
 			case -5:
 				return ___("Email is exists");
 			case -3:
-				return ___("Sql Insert Error") . debug(" :" . join(", ", db()->error()['write']));
+				return ___("Sql Insert Error") . debug(" :" . join(", ", \db()->error()['write']));
 		}
-		return hook()->apply("UserRegister_CodeMsg", "Unknown Error", $code);
+		return \hook()->apply("UserRegister_CodeMsg", "Unknown Error", $code);
 	}
 }

@@ -106,7 +106,7 @@ class UserControl{
 	 * @return string
 	 */
 	private function create_reset_password_url($user){
-		$code = salt_hash($user->getId(), time() . salt());
+		$code = salt_hash($user->getId(), NOW_TIME . salt());
 		$time = date("Y-m-d H:i:s");
 		$user->getMeta()->set([
 			'Reset_password_code' => $code,
@@ -197,7 +197,7 @@ class UserControl{
 			if(empty($meta['Reset_password_code']) || empty($meta['Reset_password_time'])){
 				return ___("reset param error.");
 			}
-			if(time() - strtotime($meta['Reset_password_time']) > hook()->apply('UserControl_reset_password_check_time', 3 * 24 * 60 * 60)){
+			if(NOW_TIME - strtotime($meta['Reset_password_time']) > hook()->apply('UserControl_reset_password_check_time', 3 * 24 * 60 * 60)){
 				return ___("Code time out.");
 			}
 			if($meta['Reset_password_code'] !== trim($code)){
@@ -292,7 +292,7 @@ class UserControl{
 		if($meta['edit_email_code'] !== $code){
 			$this->throwMsg(-12);
 		}
-		if(time() - strtotime($meta['edit_email_time']) > hook()->apply('UserControl_edit_email_time', 3 * 24 * 60 * 60)){
+		if(NOW_TIME - strtotime($meta['edit_email_time']) > hook()->apply('UserControl_edit_email_time', 3 * 24 * 60 * 60)){
 			$this->throwMsg(-11);
 		}
 		$user->getMeta()->delete([

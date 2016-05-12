@@ -185,10 +185,10 @@ class UserLogin{
 		try{
 			//登录成功后的COOKIE设置
 			if(strlen($this->user->getCookieLogin()) < 10){
-				$this->user->set(array("cookie_login" => salt_hash(time() . $this->user->getEmail(), salt(20))));
+				$this->user->set(array("cookie_login" => salt_hash(NOW_TIME . $this->user->getEmail(), salt(20))));
 			}
 			if($save_status){
-				cookie()->set("UserLogin", $this->user->getId() . "\t" . $this->user->getCookieLogin(), hook()->apply("UserLogin_PostLogin_CookieTime", time() + 60 * 60 * 24 * 7));
+				cookie()->set("UserLogin", $this->user->getId() . "\t" . $this->user->getCookieLogin(), hook()->apply("UserLogin_PostLogin_CookieTime", NOW_TIME + 60 * 60 * 24 * 7));
 			} else{
 				cookie()->set("UserLogin", $this->user->getId() . "\t" . $this->user->getCookieLogin());
 			}
