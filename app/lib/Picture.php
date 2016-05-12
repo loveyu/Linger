@@ -53,6 +53,11 @@ class Picture{
 				'gif'
 			],
 			'sub_status' => true,
+			'sub_path'=>[
+                function(){
+                    return date("Y/md/") . substr(md5(time() . rand(0, 9999)), 0, 2);
+                }
+            ],
 			'replace' => false,
 			'max_size' => 5 * 1024 * 1024,
 			'image_info' => true
