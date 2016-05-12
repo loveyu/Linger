@@ -25,7 +25,7 @@ class DataCreate extends Page{
 
 	function __construct(){
 		parent::__construct();
-		if(!_Debug_ || $_SERVER['REMOTE_ADDR']!=='127.0.0.1'){
+		if(!_Debug_ || $_SERVER['REMOTE_ADDR'] !== '127.0.0.1'){
 			$this->__load_404();
 			exit;
 		}
@@ -129,9 +129,15 @@ class DataCreate extends Page{
 			//去掉发送邮件发送功能
 			return false;
 		});
-		for($i = 0; $i < $number; $i++){
-			$name = $this->rand(15);
-			$email = $name . "@pitus.com";
+		$map = [];
+		foreach($map as $email => $name){
+			$name = str_replace(".", "_", preg_replace("/@[\\S\\s]+$/", "", $email));
+			if(strlen($name) < 6){
+				$name .= rand(1000, 9999);
+			}
+			if(ctype_digit(substr($name, 0, 1))){
+				$name = "_{$name}";
+			}
 			$password = UserCheck::MakeHashChar("123456");
 			if(($code = $ur->Register($email, $password, $name, "244")) > 0){
 				$s++;

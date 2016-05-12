@@ -68,6 +68,10 @@ class Avatar{
 	}
 
 	public static function getSizeOfAvatar($avatar_url, $avatar_sql, $size){
+		if($avatar_sql == "{default}"){
+			$avatar_sql = cfg()->get('option', 'default_avatar');
+			$avatar_sql = "{$avatar_sql}";
+		}
 		switch(strtolower($avatar_sql)){
 			case "{gravatar}":
 				return $avatar_url . "?s=" . $size;

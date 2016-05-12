@@ -8,46 +8,72 @@
 $config = array_merge([
 	'dir_path' => '',
 	'url' => '',
-	'content' => ''
 ], include __DIR__ . "/config.php");
 require_once __DIR__ . "/../../sys/config.php";
+require_once __DIR__ . "/../../sys/core/lib/interface/SqlInterface.php";
+require_once __DIR__ . "/../../sys/core/lib/medoo.php";
+$db = new medoo([
+	'database_type' => 'mysql',
+	'server' => 'localhost',
+	'username' => 'root',
+	'password' => '123456',
+	'charset' => 'utf8',
+	'database_name' => 'pic',
+	'option' => [ //PDO选项
+		PDO::ATTR_CASE => PDO::CASE_NATURAL,
+		PDO::ATTR_TIMEOUT => 5
+	],
+]);
 c_lib()->load('file');
 $file = new \CLib\File();
-$list = $file->read_dir_files($config['dir_path']);
-$content_length = mb_strlen($config['content']);
-$data = array();
-foreach($list as $v){
-	$path = $config['dir_path'] . "/" . $v;
-	$size = filesize($file::utf82sys($path));
-	if($size < 1000 || $size > 5 * 1024 * 1024){
-		//数据无效
-		continue;
+$i = 1;
+do{
+	$ids = $db->select("pic_tbl", "*", array(
+		'download_lock' => 0,
+		'ORDER' => 'id ASC',
+		'LIMIT' => [0, 100]
+	));
+	if(count($ids) == 0){
+		echo $db->last_query();
+		break;
 	}
-	$ext = strtolower(pathinfo($v, PATHINFO_EXTENSION));
-	if(!in_array($ext, ['jpg', 'png', 'gif'])){
-		continue;
+	foreach($ids as $v){
+		$config['user'] = $v['user_name'];
+		$config['password'] = $str_to_pwd_hash("123456");
+
+		foreach([1, 2, 3] as $index_2){
+			echo "{$i}:";
+			$i++;
+			if(!empty($v["pic{$index_2}_download"]) && is_file($v["pic{$index_2}_download"]) && empty($v['pic_id' . $index_2])){
+				$item = array(
+					'title' => $v['cn_name'] . " " . $v['en_name'],
+					'desc' => "",
+					'tags' => explode("/", $v['catagory']),
+					'path' => $v["pic{$index_2}_download"],
+				);
+				$pic_id = run($config, $item, $i);
+				echo "{$index_2}=>{$pic_id};";
+				$db->update("qyer_attractions_tbl", [
+					'pic_id' . $index_2 => $pic_id,
+				], ['id' => $v['id']]);
+				//exit;
+			}
+			echo "\n";
+		}
+
+		$db->update("pic_tbl", [
+			'download_lock' => 1,
+		], ['id' => $v['id']]);
 	}
-	$title = mb_substr($config['content'], rand(0, $content_length - 30), rand(15, 30));
-	$desc = mb_substr($config['content'], rand(0, $content_length - 120), rand(15, 120));
-	$tags = [];
-	$tag_length = rand(0, 8);
-	for($i = 0; $i < $tag_length; $i++){
-		$tags[] = mb_substr($config['content'], rand(0, $content_length - 5), rand(1, 5));
-	}
-	$tags = array_unique($tags);
-	$data[] = compact('path', 'title', 'desc', 'tags');
-}
-$api = $config['url'] . "UserApi/picture_upload";
-$count = count($data);
-foreach($data as $i => $item){
-	$i += 1;
-	if($i < 68){
-		continue;
-	}
-	echo "\nRun:{$i}/{$count}\n";
+} while(1);
+
+function run($config, $item, $i){
+	global $file;
+	$api = $config['url'] . "UserApi/picture_upload";
 	$ch = curl_init($api);
 	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 	curl_setopt($ch, CURLOPT_USERPWD, "{$config['user']}:{$config['password']}");
 	if(class_exists('CURLFile')){//new method
 		curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
@@ -68,6 +94,9 @@ foreach($data as $i => $item){
 	);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	echo mb_convert_encoding(curl_exec($ch), "GBK", 'UTF-8');
+	$rt = curl_exec($ch);
+	$data = json_decode($rt, true);
 	curl_close($ch);
+	//echo mb_convert_encoding(print_r($data, true), "GBK", "UTF-8");
+	return isset($data['content']['list'][0]) ? (int)$data['content']['list'][0] : 0;
 }
