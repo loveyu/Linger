@@ -58,6 +58,18 @@
 					'post_list'
 				]);
 				?>
+				<li class="visible-lg-block">
+					<form class="navbar-form" role="search" action="<?php echo get_search_link() ?>" method="get">
+						<div class="input-group">
+							<input type="text" class="form-control" value="<?php
+							echo isset($__key_word)?$__key_word:"";
+							?>" placeholder="Search" name="q" id="search-term">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<?php if(!is_login()): ?>
@@ -78,7 +90,7 @@
 						   href="<?php echo get_url("User") ?>"><?php echo login_user()->getAliases() ?><?php $un_m_c = get_unread_message_count();
 							if($un_m_c > 0){
 								echo "<span class=\"badge\">{$un_m_c}</span>";
-							}?><span class="caret"></span>
+							} ?><span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 							<li><a href="<?php echo get_url("Photo") ?>">图片中心</a></li>
@@ -86,7 +98,7 @@
 							<?php if($un_m_c > 0): ?>
 								<li><a href="<?php echo get_url("Message", "inbox") ?>"><span class="badge"><?php echo $un_m_c ?></span>未读信息</a></li>
 							<?php endif; ?>
-							<?php echo create_menu_link(user_link(login_user()->getName()), "个人主页", null, [
+							<?php echo create_menu_link(user_link(login_user()->getName()), "个人主页", NULL, [
 								'Show',
 								'user',
 								login_user()->getName()
@@ -99,6 +111,7 @@
 					</li>
 				<?php endif; ?>
 			</ul>
+
 		</div>
 	</nav>
 </header>

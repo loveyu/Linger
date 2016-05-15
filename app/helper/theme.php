@@ -207,6 +207,28 @@ function tag_list_link($name = NULL, $type = NULL, $page = NULL){
 	return get_url($router->getLink('tag_type_list_pager', urlencode($name), $type, $page));
 }
 
+/**
+ * 获取一个搜索链接
+ * @param string $q
+ * @return string
+ */
+function get_search_link($q=''){
+	/**
+	 * @var \ULib\Router $router
+	 */
+	static $router = NULL;
+	if($router === NULL){
+		$router = lib()->using('router');
+	}
+	if(empty($name)){
+		return get_url($router->getLink('search'));
+	}
+	$link= get_url($router->getLink('search'));
+	if(!empty($q)){
+		$link.="?".http_build_query(['q'=>$q]);
+	}
+	return $link;
+}
 
 function create_menu_link($link, $name, $title = NULL, $uri = NULL, $class_name = "active", $external = false){
 	static $s_uri = NULL;

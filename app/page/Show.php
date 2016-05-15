@@ -367,4 +367,16 @@ class Show extends Page{
 		$this->__view("Show/pictures_list.php");
 		$this->__view("Home/footer.php");
 	}
+
+	public function search(){
+		if(func_num_args() > 0){
+			throw new PageException404();
+		}
+		$key_word = req()->get('q');
+		$this->theme->setTitle("站内搜索");
+		$this->theme->footer_add($this->theme->js(['src' => get_style("search.js")]));
+		$this->__view("Home/header.php", ['key_word' => htmlspecialchars($key_word)]);
+		$this->__view("Show/search.php", ['key_word' => htmlspecialchars($key_word)]);
+		$this->__view("Home/footer.php");
+	}
 }

@@ -44,6 +44,7 @@
 				<a class="label label-primary hidden-print" href="<?php echo $__info['pic_url'] ?>">原图</a>
 			<?php endif; ?>
 			<a class="visible-print glyphicon glyphicon-user" href="<?php echo user_link($__info['user_name']) ?>"><?php echo $__info['user_aliases'] ?></a>
+			<span><?php echo $__info['pic_create_time']?></span>
 		</p>
 	</div>
 	<ul class="pager left">
