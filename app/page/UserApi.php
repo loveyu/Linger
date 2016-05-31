@@ -7,6 +7,7 @@ use ULib\CountMessage;
 use ULib\Feed;
 use ULib\FeedManagement;
 use ULib\FollowManagement;
+use ULib\FullTextAction;
 use ULib\Gallery;
 use ULib\ListPic;
 use ULib\Message;
@@ -195,9 +196,9 @@ class UserApi extends Page{
 			$req = \req()->_plain();
 			$user = \login_user();
 			$user->set([
-				'aliases' => $req->post('aliases'),
-				'url' => $req->post('url')
-			]);
+						   'aliases' => $req->post('aliases'),
+						   'url' => $req->post('url')
+					   ]);
 			$user->profile_message(htmlspecialchars(\req()->post('profile_message'), ENT_NOQUOTES));
 			$user->profile_video($req->post('video'));
 			$this->rt_msg['status'] = true;
@@ -405,7 +406,8 @@ class UserApi extends Page{
 			if(!array_key_exists('files', $_FILES)){
 				$_FILES['files'] = array();
 			}
-			$this->rt_msg['content'] = $pic->add($req->post('name'), $req->post('tag'), $req->post('desc'), @$_FILES['files'], $server->getNowServer(), \login_user());
+			$this->rt_msg['content'] = $pic->add($req->post('name'), $req->post('tag'), $req->post('desc'), @$_FILES['files'],
+												 $server->getNowServer(), \login_user());
 			$this->rt_msg['status'] = count($this->rt_msg['content']['list']) > 0;
 			if($this->rt_msg['status'] && $req->post('get_msg') == 1){
 				$this->rt_msg['content']['msg'] = $pic->get(join(',', $this->rt_msg['content']['list']), \login_user()->getId());
@@ -457,6 +459,7 @@ class UserApi extends Page{
 			\lib()->load('Picture');
 			$pic = new Picture();
 			$pic->delete(\req()->post('id'), \login_user()->getId());
+			FullTextAction::getInstance()->delete_picture(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -479,6 +482,7 @@ class UserApi extends Page{
 				}
 			}
 			if(count($errors) > 0){
+				FullTextAction::getInstance()->delete_picture($ids);
 				$this->rt_msg['msg'] = implode("\n", $errors);
 				$this->rt_msg['content'] = count($errors);
 			} else{
@@ -498,6 +502,7 @@ class UserApi extends Page{
 			$pic = new Picture();
 			$req = \req()->_plain();
 			$pic->remove_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
+			FullTextAction::getInstance()->update_picture($req->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -513,6 +518,7 @@ class UserApi extends Page{
 			$req = \req()->_plain();
 			$rt = $pic->add_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
 			if(is_array($rt) && count($rt) > 0){
+				FullTextAction::getInstance()->update_picture($req->post('id'));
 				$this->rt_msg['status'] = true;
 				$this->rt_msg['content'] = $rt;
 			} else{
@@ -531,6 +537,7 @@ class UserApi extends Page{
 			$pic = new Picture();
 			$req = \req()->_plain();
 			$pic->edit_info($req->post('pic_id'), \login_user()->getId(), $req->post('desc'), $req->post('status'), $req->post('name'));
+			FullTextAction::getInstance()->update_picture($req->post('pic_id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -719,7 +726,8 @@ class UserApi extends Page{
 			$this->throwMsgCheck('is_post', 'is_login', 'is_active');
 			\lib()->load('Gallery');
 			$g = new Gallery();
-			$this->rt_msg['content'] = $g->set_front_cover(\req()->_plain()->post('gallery_id'), \req()->_plain()->post('pic_id'), \login_user()->getId());
+			$this->rt_msg['content'] = $g->set_front_cover(\req()->_plain()->post('gallery_id'), \req()->_plain()->post('pic_id'),
+														   \login_user()->getId());
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -806,7 +814,8 @@ class UserApi extends Page{
 			$this->__lib('Message');
 			$m = new Message();
 			$req = \req()->_plain();
-			$this->rt_msg['content'] = $m->send($req->post('title'), $req->post('users'), htmlspecialchars(\req()->post('content'), ENT_NOQUOTES), \login_user()->getId());
+			$this->rt_msg['content'] = $m->send($req->post('title'), $req->post('users'), htmlspecialchars(\req()->post('content'), ENT_NOQUOTES),
+												\login_user()->getId());
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -902,7 +911,9 @@ class UserApi extends Page{
 			$this->__lib("Post");
 			$req = \req();
 			$post = new Post($req->post('id'));
-			$post->update(strip_tags($req->post('title')), strip_tags($req->post('name')), htmlspecialchars($req->post('content'), ENT_NOQUOTES), $req->post('category'), strip_tags($req->post('keyword')), strip_tags($req->post('description')), $req->post('status'), $req->post('allow_comment'), \login_user()->getId());
+			$post->update(strip_tags($req->post('title')), strip_tags($req->post('name')), htmlspecialchars($req->post('content'), ENT_NOQUOTES),
+						  $req->post('category'), strip_tags($req->post('keyword')), strip_tags($req->post('description')), $req->post('status'),
+						  $req->post('allow_comment'), \login_user()->getId());
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();

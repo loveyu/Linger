@@ -547,6 +547,16 @@ class Picture{
 		return $ps[0];
 	}
 
+	/**
+	 * 获取图片表的原始数据
+	 * @param int $pic_id
+	 * @return array|null
+	 */
+	public function get_raw_picture($pic_id){
+		$info = db()->get("pictures", "*", ['id' => (int)$pic_id]);
+		return empty($info) ? NULL : $info;
+	}
+
 
 	/**
 	 * 删除一个单独的标签

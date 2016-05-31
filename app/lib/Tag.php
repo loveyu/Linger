@@ -268,6 +268,23 @@ class Tag{
 	}
 
 	/**
+	 * 获取图片的标签列表
+	 * @param array $ids
+	 * @return array
+	 */
+	public function getPicTagsMap($ids){
+		$list = $this->db->select("pictures_has_tags", ['tags_name','pictures_id'], ['pictures_id' => $ids]);
+		$rt = [];
+		foreach($list as $v){
+			if(!isset($rt[$v['pictures_id']])){
+				$rt[$v['pictures_id']] = [];
+			}
+			$rt[$v['pictures_id']][] = $v['tags_name'];
+		}
+		return $rt;
+	}
+
+	/**
 	 * 获取图集的TAG
 	 * @param int $id
 	 * @return array
