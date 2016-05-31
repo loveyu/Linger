@@ -19,7 +19,7 @@
 			<li role="presentation"><a href="#GalleryTab" aria-controls="GalleryTab" role="tab" data-toggle="tab">图集</a></li>
 			<li role="presentation"><a href="#PostTab" aria-controls="PostTab" role="tab" data-toggle="tab">文章</a></li>
 		</ul>
-		<div class="tab-content">
+		<div class="tab-content search-tabs-content">
 			<div class="tab-pane active" id="PictureTab">
 				<div class="Search-Loading">Loading...</div>
 			</div>

@@ -56,4 +56,11 @@ class DataApi extends Page{
 		]);
 	}
 
+	/**
+	 * 搜索数据接口
+	 */
+	public function search(){
+
+	}
+
 }

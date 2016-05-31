@@ -815,3 +815,16 @@ body {
 #SearchPage .Search-Loading{
 	padding: 10px 0;
 }
+#SearchPage .tab-content{
+	background-color: rgba(255, 255, 255, 0.24);
+}
+#SearchPage .search-empty{
+	padding: 10px 5px;
+	font-size: 1.5em;
+}
+#SearchPage .search-empty span.glyphicon{
+	font-size: 2em;
+	color: orange;
+	position: relative;
+	top: 12px;
+}
