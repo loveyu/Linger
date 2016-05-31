@@ -15,7 +15,7 @@ use Core\Page;
 use ULib\Comment;
 use ULib\CommentManagement;
 use ULib\CountMessage;
-use ULib\FullTextAction;
+use ULib\FulltextAction;
 use ULib\POTCreator;
 use ULib\Tag;
 use ULib\User;
@@ -34,7 +34,7 @@ class DataCreate extends Page{
 	
 	public function updatePicSearchIndex(){
 		$ids = db()->select("pictures","id",[]);
-		$fulltext = FullTextAction::getInstance();
+		$fulltext = FulltextAction::getInstance();
 		$count = count($ids);
 		$i=0;
 		foreach($ids as $id){
@@ -46,7 +46,7 @@ class DataCreate extends Page{
 
 	public function updateGallerySearchIndex(){
 		$ids = db()->select("gallery","id",[]);
-		$fulltext = FullTextAction::getInstance();
+		$fulltext = FulltextAction::getInstance();
 		$count = count($ids);
 		$i=0;
 		foreach($ids as $id){

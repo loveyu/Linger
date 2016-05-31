@@ -113,4 +113,89 @@ class FulltextSearch{
 		return false;
 	}
 
+	/**
+	 * 查询搜索结果
+	 * @param string $keyword  关键字
+	 * @param string $type     搜索类型
+	 * @param int    $page     搜索第几页
+	 * @param int    $one_page 每页显示数量
+	 * @return array|false
+	 */
+	public function search($keyword, $type, $page, $one_page){
+		$strut = $this->get_search_strut($keyword, $type);
+		if(empty($strut)){
+			return false;
+		}
+		$highlight = $this->get_type_highlight_field($type);
+		$result = $this->query($type, $strut, $page, $one_page, $total, $highlight);
+		return $result;
+	}
+
+	/**
+	 * 获取要高亮的选项
+	 * @param string $type
+	 * @return bool|mixed
+	 */
+	private function get_type_highlight_field($type){
+		$map = ['pic' => ['name', 'tags']];
+		if(isset($map[$type])){
+			return $map[$type];
+		}
+		return false;
+	}
+
+	/**
+	 * 查询数据集的简单方式
+	 * @param string $types         类型表
+	 * @param array  $query_strut   关键字查询的结构
+	 * @param int    $page          当前第几页
+	 * @param int    $one_page      每页显示的数量
+	 * @param int    $total_count   返回记录的总数
+	 * @param array  $highlight     高亮选项
+	 * @param string $highlight_tag 高亮标签
+	 * @return array|false
+	 */
+	private function query($types, $query_strut, &$page, &$one_page, &$total_count, $highlight = array(), $highlight_tag = 'em'){
+		$page = (int)$page;
+		$one_page = (int)$one_page;
+		if($page < 1){
+			$page = 1;
+		}
+		if($one_page < 1 || $one_page > 100){
+			$one_page = 10;
+		}
+		$total_count = 0;
+		$param = array(
+			"from" => ($page - 1) * $one_page,
+			"size" => $one_page,
+			"query" => $query_strut,
+		);
+
+		if($highlight){
+			$param['highlight'] = array(
+				"pre_tags" => array("<{$highlight_tag}>"),
+				"post_tags" => array("</{$highlight_tag}>"),
+				'fields' => array_fill_keys($highlight, new \ArrayObject())
+			);
+		}
+		$result = $this->elastic_obj->post($this->index_name, "{$types}/_search", $param);
+		if(!isset($result['hits'])){
+			return false;
+		}
+		$total_count = (int)$result['hits']['total'];
+		$rt = array();
+		foreach($result['hits']['hits'] as $item){
+			if(ctype_digit($item['_id'])){
+				if(!isset($rt[(int)$item['_id']])){
+					$rt[(int)$item['_id']] = array();
+				}
+				$rt[(int)$item['_id']]['source'] = $item['_source'];
+				if(isset($item['highlight'])){
+					$rt[(int)$item['_id']]['highlight'] = $item['highlight'];
+				}
+			}
+		}
+		return $rt;
+	}
+
 }

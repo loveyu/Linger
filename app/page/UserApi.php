@@ -7,7 +7,7 @@ use ULib\CountMessage;
 use ULib\Feed;
 use ULib\FeedManagement;
 use ULib\FollowManagement;
-use ULib\FullTextAction;
+use ULib\FulltextAction;
 use ULib\Gallery;
 use ULib\ListPic;
 use ULib\Message;
@@ -458,7 +458,7 @@ class UserApi extends Page{
 			\lib()->load('Picture');
 			$pic = new Picture();
 			$pic->delete(\req()->post('id'), \login_user()->getId());
-			FullTextAction::getInstance()->delete_picture(\req()->post('id'));
+			FulltextAction::getInstance()->delete_picture(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -481,7 +481,7 @@ class UserApi extends Page{
 				}
 			}
 			if(count($errors) > 0){
-				FullTextAction::getInstance()->delete_picture($ids);
+				FulltextAction::getInstance()->delete_picture($ids);
 				$this->rt_msg['msg'] = implode("\n", $errors);
 				$this->rt_msg['content'] = count($errors);
 			} else{
@@ -501,7 +501,7 @@ class UserApi extends Page{
 			$pic = new Picture();
 			$req = \req()->_plain();
 			$pic->remove_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
-			FullTextAction::getInstance()->update_picture($req->post('id'));
+			FulltextAction::getInstance()->update_picture($req->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -517,7 +517,7 @@ class UserApi extends Page{
 			$req = \req()->_plain();
 			$rt = $pic->add_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
 			if(is_array($rt) && count($rt) > 0){
-				FullTextAction::getInstance()->update_picture($req->post('id'));
+				FulltextAction::getInstance()->update_picture($req->post('id'));
 				$this->rt_msg['status'] = true;
 				$this->rt_msg['content'] = $rt;
 			} else{
@@ -536,7 +536,7 @@ class UserApi extends Page{
 			$pic = new Picture();
 			$req = \req()->_plain();
 			$pic->edit_info($req->post('pic_id'), \login_user()->getId(), $req->post('desc'), $req->post('status'), $req->post('name'));
-			FullTextAction::getInstance()->update_picture($req->post('pic_id'));
+			FulltextAction::getInstance()->update_picture($req->post('pic_id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -608,7 +608,7 @@ class UserApi extends Page{
 			$req = \req()->_plain();
 			$rt = $g->add_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
 			if(is_array($rt) && count($rt) > 0){
-				FullTextAction::getInstance()->update_gallery($req->post('id'));
+				FulltextAction::getInstance()->update_gallery($req->post('id'));
 				$this->rt_msg['status'] = true;
 				$this->rt_msg['content'] = $rt;
 			} else{
@@ -627,7 +627,7 @@ class UserApi extends Page{
 			$g = new Gallery();
 			$req = \req()->_plain();
 			$g->remove_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
-			FullTextAction::getInstance()->update_gallery($req->post('id'));
+			FulltextAction::getInstance()->update_gallery($req->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -647,7 +647,7 @@ class UserApi extends Page{
 				$g->set_meta_info($meta);
 			}
 			$g->updated();
-			FullTextAction::getInstance()->update_gallery($req->post('gallery_id'));
+			FulltextAction::getInstance()->update_gallery($req->post('gallery_id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -690,7 +690,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery();
 			$g->delete(\req()->_plain()->post('id'), \login_user()->getId());
-			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
+			FulltextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -704,7 +704,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery(\req()->_plain()->post('id'), \login_user()->getId());
 			$g->set_public();
-			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
+			FulltextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -718,7 +718,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery(\req()->_plain()->post('id'), \login_user()->getId());
 			$g->set_draft();
-			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
+			FulltextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -903,7 +903,7 @@ class UserApi extends Page{
 			$this->__lib("Post");
 			$post = new Post(\req()->post('id'));
 			$post->delete(\login_user()->getId());
-			FullTextAction::getInstance()->update_post(\req()->post('id'));
+			FulltextAction::getInstance()->update_post(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -920,7 +920,7 @@ class UserApi extends Page{
 			$post->update(strip_tags($req->post('title')), strip_tags($req->post('name')), htmlspecialchars($req->post('content'), ENT_NOQUOTES),
 						  $req->post('category'), strip_tags($req->post('keyword')), strip_tags($req->post('description')), $req->post('status'),
 						  $req->post('allow_comment'), \login_user()->getId());
-			FullTextAction::getInstance()->update_post(\req()->post('id'));
+			FulltextAction::getInstance()->update_post(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();

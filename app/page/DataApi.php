@@ -51,8 +51,14 @@ class DataApi extends Page{
 	 */
 	public function search_init(){
 		$search = new FulltextSearch();
+		$list = $search->count_map(req()->get('keyword'), ['pic', 'gallery', 'post']);
+		$rt = [];
+		foreach($list as $k => $v){
+			$rt[] = ['name' => $k, 'num' => $v];
+		}
+		send_json_header();
 		echo json_encode([
-			'data' => $search->count_map(req()->get('keyword'), ['pic', 'gallery', 'post'])
+			'data' => $rt
 		]);
 	}
 
@@ -60,7 +66,14 @@ class DataApi extends Page{
 	 * 搜索数据接口
 	 */
 	public function search(){
-
+		$search = new FulltextSearch();
+		$result = $search->search(req()->get('keyword'), req()->get('type'), req()->get('page'), 40);
+		$rt = [
+			'result' => $result,
+			'count' => is_array($result) ? count($result) : 0
+		];
+		send_json_header();
+		echo json_encode($rt);
 	}
 
 }
