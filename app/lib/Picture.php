@@ -53,11 +53,11 @@ class Picture{
 				'gif'
 			],
 			'sub_status' => true,
-			'sub_path'=>[
-                function(){
-                    return date("Y/md/") . substr(md5(time() . rand(0, 9999)), 0, 2);
-                }
-            ],
+			'sub_path' => [
+				function (){
+					return date("Y/md/") . substr(md5(time() . rand(0, 9999)), 0, 2);
+				}
+			],
 			'replace' => false,
 			'max_size' => 5 * 1024 * 1024,
 			'image_info' => true
@@ -71,7 +71,8 @@ class Picture{
 			'error' => []
 		];
 		foreach($info as $v){
-			$tmp = $this->insert_data($v['save_path'] . $v['save_name'], $server, $names[$v['key']], $tags[$v['key']], $desc[$v['key']], $user->getId(), $v['image']['width'], $v['image']['height']);
+			$tmp = $this->insert_data($v['save_path'] . $v['save_name'], $server, $names[$v['key']], $tags[$v['key']], $desc[$v['key']],
+				$user->getId(), $v['image']['width'], $v['image']['height']);
 			if(is_int($tmp)){
 				$rt['list'][] = $tmp;
 			} else{
@@ -510,7 +511,14 @@ class Picture{
 		}
 	}
 
-	public function get_simple_pic($pic_id){
+
+	/**
+	 * 查询简单信息
+	 * @param int|array $pic_id
+	 * @param bool      $is_multi 是否是多条数据
+	 * @return array
+	 */
+	public function get_simple_pic($pic_id, $is_multi = false){
 		$ps = \db()->select("pictures", [
 			'[>]server' => ['server_name' => 'name'],
 		], [
@@ -537,14 +545,14 @@ class Picture{
 			'pictures.pic_display_height' => 'pic_display_height',
 			'pictures.pic_like_count' => 'pic_like_count'
 		], [
-			'pictures.id' => intval($pic_id)
+			'pictures.id' => ($is_multi && !empty($pic_id)) ? array_map('intval', $pic_id) : intval($pic_id)
 		]);
 		if(!isset($ps[0])){
 			Log::write(___("get simple picture info error."), Log::SQL);
 			return [];
 		}
 		$this->parsePic($ps, false);
-		return $ps[0];
+		return $is_multi ? $ps : $ps[0];
 	}
 
 	/**

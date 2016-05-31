@@ -67,9 +67,9 @@ class DataApi extends Page{
 	 */
 	public function search(){
 		$search = new FulltextSearch();
-		$result = $search->search(req()->get('keyword'), req()->get('type'), req()->get('page'), 40);
+		$result = $search->search(req()->get('keyword'), req()->get('type'), req()->get('page'), 42);
 		$rt = [
-			'result' => $result,
+			'list' => $result,
 			'count' => is_array($result) ? count($result) : 0
 		];
 		send_json_header();

@@ -812,11 +812,21 @@ body {
 #SearchPage .tab-list .nav-tabs>li.active>a{
 	background-color: rgba(255, 255, 255, 0.4);
 }
+#SearchPage .no-more-data{
+	padding: 10px 5px;
+}
+#SearchPage .no-more-data p{
+	padding: 8px;
+}
 #SearchPage .Search-Loading{
 	padding: 10px 0;
 }
 #SearchPage .tab-content{
 	background-color: rgba(255, 255, 255, 0.24);
+}
+#SearchPage .load-more{
+	text-align: center;
+	padding: 5px 0;
 }
 #SearchPage .search-empty{
 	padding: 10px 5px;
@@ -827,4 +837,14 @@ body {
 	color: orange;
 	position: relative;
 	top: 12px;
+}
+#PictureTab img{
+	display: block;
+	float: left;
+	height: 150px;
+	width: 16.6%;
+}
+#PictureTab .row{
+	margin-left: 0;
+	margin-right: 0;
 }

@@ -11,18 +11,27 @@ function search_init(keyword) {
 		search_api = SITE_URL + "DataApi/search";
 	}
 	var search_count = 0;
-	var empty_search_html = "<div class='search-empty'><p><span class='glyphicon glyphicon-info-sign'></span>当前未搜索到任何内容</p></div>";
+	var type_to_id_map = {
+		pic: "PictureTab",
+		gallery: "GalleryTab",
+		post: "PostTab"
+	};
+	var empty_search_html = "<div class='search-empty'><p class=\"bg-error\"><span class='glyphicon glyphicon-info-sign'></span>当前未搜索到任何内容</p></div>";
+	var no_more_result = "<div class='append_data no-more-data'><p class=\"bg-warning\">没有更多数据了</p></div>";
+	var type_count_map = {};
 	var load_init_data = function (api, keyword) {
 		//查询数据总数
 		var is_trigger = false;
 		var add_number_to_tabs = function (id, num, type) {
 			var elem = $("#SearchPage li a[aria-controls=" + id + "]");
 			elem.append("<span class=\"badge\">" + num + "</span>");
+			type_count_map[type] = num;
 			if (num == 0) {
 				$("#" + id).html(empty_search_html);
-			} else if(is_trigger==false){
+			} else if (is_trigger == false) {
 				//触发分类搜索
 				is_trigger = true;
+				load_result_by_type(type);
 				elem.trigger("click");
 			}
 		};
@@ -59,10 +68,44 @@ function search_init(keyword) {
 
 	var page_map = {};
 	var load_result_by_type = function (type) {
-		if(!page_map.hasOwnProperty(type)){
+		if (!page_map.hasOwnProperty(type)) {
 			page_map[type] = 0;
 		}
-		
+		if (page_map[type] == 0 && type_count_map[type] > 0) {
+			//加载下一页
+			load_result_by_page(type, 1);
+		}
+	};
+
+	var load_data_func = {
+		pic: function (list) {
+			var select = $("#PictureTab .row");
+			var count = list.length;
+			for (var i = 0; i < count; i++) {
+				var obj = list[i];
+				select.append("<a target='_blank' href='" + obj.pic_link + "' title='" + obj.pic_name + "'><img src='" + obj.img_url + "' alt='" + obj.pic_name + "'></a>");
+			}
+		},
+		gallery: function (list) {
+
+		},
+		post: function (list) {
+
+		}
+	};
+
+	var load_result_by_page = function (type, page) {
+		page_map[type] = page;
+		$.getJSON(search_api + "?page=" + page + "&type=" + type + "&keyword=" + keyword, function (result) {
+			var tab = $("#" + type_to_id_map[type]);
+			tab.find(".append_data").remove();
+			if (result.count < 1 || !type_to_id_map.hasOwnProperty(type) || !load_data_func.hasOwnProperty(type)) {
+				tab.append(no_more_result);
+			} else {
+				load_data_func[type](result.list);
+				tab.append("<p class='append_data load-more'><button data-type='" + type + "' type=\"button\" class=\"btn btn-info\">加载更多</button></p>");
+			}
+		});
 	};
 
 	jQuery(function ($) {
@@ -75,5 +118,12 @@ function search_init(keyword) {
 			}
 		});
 		load_init_data(count_api, keyword);
+		$("body").on("click", ".load-more button", function (e) {
+			var obj = $(this);
+			var type = obj.attr("data-type");
+			if (page_map.hasOwnProperty(type)) {
+				load_result_by_page(type, page_map[type] + 1);
+			}
+		});
 	});
 }

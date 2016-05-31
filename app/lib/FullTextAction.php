@@ -13,7 +13,7 @@ namespace ULib;
  * Class FullTextAction
  * @package ULib
  */
-class FullTextAction{
+class FulltextAction{
 
 	/**
 	 * @var ElasticsearchBase 搜索对象
@@ -26,7 +26,7 @@ class FullTextAction{
 	private $index_name;
 
 	/**
-	 * @var FullTextAction
+	 * @var FulltextAction
 	 */
 	private static $instance;
 
@@ -48,11 +48,11 @@ class FullTextAction{
 
 	/**
 	 * 获取全文索引实例
-	 * @return FullTextAction
+	 * @return FulltextAction
 	 */
 	public static function getInstance(){
 		if(self::$instance === NULL){
-			self::$instance = new FullTextAction();
+			self::$instance = new FulltextAction();
 		}
 		return self::$instance;
 	}

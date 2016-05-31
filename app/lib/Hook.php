@@ -152,6 +152,8 @@ class Hook{
 			'ULib\ElasticsearchBase' => 'ElasticsearchBase',
 			'ULib\FullTextAction' => 'FullTextAction',
 			'ULib\FulltextSearch' => 'FulltextSearch',
+			'ULib\FulltextDataConvert' => 'FulltextDataConvert',
+			'ULib\ArrayUtil' => 'ArrayUtil',
 		);
 		if(isset($map[$class])){
 			$class = $map[$class];

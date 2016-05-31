@@ -6,6 +6,7 @@
  */
 
 namespace ULib;
+use Core\Log;
 
 /**
  * 全文索引搜索
@@ -119,7 +120,7 @@ class FulltextSearch{
 	 * @param string $type     搜索类型
 	 * @param int    $page     搜索第几页
 	 * @param int    $one_page 每页显示数量
-	 * @return array|false
+	 * @return array|false 查询失败返回false
 	 */
 	public function search($keyword, $type, $page, $one_page){
 		$strut = $this->get_search_strut($keyword, $type);
@@ -128,7 +129,20 @@ class FulltextSearch{
 		}
 		$highlight = $this->get_type_highlight_field($type);
 		$result = $this->query($type, $strut, $page, $one_page, $total, $highlight);
-		return $result;
+		if(empty($result)){
+			return false;
+		}
+		$convert = new FulltextDataConvert();
+		switch($type){
+			case "pic":
+				return $convert->toPic($result);
+			case "gallery":
+				return $convert->toGallery($result);
+			case "post":
+				return $convert->toPost($result);
+			default:
+				return false;
+		}
 	}
 
 	/**
