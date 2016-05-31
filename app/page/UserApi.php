@@ -424,7 +424,6 @@ class UserApi extends Page{
 	public function get_user_pic_ids(){
 		try{
 			$this->ajax = true;
-			$req = \req()->_plain();
 			$this->throwMsgCheck('is_login');
 			$this->__lib('Picture');
 			$pic = new Picture();
@@ -609,6 +608,7 @@ class UserApi extends Page{
 			$req = \req()->_plain();
 			$rt = $g->add_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
 			if(is_array($rt) && count($rt) > 0){
+				FullTextAction::getInstance()->update_gallery($req->post('id'));
 				$this->rt_msg['status'] = true;
 				$this->rt_msg['content'] = $rt;
 			} else{
@@ -627,6 +627,7 @@ class UserApi extends Page{
 			$g = new Gallery();
 			$req = \req()->_plain();
 			$g->remove_tag($req->post('id'), $req->post('tag'), \login_user()->getId());
+			FullTextAction::getInstance()->update_gallery($req->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -646,6 +647,7 @@ class UserApi extends Page{
 				$g->set_meta_info($meta);
 			}
 			$g->updated();
+			FullTextAction::getInstance()->update_gallery($req->post('gallery_id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -688,6 +690,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery();
 			$g->delete(\req()->_plain()->post('id'), \login_user()->getId());
+			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -701,6 +704,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery(\req()->_plain()->post('id'), \login_user()->getId());
 			$g->set_public();
+			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -714,6 +718,7 @@ class UserApi extends Page{
 			\lib()->load('Gallery');
 			$g = new Gallery(\req()->_plain()->post('id'), \login_user()->getId());
 			$g->set_draft();
+			FullTextAction::getInstance()->update_gallery(\req()->_plain()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();

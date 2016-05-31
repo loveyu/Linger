@@ -243,9 +243,9 @@ class Gallery extends AppException{
 		}, $diff);
 		array_unshift($diff, "gallery_has_pictures");
 		$rt = call_user_func_array([
-			$this->db,
-			'insert'
-		], $diff);
+									   $this->db,
+									   'insert'
+								   ], $diff);
 		if($rt === false){
 			$this->throwMsg(-2);
 		}
@@ -365,37 +365,37 @@ class Gallery extends AppException{
 			'[<]gallery' => ['id' => 'gallery_front_cover'],
 			'[>]server' => ['server_name' => 'name'],
 		], [
-			'gallery.id' => 'gallery_id',
-			'gallery.users_id' => 'users_id',
-			'gallery.gallery_title' => 'gallery_title',
-			'gallery.gallery_description' => 'gallery_description',
-			'gallery.gallery_create_time' => 'gallery_create_time',
-			'gallery.gallery_update_time' => 'gallery_update_time',
-			'gallery.gallery_like_count' => 'gallery_like_count',
-			'gallery.gallery_comment_count' => 'gallery_comment_count',
-			'gallery.gallery_comment_status' => 'gallery_comment_status',
-			'gallery.gallery_front_cover' => 'gallery_front_cover',
-			'pictures.id' => 'pic_id',
-			'pictures.server_name' => 'server_name',
-			'server.url' => 'server_url',
-			'pictures.pic_name' => 'pic_name',
-			'pictures.pic_path' => 'pic_path',
-			'pictures.pic_create_time' => 'pic_create_time',
-			'pictures.pic_width' => 'pic_width',
-			'pictures.pic_height' => 'pic_height',
-			'pictures.pic_description' => 'pic_description',
-			'pictures.pic_thumbnails_path' => 'pic_thumbnails_path',
-			'pictures.pic_thumbnails_width' => 'pic_thumbnails_width',
-			'pictures.pic_thumbnails_height' => 'pic_thumbnails_height',
-			'pictures.pic_hd_path' => 'pic_hd_path',
-			'pictures.pic_hd_width' => 'pic_hd_width',
-			'pictures.pic_hd_height' => 'pic_hd_height',
-			'pictures.pic_status' => 'pic_status',
-			'pictures.pic_comment_count' => 'pic_comment_count',
-			'pictures.pic_display_path' => 'pic_display_path',
-			'pictures.pic_display_width' => 'pic_display_width',
-			'pictures.pic_display_height' => 'pic_display_height'
-		], $where);
+									  'gallery.id' => 'gallery_id',
+									  'gallery.users_id' => 'users_id',
+									  'gallery.gallery_title' => 'gallery_title',
+									  'gallery.gallery_description' => 'gallery_description',
+									  'gallery.gallery_create_time' => 'gallery_create_time',
+									  'gallery.gallery_update_time' => 'gallery_update_time',
+									  'gallery.gallery_like_count' => 'gallery_like_count',
+									  'gallery.gallery_comment_count' => 'gallery_comment_count',
+									  'gallery.gallery_comment_status' => 'gallery_comment_status',
+									  'gallery.gallery_front_cover' => 'gallery_front_cover',
+									  'pictures.id' => 'pic_id',
+									  'pictures.server_name' => 'server_name',
+									  'server.url' => 'server_url',
+									  'pictures.pic_name' => 'pic_name',
+									  'pictures.pic_path' => 'pic_path',
+									  'pictures.pic_create_time' => 'pic_create_time',
+									  'pictures.pic_width' => 'pic_width',
+									  'pictures.pic_height' => 'pic_height',
+									  'pictures.pic_description' => 'pic_description',
+									  'pictures.pic_thumbnails_path' => 'pic_thumbnails_path',
+									  'pictures.pic_thumbnails_width' => 'pic_thumbnails_width',
+									  'pictures.pic_thumbnails_height' => 'pic_thumbnails_height',
+									  'pictures.pic_hd_path' => 'pic_hd_path',
+									  'pictures.pic_hd_width' => 'pic_hd_width',
+									  'pictures.pic_hd_height' => 'pic_hd_height',
+									  'pictures.pic_status' => 'pic_status',
+									  'pictures.pic_comment_count' => 'pic_comment_count',
+									  'pictures.pic_display_path' => 'pic_display_path',
+									  'pictures.pic_display_width' => 'pic_display_width',
+									  'pictures.pic_display_height' => 'pic_display_height'
+								  ], $where);
 		\lib()->load('Picture');
 		$pic = new Picture();
 		$pic->parsePic($list, false);
@@ -481,13 +481,13 @@ class Gallery extends AppException{
 			'gallery.gallery_front_cover' => 'gallery_front_cover',
 			'gallery.gallery_status' => 'gallery_status'
 		], [
-			'users_id' => $this->user_id,
-			'ORDER' => 'gallery_id DESC',
-			'LIMIT' => [
-				$number * ($page - 1),
-				$number
-			]
-		]);
+										 'users_id' => $this->user_id,
+										 'ORDER' => 'gallery_id DESC',
+										 'LIMIT' => [
+											 $number * ($page - 1),
+											 $number
+										 ]
+									 ]);
 		$ids = [];
 		$gallery2 = [];
 		foreach($gallery as $v){
@@ -535,6 +535,16 @@ class Gallery extends AppException{
 	}
 
 	/**
+	 * 获取元素数据
+	 * @param int|null $id 图片ID
+	 * @return array|false
+	 */
+	public function get_raw_info($id = NULL){
+		$info = \db()->get("gallery", "*", ['id' => is_null($id) ? $this->gallery_id : $id]);
+		return empty($info) ? false : $info;
+	}
+
+	/**
 	 * 获取当前设置的图集信息
 	 * @return array
 	 */
@@ -555,24 +565,24 @@ class Gallery extends AppException{
 				'______' => ['users_like_gallery.users_id' => is_login() ? \login_user()->getId() : 0]
 			]
 		], [
-			'users.user_name' => 'user_name',
-			'users.user_url' => 'user_url',
-			'users.user_aliases' => 'user_aliases',
-			'users.user_status' => 'user_status',
-			'users.user_avatar' => 'user_avatar',
-			'gallery.id' => 'gallery_id',
-			'gallery.users_id' => 'user_id',
-			'gallery.gallery_title' => 'gallery_title',
-			'gallery.gallery_description' => 'gallery_description',
-			'gallery.gallery_create_time' => 'gallery_create_time',
-			'gallery.gallery_like_count' => 'gallery_like_count',
-			'gallery.gallery_update_time' => 'gallery_update_time',
-			'gallery.gallery_comment_count' => 'gallery_comment_count',
-			'gallery.gallery_comment_status' => 'gallery_comment_status',
-			'gallery.gallery_front_cover' => 'gallery_front_cover',
-			'gallery.gallery_status' => 'gallery_status',
-			'users_like_gallery.like_time' => 'gallery_like_time'
-		], $where);
+											'users.user_name' => 'user_name',
+											'users.user_url' => 'user_url',
+											'users.user_aliases' => 'user_aliases',
+											'users.user_status' => 'user_status',
+											'users.user_avatar' => 'user_avatar',
+											'gallery.id' => 'gallery_id',
+											'gallery.users_id' => 'user_id',
+											'gallery.gallery_title' => 'gallery_title',
+											'gallery.gallery_description' => 'gallery_description',
+											'gallery.gallery_create_time' => 'gallery_create_time',
+											'gallery.gallery_like_count' => 'gallery_like_count',
+											'gallery.gallery_update_time' => 'gallery_update_time',
+											'gallery.gallery_comment_count' => 'gallery_comment_count',
+											'gallery.gallery_comment_status' => 'gallery_comment_status',
+											'gallery.gallery_front_cover' => 'gallery_front_cover',
+											'gallery.gallery_status' => 'gallery_status',
+											'users_like_gallery.like_time' => 'gallery_like_time'
+										], $where);
 		if(!isset($this->info[0])){
 			$this->info = NULL;
 			$this->error = ___('Gallery not found.');
@@ -602,27 +612,27 @@ class Gallery extends AppException{
 			'[><]gallery_has_pictures' => ['id' => 'pictures_id'],
 			'[>]server' => ['server_name' => 'name']
 		], [
-			'gallery_has_pictures.gallery_id' => 'gallery_id',
-			'pictures.id' => 'pic_id',
-			'server.url' => 'server_url',
-			'pictures.pic_path' => 'pic_path',
-			'pictures.pic_name' => 'pic_name',
-			'pictures.pic_create_time' => 'pic_create_time',
-			'pictures.pic_width' => 'pic_width',
-			'pictures.pic_height' => 'pic_height',
-			'pictures.pic_description' => 'pic_description',
-			'pictures.pic_thumbnails_path' => 'pic_thumbnails_path',
-			'pictures.pic_thumbnails_width' => 'pic_thumbnails_width',
-			'pictures.pic_thumbnails_height' => 'pic_thumbnails_height',
-			'pictures.pic_hd_path' => 'pic_hd_path',
-			'pictures.pic_hd_width' => 'pic_hd_width',
-			'pictures.pic_hd_height' => 'pic_hd_height',
-			'pictures.pic_status' => 'pic_status',
-			'pictures.pic_comment_count' => 'pic_comment_count',
-			'pictures.pic_display_path' => 'pic_display_path',
-			'pictures.pic_display_width' => 'pic_display_width',
-			'pictures.pic_display_height' => 'pic_display_height'
-		], ['AND' => ['gallery_has_pictures.gallery_id' => $gallery_id]]);
+									'gallery_has_pictures.gallery_id' => 'gallery_id',
+									'pictures.id' => 'pic_id',
+									'server.url' => 'server_url',
+									'pictures.pic_path' => 'pic_path',
+									'pictures.pic_name' => 'pic_name',
+									'pictures.pic_create_time' => 'pic_create_time',
+									'pictures.pic_width' => 'pic_width',
+									'pictures.pic_height' => 'pic_height',
+									'pictures.pic_description' => 'pic_description',
+									'pictures.pic_thumbnails_path' => 'pic_thumbnails_path',
+									'pictures.pic_thumbnails_width' => 'pic_thumbnails_width',
+									'pictures.pic_thumbnails_height' => 'pic_thumbnails_height',
+									'pictures.pic_hd_path' => 'pic_hd_path',
+									'pictures.pic_hd_width' => 'pic_hd_width',
+									'pictures.pic_hd_height' => 'pic_hd_height',
+									'pictures.pic_status' => 'pic_status',
+									'pictures.pic_comment_count' => 'pic_comment_count',
+									'pictures.pic_display_path' => 'pic_display_path',
+									'pictures.pic_display_width' => 'pic_display_width',
+									'pictures.pic_display_height' => 'pic_display_height'
+								], ['AND' => ['gallery_has_pictures.gallery_id' => $gallery_id]]);
 		//		for($i = 0, $l = count($rt); $i < $l; $i++){
 		//			if($rt[$i]['pic_thumbnails_path'] === 'thumbnail'){
 		//				$rt[$i]['url'] = $rt[$i]['server_url'] . $rt[$i]['pic_path'] . "/thumbnail";
@@ -696,11 +706,11 @@ class Gallery extends AppException{
 			'gallery_status' => 0,
 			'gallery_update_time' => date("Y-m-d H:i:s")
 		], [
-			'AND' => [
-				'id' => $this->gallery_id,
-				'users_id' => $this->user_id
-			]
-		]);
+								   'AND' => [
+									   'id' => $this->gallery_id,
+									   'users_id' => $this->user_id
+								   ]
+							   ]);
 		if($d === false){
 			Log::write(___("Gallery set draft error."), Log::SQL);
 			$this->throwMsg(-17);
@@ -797,18 +807,18 @@ class Gallery extends AppException{
 						'id',
 						'gallery_title'
 					], [
-						'id' => $list,
-						'ORDER' => 'id'
-					]);
+											  'id' => $list,
+											  'ORDER' => 'id'
+										  ]);
 					if($info === false){
 						Log::write(___("Get gallery previous and next info error.") . join(",", $read->error()), Log::SQL);
 						$this->throwMsg(-15);
 					} else{
 						for($i = 0, $c = count($info); $i < $c; ++$i){
 							if($info[$i]['id'] == $list['previous']){
-								$this->info['previous_and_next']['previous'] = & $info[$i];
+								$this->info['previous_and_next']['previous'] = &$info[$i];
 							} else if($info[$i]['id'] == $list['next']){
-								$this->info['previous_and_next']['next'] = & $info[$i];
+								$this->info['previous_and_next']['next'] = &$info[$i];
 							}
 						}
 					}

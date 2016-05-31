@@ -86,6 +86,41 @@ class FullTextAction{
 	}
 
 	/**
+	 * 转换图集主键
+	 * @param array $gallery_info_list
+	 * @return array 返回数据，以ID为主键
+	 */
+	private function convert_gallery($gallery_info_list){
+		$rt = [];
+		$ids = [];
+		foreach($gallery_info_list as $v){
+			$item = [
+				'add_time' => date("Y-m-d\\TH:i:s", strtotime($v['gallery_create_time'])),
+				'modify_time' => date("Y-m-d\\TH:i:s", strtotime($v['gallery_update_time'])),
+				'title' => htmlspecialchars(strip_tags($v['gallery_title'])),
+				'desc' => htmlspecialchars(strip_tags($v['gallery_description'])),
+				'tags' => [],
+				'detail' => ""
+			];
+			$ids[] = $v['id'];
+			$rt[$v['id']] = $item;
+		}
+		$tag_obj = new Tag();
+		$tag_map = $tag_obj->getGalleryTagsMap($ids);
+		foreach($tag_map as $id => $v){
+			$rt[$id]['tags'] = $v;
+		}
+		$mate_obj = new Meta("gallery_meta", "gallery_id", $ids);
+		$list = $mate_obj->get_to_map(['more_info']);
+		foreach($list as $id=>$item){
+			if(isset($item['more_info'])){
+				$rt[$id]['detail'] = $item['more_info'];
+			}
+		}
+		return $rt;
+	}
+
+	/**
 	 * 更新全文索引
 	 * @param int $pic_id
 	 */
@@ -119,4 +154,40 @@ class FullTextAction{
 		$pic_ids = array_map('intval', $pic_ids);
 		$this->elastic_obj->bulk_delete($this->index_name, "pic", $pic_ids);
 	}
+
+	/**
+	 * 更新图集
+	 * @param int $gallery_id
+	 */
+	public function update_gallery($gallery_id){
+		if(!$this->search_open){
+			return;
+		}
+		$gallery_id = (int)$gallery_id;
+		$gallery_obj = new Gallery($gallery_id);
+		$info = $gallery_obj->get_raw_info($gallery_id);
+		if(empty($info) || !$info['gallery_status']){
+			$this->delete_gallery($gallery_id);
+			return;
+		}
+		$list = $this->convert_gallery(array($info));
+		$list = reset($list);
+		$this->elastic_obj->put_document($this->index_name, "gallery", $gallery_id, $list);
+	}
+
+	/**
+	 * 删除一个或多个图集
+	 * @param array|int $ids
+	 */
+	public function delete_gallery($ids){
+		if(!$this->search_open){
+			return;
+		}
+		if(!is_array($ids)){
+			$ids = array($ids);
+		}
+		$ids = array_map('intval', $ids);
+		$this->elastic_obj->bulk_delete($this->index_name, "gallery", $ids);
+	}
+
 }

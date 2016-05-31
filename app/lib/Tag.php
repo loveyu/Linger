@@ -285,6 +285,23 @@ class Tag{
 	}
 
 	/**
+	 * 获取图集的标签列表
+	 * @param array $ids
+	 * @return array
+	 */
+	public function getGalleryTagsMap($ids){
+		$list = $this->db->select("gallery_has_tags", ['tags_name','gallery_id'], ['gallery_id' => $ids]);
+		$rt = [];
+		foreach($list as $v){
+			if(!isset($rt[$v['gallery_id']])){
+				$rt[$v['gallery_id']] = [];
+			}
+			$rt[$v['gallery_id']][] = $v['tags_name'];
+		}
+		return $rt;
+	}
+
+	/**
 	 * 获取图集的TAG
 	 * @param int $id
 	 * @return array

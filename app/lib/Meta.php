@@ -38,9 +38,9 @@ class Meta{
 	private $list = [];
 
 	/**
-	 * @param string $table
-	 * @param string $out_key
-	 * @param int    $out_key_value
+	 * @param string    $table
+	 * @param string    $out_key
+	 * @param int|array $out_key_value
 	 */
 	public function __construct($table, $out_key, $out_key_value){
 		$this->out_key = $out_key;
@@ -70,6 +70,38 @@ class Meta{
 			foreach($s as $k){
 				$rt[$k] = $conn ? implode($implode, $this->list[$k]) : $this->list[$k];
 			}
+		}
+		return $rt;
+	}
+
+	/**
+	 * 获取一个对应的数组，要求out_key_value是一个数组
+	 * @param array $key_list
+	 * @return array {id:{key:[],k2:[]}}
+	 */
+	public function get_to_map($key_list){
+		if(empty($key_list)){
+			return [];
+		}
+		$data = db()->select($this->table, [
+			'meta_key',
+			'meta_value',
+			$this->out_key
+		], [
+			 "AND" => [
+				 $this->out_key => $this->out_key_value,
+				 'meta_key' => $key_list
+			 ]
+		 ]);
+		$rt = [];
+		foreach($data as $item){
+			if(!isset($rt[$item[$this->out_key]])){
+				$rt[$item[$this->out_key]] = [];
+			}
+			if(!isset($rt[$item[$this->out_key]][$item['meta_key']])){
+				$rt[$item[$this->out_key]][$item['meta_key']] = [];
+			}
+			$rt[$item[$this->out_key]][$item['meta_key']][] = $item['meta_value'];
 		}
 		return $rt;
 	}
