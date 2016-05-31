@@ -850,3 +850,6 @@ body {
 	margin-left: 0;
 	margin-right: 0;
 }
+#PostTab .search-post-item{
+	padding: 8px 4px;
+}

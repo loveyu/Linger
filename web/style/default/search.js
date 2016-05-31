@@ -95,7 +95,18 @@ function search_init(keyword) {
 			}
 		},
 		post: function (list) {
-
+			var select = $("#PostTab");
+			var count = list.length;
+			for (var i = 0; i < count; i++) {
+				var obj = list[i];
+				select.append("<div class='search-post-item'>" +
+					"<h4><a target='_blank' href='" + obj.post_link + "'>" + obj.title + "</a></h4>" +
+					"<p>" + obj.content + "</p>" +
+					(obj.tags ? ("<p>标签：" + obj.tags + "</p>") : "") +
+					"</div>"
+				)
+				;
+			}
 		}
 	};
 
@@ -108,7 +119,9 @@ function search_init(keyword) {
 				tab.append(no_more_result);
 			} else {
 				load_data_func[type](result.list);
-				tab.append("<p class='append_data load-more'><button data-type='" + type + "' type=\"button\" class=\"btn btn-info\">加载更多</button></p>");
+				if (result.count == 42) {
+					tab.append("<p class='append_data load-more'><button data-type='" + type + "' type=\"button\" class=\"btn btn-info\">加载更多</button></p>");
+				}
 			}
 		});
 	};

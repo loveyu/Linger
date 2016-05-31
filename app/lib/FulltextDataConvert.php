@@ -71,6 +71,29 @@ class FulltextDataConvert{
 		if(empty($list)){
 			return [];
 		}
+		$rt = [];
+		foreach($list as $id => $v){
+			$item = [
+				'post_link' => post_link($v['source']['route']),
+				'title' => $v['source']['title'],
+				'tags' => implode(",", $v['source']['tags'])
+			];
+			$high_title = isset($v['highlight']['title']) ? implode("", $v['highlight']['title']) : "";
+			if(!empty($high_title) && strip_tags($high_title) == $item['title']){
+				$item['title'] = $high_title;
+			}
+			$content = "";
+			if(isset($v['highlight']['content'])){
+				$content = implode(" &nbsp; ", $v['highlight']['content']);
+			}
+			if(!empty($content)){
+				$item['content'] = $content;
+			} else{
+				$item['content'] = trim(mb_substr(trim(preg_replace("/[-]{5,}/", "", $v['source']['content'])), 0, 100));
+			}
+			$rt[] = $item;
+		}
+		return $rt;
 	}
 
 }

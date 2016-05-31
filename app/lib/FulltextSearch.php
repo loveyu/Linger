@@ -151,7 +151,10 @@ class FulltextSearch{
 	 * @return bool|mixed
 	 */
 	private function get_type_highlight_field($type){
-		$map = ['pic' => ['name', 'tags']];
+		$map = [
+			'pic' => ['name', 'tags'],
+			'post' => ['title', 'content']
+		];
 		if(isset($map[$type])){
 			return $map[$type];
 		}
