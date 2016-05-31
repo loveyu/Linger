@@ -15,6 +15,7 @@ use Core\Page;
 use ULib\Comment;
 use ULib\CommentManagement;
 use ULib\CountMessage;
+use ULib\FullTextAction;
 use ULib\POTCreator;
 use ULib\Tag;
 use ULib\User;
@@ -28,6 +29,30 @@ class DataCreate extends Page{
 		if(!_Debug_ || $_SERVER['REMOTE_ADDR'] !== '127.0.0.1'){
 			$this->__load_404();
 			exit;
+		}
+	}
+	
+	public function updatePicSearchIndex(){
+		$ids = db()->select("pictures","id",[]);
+		$fulltext = FullTextAction::getInstance();
+		$count = count($ids);
+		$i=0;
+		foreach($ids as $id){
+			$i++;
+			echo "{$i}/{$count}\n";
+			$fulltext->update_picture($id);
+		}
+	}
+
+	public function updateGallerySearchIndex(){
+		$ids = db()->select("gallery","id",[]);
+		$fulltext = FullTextAction::getInstance();
+		$count = count($ids);
+		$i=0;
+		foreach($ids as $id){
+			$i++;
+			echo "{$i}/{$count}\n";
+			$fulltext->update_gallery($id);
 		}
 	}
 

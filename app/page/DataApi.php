@@ -10,6 +10,7 @@ namespace UView;
 
 use Core\Page;
 use ULib\Picture;
+use ULib\FulltextSearch;
 
 /**
  * Class DataApi
@@ -43,4 +44,16 @@ class DataApi extends Page{
 			'status' => true
 		], JSON_UNESCAPED_UNICODE);
 	}
+
+	/**
+	 * 搜索初始化接口
+	 * 查询总数
+	 */
+	public function search_init(){
+		$search = new FulltextSearch();
+		echo json_encode([
+			'data' => $search->count_map(req()->get('keyword'), ['pic', 'gallery', 'post'])
+		]);
+	}
+
 }

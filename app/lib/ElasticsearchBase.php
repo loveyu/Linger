@@ -6,6 +6,7 @@
  */
 
 namespace ULib;
+
 use Core\Log;
 
 /**
@@ -196,6 +197,22 @@ class ElasticsearchBase{
 	 */
 	public function post($index, $path, $data){
 		return $this->curl("{$this->server_url}{$this->prefix}{$index}/{$path}", "POST", $data);
+	}
+
+	/**
+	 * 查询总数
+	 * @param string $index 索引
+	 * @param string $type  类型
+	 * @param array  $data  查询条件
+	 * @return int
+	 */
+	public function count($index, $type, $data){
+		$result = $this->post($index, "{$type}/_count", $data);
+		if(isset($result['count'])){
+			return (int)$result['count'];
+		}
+		Log::write("Search Error:\n" . print_r(func_get_args(), true) . "\nResult:" . printf($result, true), Log::WARN);
+		return 0;
 	}
 
 	/**

@@ -1062,7 +1062,7 @@ class UserApi extends Page{
 			}
 		}
 	}
-
+	
 	/**
 	 * 析构方法，输出JSON数据
 	 */

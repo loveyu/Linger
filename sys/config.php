@@ -122,6 +122,15 @@ define("_ViewPath_", _AppPath_ . "/view");
  */
 define("_LibPath_", _AppPath_ . "/lib");
 
+/**
+ * 当前是命令行运行模式
+ */
+define('IS_CLI_RUN_MODE', substr(php_sapi_name(), 0, 3) === "cli");
+
+if(IS_CLI_RUN_MODE){
+	$_SERVER['REMOTE_ADDR'] = "127.0.0.1";
+}
+
 //设置运行错误信息
 if(_Debug_){
 	ini_set('display_errors', 'on');

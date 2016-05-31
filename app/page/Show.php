@@ -374,7 +374,14 @@ class Show extends Page{
 		}
 		$key_word = req()->get('q');
 		$this->theme->setTitle("站内搜索");
-		$this->theme->footer_add($this->theme->js(['src' => get_style("search.js")]));
+		$this->theme->footer_add($this->theme->js(['src' => get_style("search.js")]),99);
+		$key_word_json = json_encode($key_word);
+		$footer = <<<HTML
+<script type="text/javascript">
+	search_init({$key_word_json});
+</script>
+HTML;
+		$this->theme->footer_add($footer, 100);
 		$this->__view("Home/header.php", ['key_word' => htmlspecialchars($key_word)]);
 		$this->__view("Show/search.php", ['key_word' => htmlspecialchars($key_word)]);
 		$this->__view("Home/footer.php");

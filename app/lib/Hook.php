@@ -147,8 +147,11 @@ class Hook{
 		$map = array(
 			'QueueCallback' => 'Queue',
 			'ULib\Picture' => 'Picture',
+			'ULib\Tag' => 'Tag',
+			'ULib\Gallery' => 'Gallery',
 			'ULib\ElasticsearchBase' => 'ElasticsearchBase',
 			'ULib\FullTextAction' => 'FullTextAction',
+			'ULib\FulltextSearch' => 'FulltextSearch',
 		);
 		if(isset($map[$class])){
 			$class = $map[$class];

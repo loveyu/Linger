@@ -808,3 +808,10 @@ body {
 	box-sizing: border-box;
 	color: #fff;
 }
+
+#SearchPage .tab-list .nav-tabs>li.active>a{
+	background-color: rgba(255, 255, 255, 0.4);
+}
+#SearchPage .Search-Loading{
+	padding: 10px 0;
+}
