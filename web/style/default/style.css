@@ -838,13 +838,15 @@ body {
 	position: relative;
 	top: 12px;
 }
-#PictureTab img{
+#PictureTab img,
+#GalleryTab img{
 	display: block;
 	float: left;
 	height: 150px;
 	width: 16.6%;
 }
-#PictureTab .row{
+#PictureTab .row,
+#GalleryTab .row{
 	margin-left: 0;
 	margin-right: 0;
 }

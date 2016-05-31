@@ -25,6 +25,7 @@
 				<div class="Search-Loading append_data">Loading...</div>
 			</div>
 			<div class="tab-pane" id="GalleryTab">
+				<div class="row"></div>
 				<div class="Search-Loading append_data">Loading...</div>
 			</div>
 			<div class="tab-pane" id="PostTab">

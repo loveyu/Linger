@@ -49,6 +49,17 @@ class FulltextDataConvert{
 		if(empty($list)){
 			return [];
 		}
+		$list_obj = new ListGallery();
+		$result = $list_obj->getListByGalleryIds(array_keys($list));
+		$result = ArrayUtil::rebuild_list_map_kv($result, array(
+			'gallery_id',
+			'gallery_title',
+			'pic_thumbnails_url' => 'cover_img'
+		));
+		foreach($result as &$item){
+			$item['gallery_link'] = gallery_link($item['gallery_id']);
+		}
+		return $result;
 	}
 
 	/**

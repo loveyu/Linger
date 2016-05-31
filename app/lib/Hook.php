@@ -154,9 +154,14 @@ class Hook{
 			'ULib\FulltextSearch' => 'FulltextSearch',
 			'ULib\FulltextDataConvert' => 'FulltextDataConvert',
 			'ULib\ArrayUtil' => 'ArrayUtil',
+			'ULib\ListGallery' => 'ListGallery',
 		);
 		if(isset($map[$class])){
 			$class = $map[$class];
+		}
+		$split = explode("\\", $class);
+		if($split[0] == "ULib" && count($split) == 2){
+			$class = $split[1];
 		}
 		$path = __DIR__ . "/{$class}.php";
 		if(is_file($path)){

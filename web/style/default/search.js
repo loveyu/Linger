@@ -87,7 +87,12 @@ function search_init(keyword) {
 			}
 		},
 		gallery: function (list) {
-
+			var select = $("#GalleryTab .row");
+			var count = list.length;
+			for (var i = 0; i < count; i++) {
+				var obj = list[i];
+				select.append("<a target='_blank' href='" + obj.gallery_link + "' title='" + obj.gallery_title + "'><img src='" + obj.cover_img + "' alt='" + obj.gallery_title + "'></a>");
+			}
 		},
 		post: function (list) {
 
