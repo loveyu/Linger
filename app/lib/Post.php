@@ -213,6 +213,17 @@ class Post extends AppException{
 	}
 
 	/**
+	 * 获取原始数据
+	 * @param null|int $id
+	 * @return array|bool
+	 */
+	public function getRawPost($id = NULL){
+
+		$info = \db()->get("posts", "*", ['id' => is_null($id) ? $this->post_id : $id]);
+		return empty($info) ? false : $info;
+	}
+
+	/**
 	 * @param $uid
 	 * @return array|bool
 	 */
@@ -252,13 +263,13 @@ class Post extends AppException{
 			'post_content',
 			'post_comment_count'
 		], [
-			'post_status' => 1,
-			'ORDER' => 'id DESC',
-			'LIMIT' => [
-				($this->count['page'] - 1) * $this->count['number'],
-				$this->count['number']
-			]
-		]);
+									'post_status' => 1,
+									'ORDER' => 'id DESC',
+									'LIMIT' => [
+										($this->count['page'] - 1) * $this->count['number'],
+										$this->count['number']
+									]
+								]);
 		if($rt === false){
 			Log::write(___("Select public post list error."), Log::SQL);
 			return [];

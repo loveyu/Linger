@@ -86,6 +86,28 @@ class FullTextAction{
 	}
 
 	/**
+	 * 获取转换后的数据
+	 * @param array $post_info_list
+	 * @return array
+	 */
+	private function convert_post($post_info_list){
+		$rt = [];
+		foreach($post_info_list as $v){
+			$item = [
+				'abstract' => htmlspecialchars(strip_tags($v['post_description'])),
+				'add_time' => date("Y-m-d\\TH:i:s", strtotime($v['post_time'])),
+				'content' => htmlspecialchars(strip_tags($v['post_content'])),
+				'modify_time' => date("Y-m-d\\TH:i:s", strtotime($v['post_update_time'])),
+				'route' => $v['post_name'],
+				'tags' => array_filter(explode(",", $v['post_keyword'])),
+				'title' => htmlspecialchars(strip_tags($v['post_title'])),
+			];
+			$rt[$v['id']] = $item;
+		}
+		return $rt;
+	}
+
+	/**
 	 * 转换图集主键
 	 * @param array $gallery_info_list
 	 * @return array 返回数据，以ID为主键
@@ -112,7 +134,7 @@ class FullTextAction{
 		}
 		$mate_obj = new Meta("gallery_meta", "gallery_id", $ids);
 		$list = $mate_obj->get_to_map(['more_info']);
-		foreach($list as $id=>$item){
+		foreach($list as $id => $item){
 			if(isset($item['more_info'])){
 				$rt[$id]['detail'] = $item['more_info'];
 			}
@@ -175,6 +197,27 @@ class FullTextAction{
 		$this->elastic_obj->put_document($this->index_name, "gallery", $gallery_id, $list);
 	}
 
+
+	/**
+	 * 更新图集
+	 * @param int $post_id
+	 */
+	public function update_post($post_id){
+		if(!$this->search_open){
+			return;
+		}
+		$post_id = (int)$post_id;
+		$post_obj = new Post($post_id);
+		$info = $post_obj->getRawPost($post_id);
+		if(empty($info) || !$info['post_status']){
+			$this->delete_post($post_id);
+			return;
+		}
+		$list = $this->convert_post(array($info));
+		$list = reset($list);
+		$this->elastic_obj->put_document($this->index_name, "post", $post_id, $list);
+	}
+	
 	/**
 	 * 删除一个或多个图集
 	 * @param array|int $ids
@@ -189,5 +232,21 @@ class FullTextAction{
 		$ids = array_map('intval', $ids);
 		$this->elastic_obj->bulk_delete($this->index_name, "gallery", $ids);
 	}
+
+	/**
+	 * 删除一个或多个文章
+	 * @param array|int $ids
+	 */
+	public function delete_post($ids){
+		if(!$this->search_open){
+			return;
+		}
+		if(!is_array($ids)){
+			$ids = array($ids);
+		}
+		$ids = array_map('intval', $ids);
+		$this->elastic_obj->bulk_delete($this->index_name, "post", $ids);
+	}
+
 
 }

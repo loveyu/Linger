@@ -903,6 +903,7 @@ class UserApi extends Page{
 			$this->__lib("Post");
 			$post = new Post(\req()->post('id'));
 			$post->delete(\login_user()->getId());
+			FullTextAction::getInstance()->update_post(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
@@ -919,6 +920,7 @@ class UserApi extends Page{
 			$post->update(strip_tags($req->post('title')), strip_tags($req->post('name')), htmlspecialchars($req->post('content'), ENT_NOQUOTES),
 						  $req->post('category'), strip_tags($req->post('keyword')), strip_tags($req->post('description')), $req->post('status'),
 						  $req->post('allow_comment'), \login_user()->getId());
+			FullTextAction::getInstance()->update_post(\req()->post('id'));
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();
