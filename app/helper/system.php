@@ -478,3 +478,14 @@ function cdn_info($type = 'all', $name = ''){
 	}
 	return false;
 }
+
+/**
+ * 搜索功能是否被开启
+ * @return bool
+ */
+function search_func_is_open(){
+	$cfg = cfg();
+	$search_open = $cfg->get('option', 'elastic_status');
+	$search_open = $search_open === true || $search_open === "1" || $search_open == "open" || $search_open === 1;
+	return $search_open;
+}

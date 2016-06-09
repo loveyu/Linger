@@ -369,7 +369,7 @@ class Show extends Page{
 	}
 
 	public function search(){
-		if(func_num_args() > 0){
+		if(func_num_args() > 0 || !search_func_is_open()){
 			throw new PageException404();
 		}
 		$key_word = req()->get('q');

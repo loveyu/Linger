@@ -58,6 +58,7 @@
 					'post_list'
 				]);
 				?>
+				<?php if(search_func_is_open()):?>
 				<li class="visible-lg-block">
 					<form class="navbar-form" role="search" action="<?php echo get_search_link() ?>" method="get">
 						<div class="input-group">
@@ -70,6 +71,7 @@
 						</div>
 					</form>
 				</li>
+				<?php endif;?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<?php if(!is_login()): ?>
