@@ -50,7 +50,7 @@
 
 <div>
 	<p class="help-block">请先在搜索库中创建如下结构，有需求请自行修改。</p>
-	<p class="help-block text-danger">如有重建索引或其他需求，请参考DataCreate类中的相关代码，并测试</p>
+	<p class="text-danger">如有重建索引或其他需求，请参考DataCreate类中的相关代码，并测试。</p>
 	<pre><code>{
    "picture": {
       "mappings": {
