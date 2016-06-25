@@ -20,8 +20,8 @@ return array(
 			'database_name' => 'linger',
 			//数据库名
 			'option' => [ //PDO选项
-						  PDO::ATTR_CASE => PDO::CASE_NATURAL,
-						  PDO::ATTR_TIMEOUT => 5
+				PDO::ATTR_CASE => PDO::CASE_NATURAL,
+				PDO::ATTR_TIMEOUT => 5
 			],
 		],
 		//'read' => [
@@ -80,7 +80,11 @@ return array(
 	],
 
 	'option' => [
-		'register_captcha'=>'no'//yes显示验证码，no不显示
+		'register_captcha' => 'no',//yes显示验证码，no不显示
+		'elastic_server' => "http://127.0.0.1:9200/",//搜索服务器
+		'elastic_index_prefix' => "",//搜索索引的前缀，用于测速或快速切换
+		'elastic_index' => "picture",//搜索索引的库
+		'elastic_status' => false,//搜索索引的库
 	]
 	//该处选项由数据库添加，请勿随意改动
 	//数据库调用的选项
