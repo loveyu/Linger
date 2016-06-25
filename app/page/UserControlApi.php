@@ -122,6 +122,12 @@ class UserControlApi extends Page{
 						'sub' => []
 					],
 					[
+						'name' => '搜索设置',
+						'id' => 'Search',
+						'url' => '#search',
+						'sub' => []
+					],
+					[
 						'name' => '固定连接设置',
 						'id' => 'Permalink',
 						'url' => '#permalink',
@@ -490,7 +496,8 @@ class UserControlApi extends Page{
 				$this->__lib('Message');
 				$m = new Message();
 				//0表示系统用户
-				$this->rt_msg['content'] = $m->send($req->post('title'), $req->post('users'), htmlspecialchars(req()->post('content'), ENT_NOQUOTES), 0);
+				$this->rt_msg['content'] = $m->send($req->post('title'), $req->post('users'), htmlspecialchars(req()->post('content'), ENT_NOQUOTES),
+					0);
 				$this->rt_msg['status'] = true;
 			} catch(\Exception $ex){
 				$this->rt_msg['msg'] = $ex->getMessage();
@@ -553,6 +560,25 @@ class UserControlApi extends Page{
 				'list' => $req->post('list')
 			];
 			option()->update(['cdn' => serialize($data)]);
+			$this->rt_msg['status'] = true;
+		} catch(\Exception $ex){
+			$this->rt_msg['msg'] = $ex->getMessage();
+			$this->rt_msg['code'] = $ex->getCode();
+		}
+	}
+
+	public function search(){
+		try{
+			$this->throwMsgCheck('is_post');
+			$req = req()->_plain();
+			$data = [
+				'elastic_status' => $req->post('elastic_status') == '1' ? 1 : 0,
+				'elastic_server' => $req->post('elastic_server'),
+				'elastic_index_prefix' => $req->post('elastic_index_prefix'),
+				'elastic_index' => $req->post('elastic_index')
+			];
+			print_r($data);
+			option()->update($data, 1);
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
 			$this->rt_msg['msg'] = $ex->getMessage();

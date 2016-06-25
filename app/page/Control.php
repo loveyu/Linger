@@ -127,6 +127,11 @@ class Control extends Page{
 		$this->__view("Control/footer.php");
 	}
 
+	public function search(){
+		l_h('html_tag.php');
+		$this->__view("Control/search.php");
+	}
+
 	public function cdn(){
 		l_h('html_tag.php');
 		$this->__view("Control/cdn.php");

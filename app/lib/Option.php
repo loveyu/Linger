@@ -134,7 +134,7 @@ class Option{
 			}
 			if(($row = $db->update("options", ['option_value' => $v], ['option_name' => $name])) === false){
 				$db->pdo->rollBack();
-				throw new \Exception(___("Update option error") . debug("ERROR:" . implode(", ", $db->error())));
+				throw new \Exception(___("Update option error") . debug("ERROR:" . implode(", ", $db->error()). ",SQL:" . $db->last_query()));
 			}
 			if($row == 0){
 				if($db->insert("options", [
