@@ -203,7 +203,7 @@ DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 			$pdo = $db->query("SHOW CREATE TABLE `{$item['TABLE_SCHEMA']}`.`{$item['TABLE_NAME']}`;");
 			$ddl = $pdo->fetchAll(\PDO::FETCH_ASSOC)[0]['Create Table'];
 			$pdo->closeCursor();
-			preg_match_all("/\"(.*?)\".*?CHARACTER SET utf8.*?[,\n]/i", $ddl, $matches, PREG_SET_ORDER);
+			preg_match_all("/\"(.*?)\".*?CHARACTER SET utf8 .*?[,\n]/i", $ddl, $matches, PREG_SET_ORDER);
 			$item_list = array();
 			if(is_array($matches) && !empty($matches)){
 				foreach($matches as $v){
