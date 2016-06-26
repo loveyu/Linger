@@ -3,7 +3,10 @@
 
 ## 系统需求
 PHP版本必须大于等与`5.4`
-Mysql必须支持`INNODB`引擎
+Mysql必须支持`INNODB`引擎，数据库默认编码请指定为`utf8mb4`，集合为`utf8mb4_unicode_ci`，创建语句如下
+```sql
+CREATE DATABASE `database_name` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */
+```
 
 ## 安装步骤
 Clone Git，过程中必须包含子项目，否则将导致直接不可用
