@@ -333,7 +333,7 @@ CREATE TABLE `posts` (
 	`id` BIGINT (20) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`users_id` BIGINT (20) UNSIGNED NOT NULL,
 	`post_title` VARCHAR (150) NOT NULL,
-	`post_name` VARCHAR (200) NOT NULL,
+	`post_name` VARCHAR (191) NOT NULL,
 	`post_content` LONGTEXT NOT NULL,
 	`post_time` datetime NOT NULL,
 	`post_update_time` datetime NOT NULL,
