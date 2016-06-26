@@ -28,7 +28,7 @@ SET NULL ON UPDATE CASCADE,
  CONSTRAINT `fk_comments_comments2` FOREIGN KEY (`comment_parent_top`) REFERENCES `comments` (`id`) ON DELETE
 SET NULL ON UPDATE CASCADE,
  CONSTRAINT `fk_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for comment_meta
@@ -44,7 +44,7 @@ CREATE TABLE `comment_meta` (
 	PRIMARY KEY (`meta_id`),
 	KEY `fk_comment_meta_comments1_idx` (`comments_id`),
 	CONSTRAINT `fk_comment_meta_comments1` FOREIGN KEY (`comments_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for feed
@@ -62,7 +62,7 @@ CREATE TABLE `feed` (
 	PRIMARY KEY (`id`),
 	KEY `fk_feed_users1_idx` (`users_id`),
 	CONSTRAINT `fk_feed_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery
@@ -89,7 +89,7 @@ CREATE TABLE `gallery` (
 	CONSTRAINT `fk_gallery_pictures1` FOREIGN KEY (`gallery_front_cover`) REFERENCES `pictures` (`id`) ON DELETE
 SET NULL ON UPDATE CASCADE,
  CONSTRAINT `fk_gallery_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_has_comments
@@ -112,7 +112,7 @@ CREATE TABLE `gallery_has_comments` (
 	CONSTRAINT `fk_gallery_has_comments_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_gallery_has_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT `fk_gallery_has_comments_users2` FOREIGN KEY (`object_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_has_pictures
@@ -128,7 +128,7 @@ CREATE TABLE `gallery_has_pictures` (
 	KEY `fk_gallery_has_pictures_gallery1_idx` (`gallery_id`),
 	CONSTRAINT `fk_gallery_has_pictures_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_gallery_has_pictures_pictures1` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_has_tags
@@ -144,7 +144,7 @@ CREATE TABLE `gallery_has_tags` (
 	KEY `fk_gallery_has_tags_gallery1_idx` (`gallery_id`),
 	CONSTRAINT `fk_gallery_has_tags_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_gallery_has_tags_tags1` FOREIGN KEY (`tags_name`) REFERENCES `tags` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_meta
@@ -160,7 +160,7 @@ CREATE TABLE `gallery_meta` (
 	PRIMARY KEY (`meta_id`),
 	KEY `fk_gallery_meta_gallery1_idx` (`gallery_id`),
 	CONSTRAINT `fk_gallery_meta_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_outside_pictures
@@ -179,7 +179,7 @@ CREATE TABLE `gallery_outside_pictures` (
 	KEY `fk_gallery_has_pictures1_gallery1_idx` (`gallery_id`),
 	CONSTRAINT `fk_gallery_has_pictures1_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_gallery_has_pictures1_pictures1` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for gallery_views
@@ -193,7 +193,7 @@ CREATE TABLE `gallery_views` (
 	`views_count` INT (10) UNSIGNED NOT NULL DEFAULT '0',
 	PRIMARY KEY (`gallery_id`, `views_date`),
 	CONSTRAINT `fk_views_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for message
@@ -217,7 +217,7 @@ CREATE TABLE `message` (
 	KEY `fk_message_users2_idx` (`to_users_id`),
 	CONSTRAINT `fk_message_users1` FOREIGN KEY (`from_users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_message_users2` FOREIGN KEY (`to_users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for options
@@ -232,7 +232,7 @@ CREATE TABLE `options` (
 	`option_autoload` INT (11) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `option_name_UNIQUE` (`option_name`)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for pictures
@@ -267,7 +267,7 @@ CREATE TABLE `pictures` (
 	KEY `fk_pictures_server1_idx` (`server_name`),
 	CONSTRAINT `fk_pictures_server1` FOREIGN KEY (`server_name`) REFERENCES `server` (`name`) ON DELETE NO ACTION ON UPDATE CASCADE,
 	CONSTRAINT `fk_pictures_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for pictures_has_comments
@@ -290,7 +290,7 @@ CREATE TABLE `pictures_has_comments` (
 	CONSTRAINT `fk_pictures_has_comments_pictures1` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_pictures_has_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT `fk_pictures_has_comments_users2` FOREIGN KEY (`object_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for pictures_has_tags
@@ -306,7 +306,7 @@ CREATE TABLE `pictures_has_tags` (
 	KEY `fk_pictures_has_tags_pictures1_idx` (`pictures_id`),
 	CONSTRAINT `fk_pictures_has_tags_pictures` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_pictures_has_tags_tags` FOREIGN KEY (`tags_name`) REFERENCES `tags` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for pictures_views
@@ -321,7 +321,7 @@ CREATE TABLE `pictures_views` (
 	PRIMARY KEY (`views_date`, `pictures_id`),
 	KEY `fk_picture_views_pictures1_idx` (`pictures_id`),
 	CONSTRAINT `fk_picture_views_pictures1` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for posts
@@ -347,7 +347,7 @@ CREATE TABLE `posts` (
 	UNIQUE KEY `post_name_UNIQUE` (`post_name`),
 	KEY `fk_posts_users1_idx` (`users_id`),
 	CONSTRAINT `fk_posts_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for posts_has_comments
@@ -370,7 +370,7 @@ CREATE TABLE `posts_has_comments` (
 	CONSTRAINT `fk_posts_has_comments_posts1` FOREIGN KEY (`posts_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_posts_has_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT `fk_posts_has_comments_users2` FOREIGN KEY (`object_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for posts_views
@@ -385,7 +385,7 @@ CREATE TABLE `posts_views` (
 	PRIMARY KEY (`posts_id`, `views_date`),
 	KEY `fk_posts_views_posts1_idx` (`posts_id`),
 	CONSTRAINT `fk_posts_views_posts1` FOREIGN KEY (`posts_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for queue
@@ -404,7 +404,7 @@ CREATE TABLE `queue` (
 	`message` VARCHAR (1024) DEFAULT NULL COMMENT '队列执行信息',
 	`type` VARCHAR (45) DEFAULT NULL,
 	PRIMARY KEY (`id`)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for server
@@ -418,7 +418,7 @@ CREATE TABLE `server` (
 	`meta` LONGTEXT,
 	PRIMARY KEY (`name`),
 	UNIQUE KEY `server_url_UNIQUE` (`url`)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for tags
@@ -430,7 +430,7 @@ CREATE TABLE `tags` (
 	`name` VARCHAR (100) NOT NULL,
 	`count` INT (10) UNSIGNED NOT NULL DEFAULT '0',
 	PRIMARY KEY (`name`)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users
@@ -460,7 +460,7 @@ CREATE TABLE `users` (
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `name_UNIQUE` (`user_name`),
 	UNIQUE KEY `email_UNIQUE` (`user_email`)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users_follow_gallery
@@ -479,7 +479,7 @@ CREATE TABLE `users_follow_gallery` (
 	KEY `fk_users_has_gallery_users2_idx` (`users_id`),
 	CONSTRAINT `fk_users_has_gallery_gallery2` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_users_has_gallery_users2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users_follow_users
@@ -501,7 +501,7 @@ CREATE TABLE `users_follow_users` (
 	KEY `fk_users_has_users_users1_idx` (`users_id`),
 	CONSTRAINT `fk_users_has_users_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_users_has_users_users2` FOREIGN KEY (`follow_users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users_like_comments
@@ -518,7 +518,7 @@ CREATE TABLE `users_like_comments` (
 	KEY `fk_users_has_comments_users1_idx` (`users_id`),
 	CONSTRAINT `fk_users_has_comments_comments1` FOREIGN KEY (`comments_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_users_has_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users_like_gallery
@@ -535,7 +535,7 @@ CREATE TABLE `users_like_gallery` (
 	KEY `fk_users_has_gallery_users1_idx` (`users_id`),
 	CONSTRAINT `fk_users_has_gallery_gallery1` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_users_has_gallery_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users_like_pictures
@@ -552,7 +552,7 @@ CREATE TABLE `users_like_pictures` (
 	KEY `fk_users_has_pictures_users1_idx` (`users_id`),
 	CONSTRAINT `fk_users_has_pictures_pictures1` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT `fk_users_has_pictures_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for user_count
@@ -575,7 +575,7 @@ CREATE TABLE `user_count` (
 	PRIMARY KEY (`users_id`),
 	KEY `fk_user_count_users1_idx` (`users_id`),
 	CONSTRAINT `fk_user_count_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for user_meta
@@ -591,5 +591,5 @@ CREATE TABLE `user_meta` (
 	PRIMARY KEY (`meta_id`),
 	KEY `fk_user_meta_users1_idx` (`users_id`),
 	CONSTRAINT `fk_user_meta_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

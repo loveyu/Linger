@@ -15,7 +15,7 @@ return array(
 			//密码
 			'database_file' => '',
 			//数据库文件,	SqLite 专有文件
-			'charset' => 'utf8',
+			'charset' => 'utf8mb4',
 			//编码
 			'database_name' => 'linger',
 			//数据库名
@@ -30,7 +30,7 @@ return array(
 		//	'username' => 'root',
 		//	'password' => '123456',
 		//	'database_file' => '',
-		//	'charset' => 'utf8',
+		//	'charset' => 'utf8mb4',
 		//	'database_name' => 'pitus',
 		//	'option' => [ //PDO选项
 		//				  PDO::ATTR_CASE => PDO::CASE_NATURAL,

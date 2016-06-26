@@ -96,10 +96,10 @@ SQL_INPUT;
 			 * @var FeedInterface $obj
 			 */
 			$obj = @unserialize($v['content']);
-			$obj->setTime($v['time']);
 			if(!is_object($obj)){
 				continue;
 			}
+			$obj->setTime($v['time']);
 			$u = $obj->getUserId();
 			if($u < 1){
 				continue;
