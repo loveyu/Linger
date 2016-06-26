@@ -209,11 +209,9 @@ DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 				foreach($matches as $v){
 					$new_col = str_replace("CHARACTER SET utf8", "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", trim(trim($v[0], ",")));
 					$new_col = str_replace("\"", "`", $new_col);
-					//ALTER TABLE `linger_travel`.`posts` MODIFY COLUMN `post_name` VARCHAR (191) CHARACTER
-					//SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
-					if($item['TABLE_NAME'] == "posts" and $v[1] == "post_name"){
+					if($item['TABLE_NAME'] == "posts" && $v[1] == "post_name"){
 						//这里有个索引过长的问题
-						$new_col = str_replace("VARCHAR (200)", "VARCHAR (191)", $new_col);
+						$new_col = str_replace("varchar(200)", "varchar(191)", $new_col);
 					}
 					$sql = <<<SQL
 ALTER TABLE `{$item['TABLE_SCHEMA']}`.`{$item['TABLE_NAME']}`
@@ -227,7 +225,7 @@ SQL;
 				echo implode("\n\n", $item_list);
 			}
 		}
-		echo "\n-- 启用外键约束\n\n";
+		echo "\n\n-- 启用外键约束\n\n";
 		echo "SET FOREIGN_KEY_CHECKS = 1;\n\n";
 	}
 } 
