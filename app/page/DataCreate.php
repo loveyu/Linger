@@ -31,12 +31,12 @@ class DataCreate extends Page{
 			exit;
 		}
 	}
-	
+
 	public function updatePicSearchIndex(){
-		$ids = db()->select("pictures","id",[]);
+		$ids = db()->select("pictures", "id", []);
 		$fulltext = FulltextAction::getInstance();
 		$count = count($ids);
-		$i=0;
+		$i = 0;
 		foreach($ids as $id){
 			$i++;
 			echo "{$i}/{$count}\n";
@@ -45,10 +45,10 @@ class DataCreate extends Page{
 	}
 
 	public function updateGallerySearchIndex(){
-		$ids = db()->select("gallery","id",[]);
+		$ids = db()->select("gallery", "id", []);
 		$fulltext = FulltextAction::getInstance();
 		$count = count($ids);
-		$i=0;
+		$i = 0;
 		foreach($ids as $id){
 			$i++;
 			echo "{$i}/{$count}\n";
@@ -182,5 +182,52 @@ class DataCreate extends Page{
 			$rt .= $str[rand(0, $l - 1)];
 		}
 		return $rt;
+	}
+
+	public function convert_table_to_utf8mb4(){
+		echo "-- 忽略外键约束\n\n";
+		echo "SET FOREIGN_KEY_CHECKS = 0;\n\n";
+		$db = db()->getReader();
+		$pdo = $db->query("SELECT TABLE_SCHEMA,TABLE_NAME FROM information_schema.tables WHERE table_schema=" . $db->pdo->quote(cfg()->get('sql',
+				'write', 'database_name')));
+		$list = $pdo->fetchAll(\PDO::FETCH_ASSOC);
+		$pdo->closeCursor();
+		echo "-- 调整表默认编码：\n-- ====================================\n\n";
+		foreach($list as $item){
+			echo "ALTER TABLE `{$item['TABLE_SCHEMA']}`.`{$item['TABLE_NAME']}`
+DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+";
+		}
+		foreach($list as $item){
+			$pdo = $db->query("SHOW CREATE TABLE `{$item['TABLE_SCHEMA']}`.`{$item['TABLE_NAME']}`;");
+			$ddl = $pdo->fetchAll(\PDO::FETCH_ASSOC)[0]['Create Table'];
+			$pdo->closeCursor();
+			preg_match_all("/\"(.*?)\".*?CHARACTER SET utf8.*?[,\n]/i", $ddl, $matches, PREG_SET_ORDER);
+			$item_list = array();
+			if(is_array($matches) && !empty($matches)){
+				foreach($matches as $v){
+					$new_col = str_replace("CHARACTER SET utf8", "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", trim(trim($v[0], ",")));
+					$new_col = str_replace("\"", "`", $new_col);
+					//ALTER TABLE `linger_travel`.`posts` MODIFY COLUMN `post_name` VARCHAR (191) CHARACTER
+					//SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+					if($item['TABLE_NAME'] == "posts" and $v[1] == "post_name"){
+						//这里有个索引过长的问题
+						$new_col = str_replace("VARCHAR (200)", "VARCHAR (191)", $new_col);
+					}
+					$sql = <<<SQL
+ALTER TABLE `{$item['TABLE_SCHEMA']}`.`{$item['TABLE_NAME']}`
+MODIFY COLUMN {$new_col};
+SQL;
+					$item_list[] = $sql;
+				}
+			}
+			if(!empty($item_list)){
+				echo "\n\n-- 调整表{$item['TABLE_NAME']}编码：\n\n";
+				echo implode("\n\n", $item_list);
+			}
+		}
+		echo "\n-- 启用外键约束\n\n";
+		echo "SET FOREIGN_KEY_CHECKS = 1;\n\n";
 	}
 } 
