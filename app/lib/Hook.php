@@ -150,7 +150,7 @@ class Hook{
 			'ULib\Tag' => 'Tag',
 			'ULib\Gallery' => 'Gallery',
 			'ULib\ElasticsearchBase' => 'ElasticsearchBase',
-			'ULib\FullTextAction' => 'FullTextAction',
+			'ULib\FulltextAction' => 'FullTextAction',
 			'ULib\FulltextSearch' => 'FulltextSearch',
 			'ULib\FulltextDataConvert' => 'FulltextDataConvert',
 			'ULib\ArrayUtil' => 'ArrayUtil',
