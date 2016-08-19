@@ -106,7 +106,9 @@ class Option{
 				$user = User::getUser($user_id);
 				$mt = new MailTemplate("new_user_registered.html");
 				$mt->setUserInfo($user->getInfo());
-
+				if(cfg()->get('pushover_notice_status')===true){
+					$mt->setIsRegisterPushover(true);//设置当前为通知模式
+				}
 				$mt->mailSend(site_title() . " Manager", admin_email());
 			});
 		}
