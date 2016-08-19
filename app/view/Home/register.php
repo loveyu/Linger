@@ -78,36 +78,36 @@
 		$("form input[name=name]").on("change", function () {
 			this.value = this.value.replace(/[^A-Z0-9a-z_.]/g, '');
 			if (this.value.length < 6) {
-				$("form input[name=name]").attr("title", "必须大于5位");
-				$("form input[name=name]").tooltip('show');
-				$("form .form-group:first").removeClass("has-success").addClass("has-error");
+				$("#Register_form form input[name=name]").attr("title", "必须大于5位");
+				$("#Register_form form input[name=name]").tooltip('show');
+				$("#Register_form form .form-group:first").removeClass("has-success").addClass("has-error");
 				return false;
 			}
 			if (this.value.length > 20) {
-				$("form input[name=name]").attr("title", "必须小于20位");
-				$("form input[name=name]").tooltip('show');
-				$("form .form-group:first").removeClass("has-success").addClass("has-error");
+				$("#Register_form form input[name=name]").attr("title", "必须小于20位");
+				$("#Register_form form input[name=name]").tooltip('show');
+				$("#Register_form form .form-group:first").removeClass("has-success").addClass("has-error");
 				return false;
 			}
 			$.post(user_api_url + "/user_check/" + this.value, {}, function (data) {
-				$("form input[name=name]").attr("title", "用户已存在，试试其他名称");
+				$("#Register_form form input[name=name]").attr("title", "用户已存在，试试其他名称");
 				if (data['status']) {
-					$("form input[name=name]").tooltip('destroy');
-					$("form .form-group:first").removeClass("has-error").addClass("has-success");
+					$("#Register_form form input[name=name]").tooltip('destroy');
+					$("#Register_form form .form-group:first").removeClass("has-error").addClass("has-success");
 				} else {
-					$("form input[name=name]").tooltip('show');
-					$("form .form-group:first").removeClass("has-success").addClass("has-error");
+					$("#Register_form form input[name=name]").tooltip('show');
+					$("#Register_form form .form-group:first").removeClass("has-success").addClass("has-error");
 				}
 			});
 		});
-		$("form input[name=email]").on("change", function () {
+		$("#Register_form form input[name=email]").on("change", function () {
 			$.post(user_api_url + "/email_check/" + this.value, {}, function (data) {
 				if (data['status']) {
-					$("form input[name=email]").tooltip('destroy');
-					$("form .form-group:eq(1)").removeClass("has-error").addClass("has-success");
+					$("#Register_form form input[name=email]").tooltip('destroy');
+					$("#Register_form form .form-group:eq(1)").removeClass("has-error").addClass("has-success");
 				} else {
-					$("form input[name=email]").tooltip('show');
-					$("form .form-group:eq(1)").removeClass("has-success").addClass("has-error");
+					$("#Register_form form input[name=email]").tooltip('show');
+					$("#Register_form form .form-group:eq(1)").removeClass("has-success").addClass("has-error");
 				}
 			});
 		});
@@ -146,11 +146,11 @@
 				error("两次密码不一致");
 				return false;
 			}
-			$("form button[type=submit]").addClass("disabled");
-			$("form button[type=submit]").html("表单数据提交中，请稍等");
+			$("#Register_form form button[type=submit]").addClass("disabled");
+			$("#Register_form form button[type=submit]").html("表单数据提交中，请稍等");
 			$.post(this.action, param, function (data) {
-				$("form button[type=submit]").html("开始注册");
-				$("form button[type=submit]").removeClass('disabled');
+				$("#Register_form form button[type=submit]").html("开始注册");
+				$("#Register_form form button[type=submit]").removeClass('disabled');
 				if (data['status']) {
 					var l_u = "<?php echo get_url('Home','login');?>?redirect=<?php echo urlencode(get_url('User'));?>&account=" + param.name;
 					error("<span class='text-success'>注册成功，5秒后将跳转到登录页面。</span><a href='" + l_u + "'>立即跳转</a> ");
