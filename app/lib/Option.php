@@ -106,6 +106,7 @@ class Option{
 				$user = User::getUser($user_id);
 				$mt = new MailTemplate("new_user_registered.html");
 				$mt->setUserInfo($user->getInfo());
+
 				$mt->mailSend(site_title() . " Manager", admin_email());
 			});
 		}

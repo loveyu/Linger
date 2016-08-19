@@ -79,6 +79,9 @@ return array(
 		//缓存驱动
 	],
 
+	'pushover_notice_status' => false,//是否开启了,pushover推送管理员的接口
+	'pushover_beanstalk_cfg' => [],//pushover_beanstalk服务的推送接口
+
 	'option' => [
 		'register_captcha' => 'no',//yes显示验证码，no不显示
 		'elastic_server' => "http://127.0.0.1:9200/",//搜索服务器

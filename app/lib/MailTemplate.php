@@ -51,6 +51,11 @@ class MailTemplate{
 	private $is_set_values = false;
 
 	/**
+	 * @var bool 是否注册了当前使用pushover发送，成功后自动设置为false
+	 */
+	private $is_register_pushover = false;
+
+	/**
 	 * 构造函数
 	 * @param string $path 对应的模板文件名称
 	 * @throws \Exception 模板有误的错误信息
@@ -172,6 +177,15 @@ class MailTemplate{
 	}
 
 	/**
+	 * 设置当前邮件推送，而不是发送
+	 * @param boolean $is_register_pushover
+	 */
+	public function setIsRegisterPushover(bool $is_register_pushover){
+		$this->is_register_pushover = $is_register_pushover;
+	}
+
+
+	/**
 	 * 邮件发送
 	 * @param string      $name
 	 * @param string      $email
@@ -203,6 +217,12 @@ class MailTemplate{
 			} else{
 				$mail->AltBody = $textContent;
 			}
+
+			if($this->is_register_pushover){
+				Pushover::push($mail->Subject,$mail->AltBody);
+				$this->is_register_pushover = false;
+			}
+
 			if(hook()->apply('MailTemplate_mailSend_noQueue',!$queue)){
 				$mail->send();
 			} else{
