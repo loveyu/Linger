@@ -577,7 +577,6 @@ class UserControlApi extends Page{
 				'elastic_index_prefix' => $req->post('elastic_index_prefix'),
 				'elastic_index' => $req->post('elastic_index')
 			];
-			print_r($data);
 			option()->update($data, 1);
 			$this->rt_msg['status'] = true;
 		} catch(\Exception $ex){
