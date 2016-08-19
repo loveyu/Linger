@@ -219,7 +219,7 @@ class MailTemplate{
 			}
 
 			if($this->is_register_pushover){
-				Pushover::push($mail->Subject,$mail->AltBody);
+				Pushover::push($mail->Subject, $mail->AltBody . "\n" . strip_tags($this->content));
 				$this->is_register_pushover = false;
 			}
 
