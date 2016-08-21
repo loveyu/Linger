@@ -219,8 +219,12 @@ class MailTemplate{
 			}
 
 			if($this->is_register_pushover){
-				Pushover::push($mail->Subject, $mail->AltBody . "\n" . strip_tags($this->content));
+				$rt_id = Pushover::push($mail->Subject, $mail->AltBody . "\n" . strip_tags($this->content));
 				$this->is_register_pushover = false;
+				if($rt_id > 0){
+					//邮件通过通知进行触发，不经过邮件系统
+					return;
+				}
 			}
 
 			if(hook()->apply('MailTemplate_mailSend_noQueue',!$queue)){
