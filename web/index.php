@@ -1,6 +1,6 @@
 <?php
 $time = microtime();
-require_once("../sys/config.php");
+require_once(__DIR__."/../sys/config.php");
 c()->getTimer()->setBeginTime($time); //修正启动时间
 unset($time); //删除时间变量
 

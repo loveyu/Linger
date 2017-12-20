@@ -1,10 +1,10 @@
 <?php
 set_time_limit(0);
-if(is_file("../config/install.lock")){
+if(is_file(__DIR__."/../config/install.lock")){
 	die("Please try again to delete the file /config/install.lock.");
 }
-require_once("../sys/config.php");
-cfg()->load('../config/all.php'); //加载其他配置文件
+require_once(__DIR__."/../sys/config.php");
+cfg()->load(__DIR__.'/../config/all.php'); //加载其他配置文件
 l_h("system.php", "theme.php");
 c_lib()->load('session');
 $session = new \CLib\Session();
@@ -16,15 +16,16 @@ $s = $session->get('install');
 if(isset($s['number'])){
 	$info = $s;
 }
+$install_path = __DIR__."/../install/";
 $setup = isset($_GET['setup']) ? $_GET['setup'] : "1";
 if ($setup == "import_sql" && $info['number'] == '2'){
-	include("../install/import_sql.php");
+	include("{$install_path}import_sql.php");
 	exit;
 } else if ($setup == "setting" && $info['number'] == '3'){
-	include("../install/setting.php");
+	include("{$install_path}setting.php");
 	exit;
 }else if ($setup == "system" && $info['number'] == '4'){
-	include("../install/system.php");
+	include("{$install_path}system.php");
 	exit;
 }else
 ?>
@@ -49,27 +50,27 @@ if ($setup == "import_sql" && $info['number'] == '2'){
 	<?php
 	switch($info['number']){
 		case 1:
-			include("../install/setup1.php");
+			include("{$install_path}/setup1.php");
 			break;
 		case 2:
 			if($setup == "2"){
-				include("../install/setup2.php");
+				include("{$install_path}/setup2.php");
 			} else{
-				include("../install/setup1.php");
+				include("{$install_path}/setup1.php");
 			}
 			break;
 		case 3:
 			if($setup == "3"){
-				include("../install/setup3.php");
+				include("{$install_path}/setup3.php");
 			} else{
-				include("../install/setup1.php");
+				include("{$install_path}/setup1.php");
 			}
 			break;
 		case 4:
 			if($setup == "4"){
-				include("../install/setup4.php");
+				include("{$install_path}/setup4.php");
 			} else{
-				include("../install/setup1.php");
+				include("{$install_path}/setup1.php");
 			}
 			break;
 	} ?>
