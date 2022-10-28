@@ -68,7 +68,7 @@ class VersionUpdate{
 	public function update_script(){
 		$info = $this->get_update_info();
 		$hook = hook();
-		if(version_compare($info['version'], _VERSION_, ">")){
+		if(!empty($info['version']) && version_compare($info['version'], _VERSION_, ">")){
 			//输出更新提醒信息
 			$hook->add("view_control_main", function (){
 				/**
