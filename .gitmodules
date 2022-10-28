@@ -1,3 +1,0 @@
-[submodule "sys/core"]
-	path = sys/core
-	url = git@github.com:loveyu/php-framework-module.git

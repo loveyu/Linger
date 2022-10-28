@@ -9,10 +9,6 @@ CREATE DATABASE `database_name` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE u
 ```
 
 ## 安装步骤
-Clone Git，过程中必须包含子项目，否则将导致直接不可用
-```
-git clone --recurse-submodules git@github.com:loveyu/Linger.git
-```
 
 ```
 cd config

@@ -100,7 +100,7 @@ class Picture{
 		}
 		$db = \db()->getWriter();
 		$db->pdo->beginTransaction();
-		$rt = \ hook()->apply("Picture_delete", true, $pic_id, $user_id, $db);
+		$rt = \hook()->apply("Picture_delete", true, $pic_id, $user_id, $db);
 		if($rt !== true){
 			$db->pdo->rollBack();
 			$this->throwMsg(-4);
@@ -781,7 +781,7 @@ class Picture{
 			'pic_status' => 1
 		];
 		$insert = array_merge($insert, $data);
-		$id = \ db()->insert("pictures", $insert);
+		$id = \db()->insert("pictures", $insert);
 		if($id < 0){
 			return \db()->error()['write'];
 		} else{

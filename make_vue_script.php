@@ -85,7 +85,7 @@ function get_template($path){
 	foreach($object as $name => $v){
 		$map[] = $name . ":" . $v;
 	}
-	return "{" . implode($map, ",") . "}";
+	return "{" . implode(",", $map) . "}";
 }
 
 //压缩HTML文件

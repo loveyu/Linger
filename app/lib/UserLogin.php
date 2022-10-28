@@ -277,7 +277,9 @@ class UserLogin{
 		$cookie = trim(req()->cookie('UserLogin'));
 		if(!empty($cookie)){
 			$cookie = explode("\t", $cookie);
-		}
+		}else{
+            $cookie = [];
+        }
 		if(count($cookie) != 2){
 			//检测header登录
 			return self::HeaderLogin();

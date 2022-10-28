@@ -31,12 +31,12 @@ define("_AppName_", "linger");
 /**
  * 调试模式，基本未使用
  */
-define('_Debug_', true);
+define('_Debug_', false);
 
 /**
  * 转义是否开启标志
  */
-define('MAGIC_QUOTES_GPC', PHP_VERSION < 6 && get_magic_quotes_gpc());
+define('MAGIC_QUOTES_GPC', PHP_VERSION < 6 && (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()));
 
 /**
  * 路由器分割字符
