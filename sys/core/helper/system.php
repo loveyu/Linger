@@ -82,17 +82,21 @@ function redirect($uri = '', $method = 'refresh', $http_response_code = 302, $ex
  * @return bool
  */
 function is_ssl(){
-	if(isset($_SERVER['HTTPS'])){
-		if('on' == strtolower($_SERVER['HTTPS'])){
-			return true;
-		}
-		if('1' == $_SERVER['HTTPS']){
-			return true;
-		}
-	} elseif(isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'])){
-		return true;
-	}
-	return false;
+    foreach (['HTTP_X_FORWARDED_SERVER_PROTOCOL', 'HTTP_X_FORWARDED_PROTO', 'REQUEST_SCHEME'] as $k) {
+        if (isset($_SERVER[$k]) && strtolower($_SERVER[$k]) === 'https') {
+            return true;
+        }
+    }
+
+    if (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) !== 'off' || '1' === (string) $_SERVER['HTTPS'])) {
+        return true;
+    }
+
+    if (isset($_SERVER['SERVER_PORT']) && ('443' === (string) $_SERVER['SERVER_PORT'])) {
+        return true;
+    }
+
+    return false;
 }
 
 /**
