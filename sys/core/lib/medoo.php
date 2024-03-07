@@ -556,7 +556,7 @@ class medoo implements CLib\SqlInterface{
 	}
 
 	public function has($table, $where){
-		return $this->query('SELECT EXISTS(SELECT 1 FROM `' . $table . '`' . $this->where_clause($where) . ')')->fetchColumn() === '1';
+		return (string)$this->query('SELECT EXISTS(SELECT 1 FROM `' . $table . '`' . $this->where_clause($where) . ')')->fetchColumn() === '1';
 	}
 
 	public function count($table, $where = NULL){
