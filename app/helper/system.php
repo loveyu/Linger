@@ -104,7 +104,7 @@ function salt($len = 40){
  */
 function salt_hash($hash, $salt){
 	$count = strlen($salt);
-	return _hash(substr($salt, 0, $count / 3) . $hash . $salt);
+	return _hash(substr($salt, 0, (int)ceil($count / 3)) . $hash . $salt);
 }
 
 /**

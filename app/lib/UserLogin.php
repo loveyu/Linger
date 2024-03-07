@@ -184,7 +184,7 @@ class UserLogin{
 
 		try{
 			//登录成功后的COOKIE设置
-			if(strlen($this->user->getCookieLogin()) < 10){
+			if(strlen((string)$this->user->getCookieLogin()) < 10){
 				$this->user->set(array("cookie_login" => salt_hash(NOW_TIME . $this->user->getEmail(), salt(20))));
 			}
 			if($save_status){
