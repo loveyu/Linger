@@ -102,7 +102,10 @@ class Captcha{
 	 * @return bool
 	 */
 	public function verify($code, $destroy = false, $id = 0){
-		$code = strtolower(trim($code));
+        $code = strtolower(trim((string)$code));
+        if ($code === '') {
+            return false;
+        }
 		$s_code = $this->get_code($id);
 		if($s_code === $code){
 			if($destroy){
