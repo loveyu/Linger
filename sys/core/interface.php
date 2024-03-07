@@ -121,11 +121,11 @@ require_once(_CorePath_ . "/request.php");
 define('URL_NOW', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http') . "://" . @$_SERVER["HTTP_HOST"] . @$_SERVER['REQUEST_URI']);
 define('URL_PATH', str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])) . "");
 define('NOW_TIME', time());
-//if(!_Debug_){
-//调整错误记录为全部运行模式，调试输出改在记录函数中输出
-set_error_handler('\Core\Log::phpErrorLog');
-register_shutdown_function('\Core\Log::phpShowdownLog');
-//}
+if (!defined('DISABLE_GLOBAL_ERROR_COLLECT') || empty(DISABLE_GLOBAL_ERROR_COLLECT)) {
+    //调整错误记录为全部运行模式，调试输出改在记录函数中输出
+    set_error_handler('\Core\Log::phpErrorLog');
+    register_shutdown_function('\Core\Log::phpShowdownLog');
+}
 
 //自动加载系统类
 spl_autoload_register(function ($class){

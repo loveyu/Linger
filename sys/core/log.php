@@ -81,7 +81,12 @@ class Log{
 		}
 		$now = date(self::$config['time_format']);
 		$message = Core::getInstance()->getHook()->apply("Log_write", $message, $level);
-		error_log("[{$now}] " . URL_NOW . "; {$level}: {$message}\r\n", self::$config['type'], self::$config['destination'], self::$config['headers']);
+        $logMsg = "[{$now}] " . URL_NOW . "; {$level}: {$message}\r\n";
+        if (function_exists('__custom_error_log')) {
+            __custom_error_log($logMsg, self::$config['type'], self::$config['destination'], self::$config['headers']);
+        } else {
+            error_log($logMsg, self::$config['type'], self::$config['destination'], self::$config['headers']);
+        }
 	}
 
 	/**

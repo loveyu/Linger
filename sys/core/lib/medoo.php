@@ -337,8 +337,7 @@ class medoo implements CLib\SqlInterface{
 				$match_query = $where['MATCH'];
 				if(is_array($match_query) && isset($match_query['columns']) && isset($match_query['keyword'])){
 					$where_clause .= ($where_clause != '' ? ' AND ' : ' WHERE ') . ' MATCH (`' . str_replace('.', '`.`',
-																											 implode($match_query['columns'],
-																													 '`, `')) . '`) AGAINST (' . $this->quote($match_query['keyword']) . ')';
+                     implode('`, `', $match_query['columns'])) . '`) AGAINST (' . $this->quote($match_query['keyword']) . ')';
 				}
 			}
 			if(isset($where['GROUP'])){

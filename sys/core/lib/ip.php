@@ -164,9 +164,9 @@ class Ip{
 	 * @return bool|string
 	 */
 	public function bin2ip6($bin){
-		if(strlen($bin) !== 16){
-			return false;
-		}
+        if ($bin === null || strlen((string)$bin) !== 16) {
+            return false;
+        }
 		$arr = str_split(join('', unpack('H*', $bin)), 4);
 		$addr = join(':', $arr);
 		return $addr;
@@ -230,9 +230,9 @@ class Ip{
 	 * @return bool
 	 */
 	public function ipv6_is_ipv4($ipv6_bin){
-		if(strlen($ipv6_bin) !== 16){
-			return false;
-		}
+        if ($ipv6_bin === null || strlen((string)$ipv6_bin) !== 16) {
+            return false;
+        }
 		$unpack = join('', unpack("H*", $ipv6_bin));
 		//IPv4只有32位所以前96位全部为0
 		return strpos($unpack, "000000000000000000000000") === 0;

@@ -274,7 +274,7 @@ class UserLogin{
 	 * @return bool|User
 	 */
 	public static function CookieLogin(){
-		$cookie = trim(req()->cookie('UserLogin'));
+		$cookie = trim((string)req()->cookie('UserLogin'));
 		if(!empty($cookie)){
 			$cookie = explode("\t", $cookie);
 		}else{
