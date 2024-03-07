@@ -42,8 +42,8 @@ if (PHP_VERSION_ID >= 50102) {
      * Fall back to traditional autoload for old PHP versions
      * @param string $classname The name of the class to load
      */
-    function __autoload($classname)
-    {
-        PHPMailerAutoload($classname);
-    }
+//    function __autoload($classname)
+//    {
+//        PHPMailerAutoload($classname);
+//    }
 }
